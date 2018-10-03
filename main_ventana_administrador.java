@@ -9,7 +9,7 @@ package usuarios;
  */
 public class main_ventana_administrador
 {
-    public static void main(String []a){
+    public static void main(){
         new ventana_administrador();
     }
 }
