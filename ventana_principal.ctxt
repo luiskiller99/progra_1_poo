@@ -1,8 +1,0 @@
-#BlueJ class context
-comment0.target=ventana_principal
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ ventana_principal\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=
-comment1.target=ventana_principal()
-comment2.params=
-comment2.target=void\ configuraciones()
-numComments=3
