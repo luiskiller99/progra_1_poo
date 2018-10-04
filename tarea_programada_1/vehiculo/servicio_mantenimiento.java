@@ -1,4 +1,4 @@
-package vehiculo;
+package tarea_programada_1.vehiculo;
 
 
 /**
@@ -15,7 +15,7 @@ public class servicio_mantenimiento
     private fecha fecha_inicio;
     private fecha fecha_final ;
     private int monto=0;
-    private String consecutivo="";//el formato “ID-SM-XXX”. Donde XXX es un consecutivo numérico que inicia en 1.
+    private String consecutivo="";//el formato “ID-SM-XXX�?. Donde XXX es un consecutivo numérico que inicia en 1.
     private String detalle="";
     private String tipo="";
     empresa empresa_l;

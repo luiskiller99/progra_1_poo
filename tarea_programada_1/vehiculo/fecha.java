@@ -1,4 +1,4 @@
-package vehiculo;
+package tarea_programada_1.vehiculo;
 
 
 /**
