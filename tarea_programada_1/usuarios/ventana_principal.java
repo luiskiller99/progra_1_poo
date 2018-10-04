@@ -39,20 +39,7 @@ public class ventana_principal extends JFrame
         pane.setTitle("Principal");
         pane.setLocationRelativeTo(null);
         pane.setVisible(true);
-                
-        add(ADM); 
-        add(SEC); 
-        add(label_usu_adm);
-        add(label_usu_sec);  
-        add(label_cont_adm);
-        add(label_cont_sec);
-        add(label_titulo_adm);
-        add(label_titulo_sec);
-        add(textedit_usu_adm);
-        add(textedit_cont_adm);
-        add(textedit_usu_sec);
-        add(textedit_cont_sec);
-        
+       
         pane.add(ADM);
         pane.add(SEC);
         pane.add(label_usu_adm);
