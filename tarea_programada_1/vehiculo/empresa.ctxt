@@ -1,0 +1,26 @@
+#BlueJ class context
+comment0.target=empresa
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ empresa\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=nom\ razon_soc\ ced_jur\ tel\ dir
+comment1.target=empresa(java.lang.String,\ java.lang.String,\ int,\ int,\ direccion)
+comment10.params=
+comment10.target=int\ get_tel()
+comment11.params=
+comment11.target=direccion\ get_dir()
+comment2.params=nom
+comment2.target=void\ set_nom(java.lang.String)
+comment3.params=razon_soc
+comment3.target=void\ set_razon(java.lang.String)
+comment4.params=ced_jur
+comment4.target=void\ set_cedjur(int)
+comment5.params=tel
+comment5.target=void\ set_tel(int)
+comment6.params=dir
+comment6.target=void\ set_dir(direccion)
+comment7.params=
+comment7.target=java.lang.String\ get_nom()
+comment8.params=
+comment8.target=java.lang.String\ get_razon()
+comment9.params=
+comment9.target=int\ get_cedjur()
+numComments=12
