@@ -1,4 +1,4 @@
-package usuarios;
+package tarea_programada_1.usuarios;
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
@@ -126,7 +126,7 @@ public class ventana_principal extends JFrame
         }
     }
     private class secretaria implements ActionListener{
-        public void actionPerformed(ActionEvent e){            
+        public void actionPerformed(ActionEvent e){                        
             new ventana_secretaria();
         }
     }

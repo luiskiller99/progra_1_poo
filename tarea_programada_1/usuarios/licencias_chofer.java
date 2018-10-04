@@ -1,4 +1,4 @@
-package usuarios;
+package tarea_programada_1.usuarios;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;

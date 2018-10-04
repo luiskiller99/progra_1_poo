@@ -1,4 +1,4 @@
-package usuarios;
+package tarea_programada_1.usuarios;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -22,7 +22,9 @@ public class ventana_administrador
     JButton boton_vehiculo = new JButton("Registrar");      
     JLabel label_list_adm = new JLabel("Listar informacion");
     JTextField textfield_list_adm = new JTextField("aqui mostrar");
-    
+    JButton boton_list_adm = new JButton("Listar");      
+    JLabel label_aprovar = new JLabel("Aprovar solicitud de viaje");
+    JTextField textfield_aprovar  = new JTextField("consecutivo viaje");
     public ventana_administrador(){
         configuraciones();
     }
@@ -46,6 +48,9 @@ public class ventana_administrador
         pane.add(boton_vehiculo);
         pane.add(textfield_list_adm);
         pane.add(label_list_adm);
+        pane.add(boton_list_adm);
+        pane.add(label_aprovar);
+        pane.add(textfield_aprovar);
         
         //label_chofer
         label_chofer.setBounds(new Rectangle(150,20));        
@@ -89,6 +94,14 @@ public class ventana_administrador
         boton_list_adm.setBounds(new Rectangle(100,20));                        
         boton_list_adm.setLocation(350,400);            
         boton_list_adm.setBackground(Color.white);
+        //label_aprovar
+        label_aprovar.setBounds(new Rectangle(150,20));        
+        label_aprovar.setLocation(10,310);
+        label_aprovar.setBackground(Color.white);
+        //textfield_aprovar
+        textfield_aprovar.setBounds(new Rectangle(300,20));        
+        textfield_aprovar.setLocation(10,340);
+        textfield_aprovar.setBackground(Color.white);
     }
      private class act_bot implements ActionListener{
         public void actionPerformed(ActionEvent e){

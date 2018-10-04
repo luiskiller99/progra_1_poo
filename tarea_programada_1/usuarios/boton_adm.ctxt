@@ -1,7 +1,0 @@
-#BlueJ class context
-comment0.target=boton_adm
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ botones\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=
-comment1.target=boton_adm()
-comment1.text=private\ textedit_usu_adm\ ADMu;//\=\ new\ Administrador("Luis","computacion","Administrador","123Admin\!",85752957);\r\nprivate\ \ textedit_cont_adm\ ADMc;
-numComments=2

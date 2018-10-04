@@ -1,4 +1,4 @@
-package usuarios;
+package tarea_programada_1.usuarios;
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
@@ -35,10 +35,11 @@ public class ventana_secretaria
     JLabel label_detalle = new JLabel("Consultar detalle de viaje");
     JTextField textfield_detalle = new JTextField("consecutivo");
     JTextField textfield_panel_detalle = new JTextField("aqui mostrar");
-    JButton boton_detalle = new JButton("Consultar");    
+    JButton boton_detalle = new JButton ("Consultar");    
+
     public ventana_secretaria(){
         configuraciones();
-    }
+    }    
     private void configuraciones(){
         
         pane.getContentPane().setBackground(Color.WHITE);

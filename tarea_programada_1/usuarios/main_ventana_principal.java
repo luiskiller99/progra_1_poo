@@ -1,4 +1,4 @@
-package usuarios;
+package tarea_programada_1.usuarios;
 
 
 /**
@@ -9,9 +9,7 @@ package usuarios;
  */
 public class main_ventana_principal
 {
-    public static void main(){//String []a){
+    public static void main(){
         new ventana_principal();
-        //new ventana_administrador();
-        //new ventana_secretaria();
     }
 }
