@@ -18,13 +18,21 @@ public class ventana_administrador
     JButton boton_chofer= new JButton("Registrar");  
     JTextField licencias_chofer= new JTextField("numero /fecha exp(dd//mm//aa) /fecha emi(dd/mm/aa))");
     JLabel label_vehiculo = new JLabel("Registrar nuevo vehiculo");
-    JTextField textfield_vehiculo = new JTextField("placa/año/capacidad/kilometraje/numero vinn/color/marca/sede/estado");
+    JTextField textfield_vehiculo = new JTextField("placa/a�o/capacidad/kilometraje/numero vinn/color/marca/sede/estado");
     JButton boton_vehiculo = new JButton("Registrar");      
     JLabel label_list_adm = new JLabel("Listar informacion");
     JTextField textfield_list_adm = new JTextField("aqui mostrar");
     JButton boton_list_adm = new JButton("Listar");      
     JLabel label_aprovar = new JLabel("Aprovar solicitud de viaje");
     JTextField textfield_aprovar  = new JTextField("consecutivo viaje");
+    JButton boton_aprovar = new JButton("Aprovar");   
+    JLabel label_registrar  = new JLabel("Registrar nuevo usuario");
+    JTextField textfield_registrar  = new JTextField("nombre/cedula/provincia/canton/distrito/señas/correo/telefono");
+    JButton boton_registrar = new JButton("Registrar");
+    JButton boton_topcho  = new JButton("Top choferes"); 
+    JButton boton_topdep = new JButton("Top departamentos");               
+    
+    
     public ventana_administrador(){
         configuraciones();
     }
@@ -46,12 +54,17 @@ public class ventana_administrador
         pane.add(label_vehiculo);
         pane.add(textfield_vehiculo);
         pane.add(boton_vehiculo);
+        pane.add(label_registrar);
         pane.add(textfield_list_adm);
         pane.add(label_list_adm);
         pane.add(boton_list_adm);
         pane.add(label_aprovar);
         pane.add(textfield_aprovar);
-        
+        pane.add(boton_aprovar);      
+        pane.add(textfield_registrar); 
+        pane.add(boton_registrar); 
+        pane.add(boton_topcho); 
+        pane.add(boton_topdep); 
         //label_chofer
         label_chofer.setBounds(new Rectangle(150,20));        
         label_chofer.setLocation(10,10);
@@ -102,6 +115,34 @@ public class ventana_administrador
         textfield_aprovar.setBounds(new Rectangle(300,20));        
         textfield_aprovar.setLocation(10,340);
         textfield_aprovar.setBackground(Color.white);
+        //boton_aprovar
+        boton_aprovar.setBounds(new Rectangle(100,20));                        
+        boton_aprovar.setLocation(10,360);            
+        boton_aprovar.setBackground(Color.white);
+        boton_aprovar.addActionListener(new act_bot());
+        //label_registrar
+        label_registrar.setBounds(new Rectangle(150,20));        
+        label_registrar.setLocation(10,220);
+        label_registrar.setBackground(Color.white);
+        //textfield_registrar
+        textfield_registrar.setBounds(new Rectangle(300,20));        
+        textfield_registrar.setLocation(10,260);
+        textfield_registrar.setBackground(Color.white);
+        //boton_registrar
+        boton_registrar.setBounds(new Rectangle(100,20));                        
+        boton_registrar.setLocation(10,280);            
+        boton_registrar.setBackground(Color.white);
+        boton_registrar.addActionListener(new act_bot());
+        //boton_topcho
+        boton_topcho.setBounds(new Rectangle(130,20));                        
+        boton_topcho.setLocation(10,400);            
+        boton_topcho.setBackground(Color.white);
+        boton_topcho.addActionListener(new act_bot());
+        //boton_topdep
+        boton_topdep.setBounds(new Rectangle(130,20));                        
+        boton_topdep.setLocation(170,400);            
+        boton_topdep.setBackground(Color.white);
+        boton_topdep.addActionListener(new act_bot());
     }
      private class act_bot implements ActionListener{
         public void actionPerformed(ActionEvent e){
