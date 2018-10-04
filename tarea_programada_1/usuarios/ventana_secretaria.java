@@ -16,9 +16,9 @@ public class ventana_secretaria
     JFrame pane = new JFrame();
     JLabel label_pasajero = new JLabel("Registrar nuevo pasajero");
     JLabel label_viaje = new JLabel("Solicitar nuevo viaje");
-    JTextField textfield_pasajero = new JTextField("cedula/nombre/provincia/canton/distrito/seÃ±as/correo/telefono");    
+    JTextField textfield_pasajero = new JTextField("cedula/nombre/provincia/canton/distrito/señas/correo/telefono");    
     JButton boton_pas = new JButton("Registrar");    
-    JTextField textfield_viaje = new JTextField("pnt salida/destino salida(dia/mes/aÃ±o) llegada(dia/mes/aÃ±o)");
+    JTextField textfield_viaje = new JTextField("pnt salida/destino salida(dia/mes/año) llegada(dia/mes/año)");
     JTextField textfield_viaje_pasajeros = new JTextField("cedula pasajero1 / cedula pasajero2");
     JButton boton_viaje = new JButton("Solicitar");  
     JLabel label_listar = new JLabel("Listar solicitudes de viajes");
