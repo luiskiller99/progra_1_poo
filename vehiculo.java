@@ -11,7 +11,7 @@ public class vehiculo
 {    
     //Atributos
     private int placa=0;
-    private int año =0;
+    private int anio =0;
     private int capacidad=0;
     private int Kilometraje =0;
     private int numero_vin =0;    
@@ -39,7 +39,7 @@ public class vehiculo
         set_estado(estado);
     }
     private void set_placa(int pla){placa=pla;}
-    private void set_anno(int ann){año=ann;}
+    private void set_anno(int ann){anio=ann;}
     private void set_color(String col){color=col;}
     private void set_marca(String mar){marca=mar;}
     private void set_cap(int cap){capacidad=cap;}
@@ -48,7 +48,7 @@ public class vehiculo
     private void set_sede(String sed){sede=sed;}
     private void set_estado(String est){estado=est;}
     public int get_placa(){return placa;}
-    public int get_anno(){return año;}
+    public int get_anno(){return anio;}
     public String get_color(){return color;}
     public String get_marca(){return marca;}
     public int get_cap(){return capacidad;}
