@@ -14,7 +14,7 @@ public class boton_adm extends JPanel{
     private JButton boton_administrador;
     /**private textedit_usu_adm ADMu;//= new Administrador("Luis","computacion","Administrador","123Admin!",85752957);
     private  textedit_cont_adm ADMc;*/
-    public boton_adm(textedit_usu_adm admu,textedit_cont_adm admc ){
+    public boton_adm(){
         //boton administrador
         /**ADMu = admu;
         ADMc = admc;*/
