@@ -1,0 +1,2 @@
+Para instalar la librería que crea archivos PDF, se debe descargar el "itextpdf-5.5.13.jar" y 
+"itextpdf-5.1.0.jar.zip", luego de haber hecho eso, abren BlueJ e ingresan a "herramientas", luego a "preferencias" y en la extensión de librerías, añaden esos dos archivos que acaban de descargar, reinician el BlueJ y prueban con el programa "JavaPdfHelloWorld"
