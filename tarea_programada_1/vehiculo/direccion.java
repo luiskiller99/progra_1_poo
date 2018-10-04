@@ -16,7 +16,7 @@ public class direccion
     String provincia;
     String canton;
     String distrito;
-    String seÃ±as;
+    String señas;
     public direccion(String pro,String can,String dis,String se)
     {
         set_pro(pro);
@@ -27,9 +27,9 @@ public class direccion
     private void set_pro(String pro){provincia=pro;}
     private void set_can(String can){canton=can;}
     private void set_dis(String dis){distrito=dis;}
-    private void set_se(String se){seÃ±as=se;}
+    private void set_se(String se){señas=se;}
     public String get_pro(){return provincia;}
     public String get_can(){return canton;}
     public String get_dis(){return distrito;}
-    public String get_se(){return seÃ±as;}
+    public String get_se(){return señas;}
 }

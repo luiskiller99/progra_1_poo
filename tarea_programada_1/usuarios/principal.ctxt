@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=principal
+comment1.params=
+comment1.target=principal()
+comment2.params=usu\ cont
+comment2.target=boolean\ validar_adm(java.lang.String,\ java.lang.String)
+comment3.params=usu\ cont
+comment3.target=boolean\ validar_sec(java.lang.String,\ java.lang.String)
+numComments=4

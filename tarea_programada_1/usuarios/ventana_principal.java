@@ -4,23 +4,22 @@ import javax.swing.*;
 import java.awt.*;
 import javax.imageio.ImageIO;
 import java.io.*;
-/**
- * Write a description of class ventana_principal here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
+import javax.swing.JOptionPane;
+
 public class ventana_principal extends JFrame
 {
     JFrame pane = new JFrame();
+    principal prin = new principal();
     JButton ADM = new JButton("Ingresar");    
     JButton SEC = new JButton("Ingresar"); 
+    
     JLabel label_usu_adm = new JLabel("Usuario: ");
     JLabel label_usu_sec = new JLabel("Usuario: ");
     JLabel label_cont_adm = new JLabel("Contraseña: ");
     JLabel label_cont_sec = new JLabel("Contraseña: ");
     JLabel label_titulo_adm = new JLabel("Administrador");
     JLabel label_titulo_sec = new JLabel("Secretaria");
+    
     JTextField textedit_usu_adm = new JTextField("");
     JTextField textedit_cont_adm = new JTextField("");
     JTextField textedit_usu_sec = new JTextField("");    
@@ -120,14 +119,29 @@ public class ventana_principal extends JFrame
 
     }
     private class administrador implements ActionListener{
-        public void actionPerformed(ActionEvent e){            
-            new ventana_administrador();
+        public void actionPerformed(ActionEvent e){
+            String usu=textedit_usu_adm.getText();            
+            String cont=textedit_cont_adm.getText(); 
+            if(prin.validar_adm(usu,cont)){
+                new ventana_administrador();
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos", "ERROR!!!", JOptionPane.WARNING_MESSAGE);
+            }
             
         }
     }
     private class secretaria implements ActionListener{
-        public void actionPerformed(ActionEvent e){                        
-            new ventana_secretaria();
+        public void actionPerformed(ActionEvent e){
+            
+            String usu=textedit_usu_adm.getText();            
+            String cont=textedit_cont_adm.getText();                        
+            if(prin.validar_sec(usu, cont)){            
+                new ventana_secretaria();
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos", "ERROR!!!", JOptionPane.WARNING_MESSAGE);
+            }
         }
     }
 }
