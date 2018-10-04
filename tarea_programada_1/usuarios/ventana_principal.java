@@ -17,8 +17,8 @@ public class ventana_principal extends JFrame
     JButton SEC = new JButton("Ingresar"); 
     JLabel label_usu_adm = new JLabel("Usuario: ");
     JLabel label_usu_sec = new JLabel("Usuario: ");
-    JLabel label_cont_adm = new JLabel("ContraseÃ±a: ");
-    JLabel label_cont_sec = new JLabel("ContraseÃ±a: ");
+    JLabel label_cont_adm = new JLabel("Contraseña: ");
+    JLabel label_cont_sec = new JLabel("Contraseña: ");
     JLabel label_titulo_adm = new JLabel("Administrador");
     JLabel label_titulo_sec = new JLabel("Secretaria");
     JTextField textedit_usu_adm = new JTextField("");
