@@ -27,7 +27,7 @@ public class ventana_administrador
     JTextField textfield_aprovar  = new JTextField("consecutivo viaje");
     JButton boton_aprovar = new JButton("Aprovar");   
     JLabel label_registrar  = new JLabel("Registrar nuevo usuario");
-    JTextField textfield_registrar  = new JTextField("nombre/cedula/provincia/canton/distrito/seÃ±as/correo/telefono");
+    JTextField textfield_registrar  = new JTextField("nombre/cedula/provincia/canton/distrito/señas/correo/departamento/telefono");
     JButton boton_registrar = new JButton("Registrar");
     JButton boton_topcho  = new JButton("Top choferes"); 
     JButton boton_topdep = new JButton("Top departamentos");               
