@@ -2,6 +2,9 @@ package tarea_programada_1.usuarios;
 import tarea_programada_1.vehiculo.persona;
 import tarea_programada_1.vehiculo.direccion;
 import java.util.ArrayList;
+import org.json.simple.JSONObject;
+import java.io.FileWriter;
+import java.io.IOException;
 public class principal
 {
     ArrayList<usuario> Array_usuarios = new ArrayList<usuario>();
@@ -68,39 +71,20 @@ public class principal
         Array_pasajeros.add(pers);
         return true;
     }
-    public void nuevo_secretaria(String info){
-        String cedula="";
-        String nombre="";
-        String provincia="";
-        String canton="";
-        String distrito="";
-        String señas="";
-        String correo="";
-        String telefono="";
-        String departamento="";
-        /**obtiene informacion de string*/
-        int cont=0;
-        for(int i = 0 ; i < info.length() ; i++){
-            char c = info.charAt(i);
-            if(c=='/')cont++;
-            else if (cont==0)nombre += c;
-            else if (cont==1)cedula += c;
-            else if (cont==2)provincia += c;
-            else if (cont==3)canton += c;
-            else if (cont==4)distrito += c;
-            else if (cont==5)señas += c;
-            else if (cont==6)correo += c;
-            else if (cont==7)departamento += c;            
-            else if (cont==8)telefono += c;                                    
-        }    
-        /**crea los objetos */
-        direccion dir = new direccion(provincia,canton,distrito,señas);
-        int ced = Integer.parseInt(cedula);
-        int tel = Integer.parseInt(telefono);        
-        persona pers = new persona(nombre,ced,dir,correo,tel);
-        usuario usu = new usuario(pers,departamento);               
-        /**agrega nuevo usuario al arreglo de usuarios*/
-        /**meter en jason*/        
-        Array_usuarios.add(usu);
+    
+    @SuppressWarnings("unchecked")
+    public void genjson() throws IOException{
+        JSONObject obj = new JSONObject();
+        for(int i=0;i<Array_pasajeros.size();i++){            
+            obj.put("Cedula",Array_pasajeros.get(i).get_ced());
+            obj.put("Nombre", Array_pasajeros.get(i).get_nom());            
+            obj.put("Direccion",Array_pasajeros.get(i).get_dir());
+            obj.put("Telefono",Array_pasajeros.get(i).get_tel());
+            obj.put("Correo",Array_pasajeros.get(i).get_correo());
+        }
+        
+        try (FileWriter file = new FileWriter("D:/Java/Hola/file1.json")) {
+		file.write(obj.toJSONString());
+	}
     }
 }
