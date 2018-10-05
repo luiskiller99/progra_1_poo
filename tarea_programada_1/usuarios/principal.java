@@ -67,7 +67,7 @@ public class principal
             }
         }
         /**agrega nuevo pasajero al arreglo de pasajeros*/
-        /**meter en jason*/        
+        /**meter en jason*/
         Array_pasajeros.add(pers);
         genjson();
         return true;
@@ -76,21 +76,19 @@ public class principal
     @SuppressWarnings("unchecked")
     public void genjson() {
         JSONObject obj = new JSONObject();
-        System.out.println("holis putos");
-        for(int i=0;i<Array_pasajeros.size();i++){   
-            System.out.println(Array_pasajeros.get(i).get_ced());
+        for(int i=0;i<Array_pasajeros.size();i++){            
             obj.put("Cedula",Array_pasajeros.get(i).get_ced());
             obj.put("Nombre", Array_pasajeros.get(i).get_nom());            
             obj.put("Direccion",Array_pasajeros.get(i).get_dir());
             obj.put("Telefono",Array_pasajeros.get(i).get_tel());
-            obj.put("Correo",Array_pasajeros.get(i).get_correo());            
+            obj.put("Correo",Array_pasajeros.get(i).get_correo());
         }
-        try (FileWriter file = new FileWriter("D:/Java/Hola/file1.json")) {
+        
+        try (FileWriter file = new FileWriter("D:/Java/Hola/file1.json",true)) {
 		file.append(obj.toJSONString());
 	}
 	catch (IOException e){
 	    System.out.print(e.getMessage());
 	   }
-
     }
 }
