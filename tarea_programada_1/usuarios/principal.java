@@ -63,6 +63,8 @@ public class principal
            obj.put("Señas",Array_usuarios.get(i).get_señas());            
            obj.put("Telefono",Array_usuarios.get(i).get_telefono());
            obj.put("Correo",Array_usuarios.get(i).get_correo());
+           obj.put("Usuario",Array_usuarios.get(i).get_usuario());
+           obj.put("Constraseña",Array_usuarios.get(i).get_contraseña());
         }
         //C:/Users/metal/Documents/GitHub7progra_1_poo/tarea_programada_1/usuarios/
         try (FileWriter file = new FileWriter("C:/Users/metal/Documents/GitHub/progra_1_poo/tarea_programada_1/usuarios/secretarias.json",true)) {
