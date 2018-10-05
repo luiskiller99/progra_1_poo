@@ -1,18 +1,18 @@
 package tarea_programada_1.usuarios;
 import tarea_programada_1.vehiculo.persona;
 import tarea_programada_1.vehiculo.direccion;
-
+import java.util.ArrayList;
 public class principal
 {
-    usuario Array_usuarios[] = new usuario[1];//cambiar tamaños dinamicamente
-    persona Array_pasajeros[] = new persona[1];
+    ArrayList<usuario> Array_usuarios = new ArrayList<usuario>();
+    ArrayList<persona> Array_pasajeros = new ArrayList<persona>();    
     
     public principal(){
         //usuario de pruevas
         direccion res=new direccion("","","","");
         persona hola=new persona("",5,res,"",3);
         usuario aquel=new usuario(hola,"hols");
-        Array_usuarios[0]=aquel;
+        Array_usuarios.add(aquel);
         //eliminar
     }
     
@@ -23,9 +23,9 @@ public class principal
         return false;        
     }
     public boolean validar_sec(String usu,String cont){        
-        for (int i = 0 ; i < Array_usuarios.length ; i++){                          
-            int us = usu.compareTo(Array_usuarios[i].get_usuario());
-            int co = cont.compareTo(Array_usuarios[i].get_contraseña());            
+        for (int i = 0 ; i < Array_usuarios.size() ; i++){                          
+            int us = usu.compareTo(Array_usuarios.get(i).get_usuario());
+            int co = cont.compareTo(Array_usuarios.get(i).get_contraseña());            
             if(us==0 && co==0){return true;}        
         }
         return false;        
@@ -58,12 +58,14 @@ public class principal
         con el mismo numero de cedula*/
         direccion dir = new direccion(provincia,canton,distrito,señas);
         persona pers = new persona(nombre,Integer.parseInt(cedula),dir,correo,Integer.parseInt(telefono));
-        for (int i = 0; i < Array_pasajeros.length ; i++ ){
-            if(Array_pasajeros[i].get_ced()==pers.get_ced()){
+        for (int i = 0; i < Array_pasajeros.size() ; i++ ){
+            if(Array_pasajeros.get(i).get_ced()==pers.get_ced()){
             return false;
             }
         }
-        /**falta meter a array pasajeros "pers"*/
+        /**agrega nuevo pasajero al arreglo de pasajeros*/
+        /**meter en jason*/
+        Array_pasajeros.add(pers);
         return true;
     }
 }
