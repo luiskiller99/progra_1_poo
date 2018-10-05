@@ -82,7 +82,7 @@ public class ventana_administrador
         boton_chofer.setBounds(new Rectangle(100,20));                        
         boton_chofer.setLocation(10,100);            
         boton_chofer.setBackground(Color.white);
-        boton_chofer.addActionListener(new act_bot());
+        boton_chofer.addActionListener(new act_bot_registar());
         //licencias_chofer
         licencias_chofer.setBounds(new Rectangle(300,20));        
         licencias_chofer.setLocation(10,80);
@@ -99,7 +99,7 @@ public class ventana_administrador
         boton_vehiculo.setBounds(new Rectangle(100,20));                        
         boton_vehiculo.setLocation(10,190);            
         boton_vehiculo.setBackground(Color.white);
-        boton_vehiculo.addActionListener(new act_bot());
+        boton_vehiculo.addActionListener(new act_bot_registar());
         //label_list_adm
         label_list_adm.setBounds(new Rectangle(150,20));        
         label_list_adm.setLocation(350,10);
@@ -124,7 +124,7 @@ public class ventana_administrador
         boton_aprovar.setBounds(new Rectangle(100,20));                        
         boton_aprovar.setLocation(10,360);            
         boton_aprovar.setBackground(Color.white);
-        boton_aprovar.addActionListener(new act_bot());
+        boton_aprovar.addActionListener(new act_bot_registar());
         //label_registrar
         label_registrar.setBounds(new Rectangle(150,20));        
         label_registrar.setLocation(10,220);
@@ -137,22 +137,22 @@ public class ventana_administrador
         boton_registrar.setBounds(new Rectangle(100,20));                        
         boton_registrar.setLocation(10,280);            
         boton_registrar.setBackground(Color.white);
-        boton_registrar.addActionListener(new act_bot());
+        boton_registrar.addActionListener(new act_bot_registar());
         //boton_topcho
         boton_topcho.setBounds(new Rectangle(130,20));                        
         boton_topcho.setLocation(10,400);            
         boton_topcho.setBackground(Color.white);
-        boton_topcho.addActionListener(new act_bot());
+        boton_topcho.addActionListener(new act_bot_registar());
         //boton_topdep
         boton_topdep.setBounds(new Rectangle(130,20));                        
         boton_topdep.setLocation(170,400);            
         boton_topdep.setBackground(Color.white);
-        boton_topdep.addActionListener(new act_bot());
+        boton_topdep.addActionListener(new act_bot_registar());
     }
-     private class act_bot implements ActionListener{
+     private class act_bot_registar implements ActionListener{
         public void actionPerformed(ActionEvent e){
-            //new ventana_secretaria(); 
-            //accion de venteana
+            prin.nuevo_secretaria(textfield_registrar.getText());
+            JOptionPane.showMessageDialog(null, "Usuario agregado correctamente", "just now", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 }

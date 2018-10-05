@@ -68,4 +68,39 @@ public class principal
         Array_pasajeros.add(pers);
         return true;
     }
+    public void nuevo_secretaria(String info){
+        String cedula="";
+        String nombre="";
+        String provincia="";
+        String canton="";
+        String distrito="";
+        String señas="";
+        String correo="";
+        String telefono="";
+        String departamento="";
+        /**obtiene informacion de string*/
+        int cont=0;
+        for(int i = 0 ; i < info.length() ; i++){
+            char c = info.charAt(i);
+            if(c=='/')cont++;
+            else if (cont==0)nombre += c;
+            else if (cont==1)cedula += c;
+            else if (cont==2)provincia += c;
+            else if (cont==3)canton += c;
+            else if (cont==4)distrito += c;
+            else if (cont==5)señas += c;
+            else if (cont==6)correo += c;
+            else if (cont==7)departamento += c;            
+            else if (cont==8)telefono += c;                                    
+        }    
+        /**crea los objetos */
+        direccion dir = new direccion(provincia,canton,distrito,señas);
+        int ced = Integer.parseInt(cedula);
+        int tel = Integer.parseInt(telefono);        
+        persona pers = new persona(nombre,ced,dir,correo,tel);
+        usuario usu = new usuario(pers,departamento);               
+        /**agrega nuevo usuario al arreglo de usuarios*/
+        /**meter en jason*/        
+        Array_usuarios.add(usu);
+    }
 }
