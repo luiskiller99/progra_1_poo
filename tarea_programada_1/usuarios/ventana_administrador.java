@@ -12,29 +12,34 @@ import java.io.*;
  */
 public class ventana_administrador
 {
-    JFrame pane;
-    JLabel label_chofer = new JLabel("Registrar nuevo chofer");
-    JTextField textfield_chofer = new JTextField("cedula/nombre/correo/telefono");
-    JButton boton_chofer= new JButton("Registrar");  
-    JTextField licencias_chofer= new JTextField("numero /fecha exp(dd//mm//aa) /fecha emi(dd/mm/aa))");
-    JLabel label_vehiculo = new JLabel("Registrar nuevo vehiculo");
-    JTextField textfield_vehiculo = new JTextField("placa/año/capacidad/kilometraje/numero vinn/color/marca/sede/estado");
-    JButton boton_vehiculo = new JButton("Registrar");      
-    JLabel label_list_adm = new JLabel("Listar informacion");
-    JTextField textfield_list_adm = new JTextField("aqui mostrar");
-    JButton boton_list_adm = new JButton("Listar");      
-    JLabel label_aprovar = new JLabel("Aprovar solicitud de viaje");
-    JTextField textfield_aprovar  = new JTextField("consecutivo viaje");
-    JButton boton_aprovar = new JButton("Aprovar");   
-    JLabel label_registrar  = new JLabel("Registrar nuevo usuario");
-    JTextField textfield_registrar  = new JTextField("nombre/cedula/provincia/canton/distrito/señas/correo/departamento/telefono");
-    JButton boton_registrar = new JButton("Registrar");
-    JButton boton_topcho  = new JButton("Top choferes"); 
-    JButton boton_topdep = new JButton("Top departamentos");               
+    private principal prin;
+    private JFrame pane;
+    private JLabel label_chofer = new JLabel("Registrar nuevo chofer");
+    private JTextField textfield_chofer = new JTextField("cedula/nombre/correo/telefono");
+    private JButton boton_chofer= new JButton("Registrar");  
+    private JTextField licencias_chofer= new JTextField("numero /fecha exp(dd//mm//aa) /fecha emi(dd/mm/aa))");
+    private JLabel label_vehiculo = new JLabel("Registrar nuevo vehiculo");
+    private JTextField textfield_vehiculo = new JTextField("placa/año/capacidad/kilometraje/numero vinn/color/marca/sede/estado");
+    private JButton boton_vehiculo = new JButton("Registrar");      
+    private JLabel label_list_adm = new JLabel("Listar informacion");
+    private JTextField textfield_list_adm = new JTextField("aqui mostrar");
+    private JButton boton_list_adm = new JButton("Listar");      
+    private JLabel label_aprovar = new JLabel("Aprovar solicitud de viaje");
+    private JTextField textfield_aprovar  = new JTextField("consecutivo viaje");
+    private JButton boton_aprovar = new JButton("Aprovar");   
+    private JLabel label_registrar  = new JLabel("Registrar nuevo usuario");
+    private JTextField textfield_registrar  = new JTextField("nombre/cedula/provincia/canton/distrito/señas/correo/departamento/telefono");
+    private JButton boton_registrar = new JButton("Registrar");
+    private JButton boton_topcho  = new JButton("Top choferes"); 
+    private JButton boton_topdep = new JButton("Top departamentos");               
     
     
-    public ventana_administrador(){
+    public ventana_administrador(principal pr){
+        set_prin(pr);
         configuraciones();
+    }
+    private void set_prin(principal pr){
+        prin=pr;
     }
     private void configuraciones(){
         pane=new JFrame();

@@ -8,22 +8,23 @@ import javax.swing.JOptionPane;
 
 public class ventana_principal extends JFrame
 {
-    JFrame pane = new JFrame();
     principal prin = new principal();
-    JButton ADM = new JButton("Ingresar");    
-    JButton SEC = new JButton("Ingresar"); 
     
-    JLabel label_usu_adm = new JLabel("Usuario: ");
-    JLabel label_usu_sec = new JLabel("Usuario: ");
-    JLabel label_cont_adm = new JLabel("Contraseña: ");
-    JLabel label_cont_sec = new JLabel("Contraseña: ");
-    JLabel label_titulo_adm = new JLabel("Administrador");
-    JLabel label_titulo_sec = new JLabel("Secretaria");
+    private JFrame pane = new JFrame();
+    private JButton ADM = new JButton("Ingresar");    
+    private JButton SEC = new JButton("Ingresar"); 
     
-    JTextField textedit_usu_adm = new JTextField("");
-    JTextField textedit_cont_adm = new JTextField("");
-    JTextField textedit_usu_sec = new JTextField("");    
-    JTextField textedit_cont_sec = new JTextField("");
+    private JLabel label_usu_adm = new JLabel("Usuario: ");
+    private JLabel label_usu_sec = new JLabel("Usuario: ");
+    private JLabel label_cont_adm = new JLabel("Contraseña: ");
+    private JLabel label_cont_sec = new JLabel("Contraseña: ");
+    private JLabel label_titulo_adm = new JLabel("Administrador");
+    private JLabel label_titulo_sec = new JLabel("Secretaria");
+    
+    private JTextField textedit_usu_adm = new JTextField("");
+    private JTextField textedit_cont_adm = new JTextField("");
+    private JTextField textedit_usu_sec = new JTextField("");    
+    private JTextField textedit_cont_sec = new JTextField("");
     
     public ventana_principal(){
         configuraciones();
@@ -123,7 +124,7 @@ public class ventana_principal extends JFrame
             String usu=textedit_usu_adm.getText();            
             String cont=textedit_cont_adm.getText(); 
             if(prin.validar_adm(usu,cont)){
-                new ventana_administrador();
+                new ventana_administrador(prin);
             }
             else{
                 JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos", "ERROR!!!", JOptionPane.WARNING_MESSAGE);
@@ -134,10 +135,10 @@ public class ventana_principal extends JFrame
     private class secretaria implements ActionListener{
         public void actionPerformed(ActionEvent e){
             
-            String usu=textedit_usu_adm.getText();            
-            String cont=textedit_cont_adm.getText();                        
+            String usu=textedit_usu_sec.getText();            
+            String cont=textedit_cont_sec.getText();                        
             if(prin.validar_sec(usu, cont)){            
-                new ventana_secretaria();
+                new ventana_secretaria(prin);
             }
             else{
                 JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos", "ERROR!!!", JOptionPane.WARNING_MESSAGE);

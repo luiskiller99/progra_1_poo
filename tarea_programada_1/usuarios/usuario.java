@@ -7,6 +7,7 @@ public class usuario
     private String departamento;
     private String usuario="metal0500";
     private String contraseña="luise5847";
+    
     public usuario(persona ind,String dep)
     {
         set_persona(ind);

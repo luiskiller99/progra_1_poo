@@ -32,7 +32,7 @@ public class persona
     private void set_tel(int tel){telefono=tel;}
     //geters
     public String get_nom(String nom){return nombre;}
-    public int get_ced(int ced){return cedula;}
+    public int get_ced(){return cedula;}
     public direccion get_dir(direccion dir){return direc;}
     public String get_correo(String corr){return correo;}
     public int get_tel(int tel){return telefono;}

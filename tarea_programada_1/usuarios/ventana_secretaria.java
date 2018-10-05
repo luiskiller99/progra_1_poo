@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import javax.imageio.ImageIO;
 import java.io.*;
+import javax.swing.JOptionPane;
 
 /**
  * Write a description of class ventana_secretaria here.
@@ -13,33 +14,38 @@ import java.io.*;
  */
 public class ventana_secretaria
 {
-    JFrame pane = new JFrame();
-    JLabel label_pasajero = new JLabel("Registrar nuevo pasajero");
-    JLabel label_viaje = new JLabel("Solicitar nuevo viaje");
-    JTextField textfield_pasajero = new JTextField("cedula/nombre/provincia/canton/distrito/señas/correo/telefono");    
-    JButton boton_pas = new JButton("Registrar");    
-    JTextField textfield_viaje = new JTextField("pnt salida/destino salida(dia/mes/año) llegada(dia/mes/año)");
-    JTextField textfield_viaje_pasajeros = new JTextField("cedula pasajero1 / cedula pasajero2");
-    JButton boton_viaje = new JButton("Solicitar");  
-    JLabel label_listar = new JLabel("Listar solicitudes de viajes");
-    JTextField textfield_listar_fecha = new JTextField("dd/mm/aa");
-    JTextField textfield_listar_estado = new JTextField("En confeccion/Aprovado/Cancelado/No aprovado");
-    JTextField textfield_listar_destino = new JTextField("Destino");
-    JTextField textfield_panel_listar = new JTextField("aqui mostrar");
-    JButton boton_listar_fecha = new JButton("Listar");
-    JButton boton_listar_estado = new JButton("Listar");               
-    JButton boton_listar_destino = new JButton("Listar");  
-    JLabel label_cancelar = new JLabel("Cancelar viaje");
-    JTextField textfield_cancelar = new JTextField("consecutivo");
-    JButton boton_cancelar = new JButton("Cancelar");              
-    JLabel label_detalle = new JLabel("Consultar detalle de viaje");
-    JTextField textfield_detalle = new JTextField("consecutivo");
-    JTextField textfield_panel_detalle = new JTextField("aqui mostrar");
-    JButton boton_detalle = new JButton ("Consultar");    
+    private principal prin;
+    private JFrame pane = new JFrame();
+    private JLabel label_pasajero = new JLabel("Registrar nuevo pasajero");
+    private JLabel label_viaje = new JLabel("Solicitar nuevo viaje");
+    private JTextField textfield_pasajero = new JTextField("cedula/nombre/provincia/canton/distrito/señas/correo/telefono");    
+    private JButton boton_pas = new JButton("Registrar");    
+    private JTextField textfield_viaje = new JTextField("pnt salida/destino salida(dia/mes/año) llegada(dia/mes/año)");
+    private JTextField textfield_viaje_pasajeros = new JTextField("cedula pasajero1 / cedula pasajero2");
+    private JButton boton_viaje = new JButton("Solicitar");  
+    private JLabel label_listar = new JLabel("Listar solicitudes de viajes");
+    private JTextField textfield_listar_fecha = new JTextField("dd/mm/aa");
+    private JTextField textfield_listar_estado = new JTextField("En confeccion/Aprovado/Cancelado/No aprovado");
+    private JTextField textfield_listar_destino = new JTextField("Destino");
+    private JTextField textfield_panel_listar = new JTextField("aqui mostrar");
+    private JButton boton_listar_fecha = new JButton("Listar");
+    private JButton boton_listar_estado = new JButton("Listar");               
+    private JButton boton_listar_destino = new JButton("Listar");  
+    private JLabel label_cancelar = new JLabel("Cancelar viaje");
+    private JTextField textfield_cancelar = new JTextField("consecutivo");
+    private JButton boton_cancelar = new JButton("Cancelar");              
+    private JLabel label_detalle = new JLabel("Consultar detalle de viaje");
+    private JTextField textfield_detalle = new JTextField("consecutivo");
+    private JTextField textfield_panel_detalle = new JTextField("aqui mostrar");
+    private JButton boton_detalle = new JButton ("Consultar");    
 
-    public ventana_secretaria(){
+    public ventana_secretaria(principal pr){
+        set_prin(pr);
         configuraciones();
     }    
+    private void set_prin(principal pr){
+        prin=pr;
+    }
     private void configuraciones(){
         
         pane.getContentPane().setBackground(Color.WHITE);
@@ -86,7 +92,7 @@ public class ventana_secretaria
         boton_pas.setBounds(new Rectangle(100,20));                        
         boton_pas.setLocation(10,70);            
         boton_pas.setBackground(Color.white);
-        boton_pas.addActionListener(new act_bot());
+        boton_pas.addActionListener(new act_bot_pas());
         //label_viaje
         label_viaje.setBounds(new Rectangle(150,20));        
         label_viaje.setLocation(10,110);
@@ -174,6 +180,16 @@ public class ventana_secretaria
         public void actionPerformed(ActionEvent e){
             //new ventana_secretaria(); 
             //accion de venteana
+        }
+    }
+    private class act_bot_pas implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+            if(prin.agregar_pasajero(textfield_pasajero.getText())){
+                JOptionPane.showMessageDialog(null, "Pasajero agregado correctamente", "just now", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Pasajero no fue agregado correctamente", "ERROR!!!", JOptionPane.WARNING_MESSAGE);
+            }
         }
     }
 

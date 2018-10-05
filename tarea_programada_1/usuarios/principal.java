@@ -4,13 +4,16 @@ import tarea_programada_1.vehiculo.direccion;
 
 public class principal
 {
-    usuario Array_usuarios[] = new usuario[1];
+    usuario Array_usuarios[] = new usuario[1];//cambiar tamaños dinamicamente
+    persona Array_pasajeros[] = new persona[1];
     
     public principal(){
+        //usuario de pruevas
         direccion res=new direccion("","","","");
         persona hola=new persona("",5,res,"",3);
         usuario aquel=new usuario(hola,"hols");
         Array_usuarios[0]=aquel;
+        //eliminar
     }
     
     public boolean validar_adm(String usu,String cont){        
@@ -20,18 +23,47 @@ public class principal
         return false;        
     }
     public boolean validar_sec(String usu,String cont){        
-        for (int i =0;i<Array_usuarios.length;i++){  
-            System.out.println(Array_usuarios[i].get_usuario());
-            System.out.println(Array_usuarios[i].get_contraseña());
+        for (int i = 0 ; i < Array_usuarios.length ; i++){                          
             int us = usu.compareTo(Array_usuarios[i].get_usuario());
             int co = cont.compareTo(Array_usuarios[i].get_contraseña());            
-            System.out.println(us);
-            System.out.println(co);
-            if(usu==Array_usuarios[i].get_usuario()){
-                System.out.println("hola putos");
-            }
             if(us==0 && co==0){return true;}        
         }
         return false;        
+    }
+    public boolean agregar_pasajero(String info){        
+        
+        String cedula="";
+        String nombre="";
+        String provincia="";
+        String canton="";
+        String distrito="";
+        String señas="";
+        String correo="";
+        String telefono="";
+        /**obtiene informacion de string*/
+        int cont=0;
+        for(int i = 0 ; i < info.length() ; i++){
+            char c = info.charAt(i);
+            if(c=='/')cont++;
+            else if (cont==0)cedula += c;
+            else if (cont==1)nombre += c;
+            else if (cont==2)provincia += c;
+            else if (cont==3)canton += c;
+            else if (cont==4)distrito += c;
+            else if (cont==5)señas += c;
+            else if (cont==6)correo += c;
+            else if (cont==7)telefono += c;            
+        }    
+        /**crea los objetos y procede a verificar si existe otro
+        con el mismo numero de cedula*/
+        direccion dir = new direccion(provincia,canton,distrito,señas);
+        persona pers = new persona(nombre,Integer.parseInt(cedula),dir,correo,Integer.parseInt(telefono));
+        for (int i = 0; i < Array_pasajeros.length ; i++ ){
+            if(Array_pasajeros[i].get_ced()==pers.get_ced()){
+            return false;
+            }
+        }
+        /**falta meter a array pasajeros "pers"*/
+        return true;
     }
 }

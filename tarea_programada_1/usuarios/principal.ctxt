@@ -6,4 +6,6 @@ comment2.params=usu\ cont
 comment2.target=boolean\ validar_adm(java.lang.String,\ java.lang.String)
 comment3.params=usu\ cont
 comment3.target=boolean\ validar_sec(java.lang.String,\ java.lang.String)
-numComments=4
+comment4.params=info
+comment4.target=boolean\ agregar_pasajero(java.lang.String)
+numComments=5
