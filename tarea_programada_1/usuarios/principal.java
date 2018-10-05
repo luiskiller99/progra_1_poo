@@ -72,7 +72,9 @@ public class principal
         genjson();
         return true;
     }
-    
+    public boolean aprovar_solicitud_viaje(){
+        return true;
+    }
     @SuppressWarnings("unchecked")
     public void genjson() {
         JSONObject obj = new JSONObject();
@@ -91,6 +93,6 @@ public class principal
 	catch (IOException e){
 	    System.out.print(e.getMessage());
 	   }
-
-    }
+}
+	   
 }

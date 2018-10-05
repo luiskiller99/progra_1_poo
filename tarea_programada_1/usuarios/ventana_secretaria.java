@@ -109,7 +109,7 @@ public class ventana_secretaria
         boton_viaje.setBounds(new Rectangle(100,20));                        
         boton_viaje.setLocation(10,180);            
         boton_viaje.setBackground(Color.white);
-        boton_viaje.addActionListener(new act_bot());
+        boton_viaje.addActionListener(new act_bot_viaje());
         //label_listar
         label_listar.setBounds(new Rectangle(170,20));        
         label_listar.setLocation(10,220);
@@ -189,6 +189,16 @@ public class ventana_secretaria
             }
             else{
                 JOptionPane.showMessageDialog(null, "Pasajero no fue agregado correctamente", "ERROR!!!", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+    }
+    private class act_bot_viaje implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+            if(prin.aprovar_solicitud_viaje()){
+                JOptionPane.showMessageDialog(null, "Solicitud aprovada", "just now", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Solicitud no fue aprovado", "ERROR!!!", JOptionPane.WARNING_MESSAGE);
             }
         }
     }
