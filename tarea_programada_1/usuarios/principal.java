@@ -18,6 +18,7 @@ public class principal
         Array_usuarios.add(aquel);
         //eliminar
     }
+    
     public void nuevo_secretaria(String info){
         String cedula="";
         String nombre="";
@@ -50,6 +51,29 @@ public class principal
         usuario usu= new usuario(pers,departamento);
         Array_usuarios.add(usu);
     }
+    
+    public void genjsonsec(){
+        JSONObject obj = new JSONObject();
+        for(int i=0;i<Array_usuarios.size();i++){            
+           obj.put("Cedula",Array_usuarios.get(i).get_cedula());
+           obj.put("Nombre", Array_usuarios.get(i).get_nombre());            
+           obj.put("Cantón",Array_usuarios.get(i).get_canton());
+           obj.put("Distrito",Array_usuarios.get(i).get_distrito());
+           obj.put("Provincia",Array_usuarios.get(i).get_provincia());
+           obj.put("Señas",Array_usuarios.get(i).get_señas());            
+           obj.put("Telefono",Array_usuarios.get(i).get_telefono());
+           obj.put("Correo",Array_usuarios.get(i).get_correo());
+        }
+        //C:/Users/metal/Documents/GitHub7progra_1_poo/tarea_programada_1/usuarios/
+        try (FileWriter file = new FileWriter("C:/Users/metal/Documents/GitHub/progra_1_poo/tarea_programada_1/usuarios/secretarias.json",true)) {
+		file.append(obj.toJSONString());
+	}
+	catch (IOException e){
+	    System.out.print(e.getMessage());
+	   }
+        
+    }
+    
     public boolean validar_adm(String usu,String cont){        
         int us = usu.compareTo("administrador");
         int co = cont.compareTo("123admin!");
@@ -125,7 +149,10 @@ public class principal
         for(int i=0;i<Array_pasajeros.size();i++){            
             obj.put("Cedula",Array_pasajeros.get(i).get_ced());
             obj.put("Nombre", Array_pasajeros.get(i).get_nom());            
-            obj.put("Direccion",Array_pasajeros.get(i).get_dir());
+            obj.put("Cantón",Array_pasajeros.get(i).get_dir().get_can());
+            obj.put("Distrito",Array_pasajeros.get(i).get_dir().get_dis());
+            obj.put("Provincia",Array_pasajeros.get(i).get_dir().get_pro());
+            obj.put("Señas",Array_pasajeros.get(i).get_dir().get_se());            
             obj.put("Telefono",Array_pasajeros.get(i).get_tel());
             obj.put("Correo",Array_pasajeros.get(i).get_correo());
         }

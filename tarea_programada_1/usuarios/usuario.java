@@ -57,8 +57,41 @@ public class usuario
     public String get_usuario(){
         return usuario;
     }
+    
     public String get_contraseña(){
         return contraseña;
     }
+    
+    public int get_cedula(){
+        return individuo.get_ced();
+    }
+    
+    public String get_nombre(){
+        return individuo.get_nom();
+    }
+    
+    public String get_provincia(){
+        return individuo.get_dir().get_pro();
+    }
+    
+    public String get_canton(){
+        return individuo.get_dir().get_can();           
+    }
+    
+    public String get_distrito(){
+        return individuo.get_dir().get_dis();
+    }
+    
+    public String get_señas(){
+        return individuo.get_dir().get_se();
+    }
+    
+    public int get_telefono(){
+        return individuo.get_tel();
+    }
+    
+    public String get_correo(){
+        return individuo.get_correo();
+    }
+    
 }
-
