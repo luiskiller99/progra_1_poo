@@ -73,7 +73,7 @@ public class principal
     }
     
     @SuppressWarnings("unchecked")
-    public void genjson() throws IOException{
+    public void genjson() {
         JSONObject obj = new JSONObject();
         for(int i=0;i<Array_pasajeros.size();i++){            
             obj.put("Cedula",Array_pasajeros.get(i).get_ced());
@@ -86,5 +86,8 @@ public class principal
         try (FileWriter file = new FileWriter("D:/Java/Hola/file1.json")) {
 		file.write(obj.toJSONString());
 	}
+	catch (IOException e){
+	    System.out.print(e.getMessage());
+	   }
     }
 }
