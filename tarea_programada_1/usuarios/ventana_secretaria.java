@@ -193,13 +193,9 @@ public class ventana_secretaria
         }
     }
     private class act_bot_viaje implements ActionListener{
-        public void actionPerformed(ActionEvent e){
-            if(prin.aprovar_solicitud_viaje()){
-                JOptionPane.showMessageDialog(null, "Solicitud aprovada", "just now", JOptionPane.INFORMATION_MESSAGE);
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Solicitud no fue aprovado", "ERROR!!!", JOptionPane.WARNING_MESSAGE);
-            }
+        public void actionPerformed(ActionEvent e){          
+            prin.solicitar_viaje(textfield_viaje.getText(),textfield_viaje_pasajeros.getText());
+            JOptionPane.showMessageDialog(null, "Solicitud creada", "just now", JOptionPane.INFORMATION_MESSAGE);            
         }
     }
 

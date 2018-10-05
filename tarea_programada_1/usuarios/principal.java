@@ -72,8 +72,21 @@ public class principal
         genjson();
         return true;
     }
-    public boolean aprovar_solicitud_viaje(){
-        return true;
+    public void solicitar_viaje(String info, String list_pas){
+        //obtener informacion
+        String pnt_salida="";
+        String pnt_destino="";
+        String dia_salida="";
+        String mes_salida="";
+        String ano_salida="";
+        String dia_llegada="";
+        String mes_llegada="";
+        String ano_llegada="";
+        String cedula_pasajero="";
+        //interseccion de fechas vasia
+        //fecha con 24 horas de diferencia//tomar fecha de sistema operativo        
+        //debe aber un pasajero almenos
+        //escribir en json
     }
     @SuppressWarnings("unchecked")
     public void genjson() {
