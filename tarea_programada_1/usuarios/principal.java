@@ -85,14 +85,6 @@ public class principal
             obj.put("Telefono",Array_pasajeros.get(i).get_tel());
             obj.put("Correo",Array_pasajeros.get(i).get_correo());            
         }
-        try (FileWriter file = new FileWriter("C:/Users/metal/Documents/GitHub/progra_1_poo/tarea_programada_1/usuarios/file1.json")) {
-                file.write(obj.toJSONString());
-            }catch (IOException e){
-                System.out.print(e.getMessage());
-            }
-        
-        
-
         try (FileWriter file = new FileWriter("D:/Java/Hola/file1.json")) {
 		file.append(obj.toJSONString());
 	}
