@@ -21,6 +21,7 @@ comment7.params=nom
 comment7.target=java.lang.String\ get_nom(java.lang.String)
 comment8.params=ced
 comment8.target=int\ get_ced(int)
+comment8.target=int\ get_ced()
 comment9.params=dir
 comment9.target=direccion\ get_dir(direccion)
 numComments=12
