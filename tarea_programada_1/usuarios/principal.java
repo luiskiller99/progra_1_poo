@@ -92,5 +92,13 @@ public class principal
             }
         
         
+
+        try (FileWriter file = new FileWriter("D:/Java/Hola/file1.json")) {
+		file.append(obj.toJSONString());
+	}
+	catch (IOException e){
+	    System.out.print(e.getMessage());
+	   }
+
     }
 }
