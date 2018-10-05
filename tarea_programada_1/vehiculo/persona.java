@@ -31,11 +31,11 @@ public class persona
     private void set_correo(String corr){correo=corr;}
     private void set_tel(int tel){telefono=tel;}
     //geters
-    public String get_nom(String nom){return nombre;}
+    public String get_nom(){return nombre;}
     public int get_ced(){return cedula;}
-    public direccion get_dir(direccion dir){return direc;}
-    public String get_correo(String corr){return correo;}
-    public int get_tel(int tel){return telefono;}
+    public direccion get_dir(){return direc;}
+    public String get_correo(){return correo;}
+    public int get_tel(){return telefono;}
 
 
 }
