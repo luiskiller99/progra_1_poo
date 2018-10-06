@@ -49,12 +49,29 @@ public class Json{
         
     }
     
+    static void leerJSONviajes() throws FileNotFoundException, IOException, ParseException{
+        JSONParser parser=new JSONParser();
+        JSONArray arregloJson=(JSONArray) parser.parse(new FileReader("D:/Descargas/GitHub/progra_1_poo/tarea_programada_1/usuarios/viajes.json"));
+        for(int i=0;i<arregloJson.size();i++){
+            JSONObject elemento= (JSONObject) arregloJson.get(i);
+            System.out.print(elemento.get("Destino")+"/");            
+            System.out.print(elemento.get("Chofer")+"/");
+            System.out.print(elemento.get("Salida")+"/");
+            System.out.print(elemento.get("Estado")+"/");            
+            System.out.print(elemento.get("Consecutivo")+"/");
+            System.out.print(elemento.get("FechaFin")+"/");
+            System.out.print(elemento.get("FechaIni")+"\n");
+        }
+    }
+    
     static void main(String Args[]) throws FileNotFoundException, IOException, ParseException{
         Json prueba=new Json();
         System.out.print("=========================Usuarios=========================\n");
         Json.leerJSONusuarios();
         System.out.print("=========================Pasajeros=========================\n");
         Json.leerJSONpasajeros();
+        System.out.print("=========================Viajes=========================\n");
+        Json.leerJSONviajes();
     }
     
     
