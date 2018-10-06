@@ -201,8 +201,8 @@ public class ventana_secretaria
     }
     private class act_bot_cancelar implements ActionListener{
         public void actionPerformed(ActionEvent e){          
-        if (prin.solicitar_viaje(textfield_viaje.getText(),textfield_viaje_pasajeros.getText())){
-            JOptionPane.showMessageDialog(null, "Solicitud creada", "just now", JOptionPane.INFORMATION_MESSAGE);            
+        if (prin.cancelar_viaje(textfield_cancelar.getText())){
+            JOptionPane.showMessageDialog(null, "Viaje cancelado con exito", "just now", JOptionPane.INFORMATION_MESSAGE);            
         }
         }
     }

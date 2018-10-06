@@ -53,5 +53,8 @@ public class viaje
     public void agregar_pasajero(persona pers){
         lista_pasajeros.add(pers);
     }
+    public void cambiar_estado(String est){
+        estado=est;
+    }
  
 }

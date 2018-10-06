@@ -290,7 +290,21 @@ public class principal
         }
         return aux;
     }
-    boolean cancelar_viaje(){}
+    boolean cancelar_viaje(String consec){
+        for(int i=0;i<Array_viajes.size();i++){
+            if(Array_viajes.get(i).get_consec().compareTo(consec)==0){
+                if(Array_viajes.get(i).get_estado().compareTo("En confección")==0){
+                Array_viajes.get(i).cambiar_estado("Cancelado");
+                }
+                else if(Array_viajes.get(i).get_estado().compareTo("Aprovado")==0){
+                Array_viajes.get(i).cambiar_estado("Cancelado");
+                /**aqui codigo para notificar a los usuarios*/
+                }
+            }
+        }
+        return true;
+    }
+    
     @SuppressWarnings("unchecked")
     public void genjson() {
         JSONObject obj = new JSONObject();
