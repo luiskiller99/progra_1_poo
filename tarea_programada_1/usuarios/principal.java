@@ -29,6 +29,7 @@ public class principal
     ArrayList<persona> Array_pasajeros = new ArrayList<persona>(); 
     JSONArray arreglousuarios=new JSONArray();
     JSONArray arreglopasajeros=new JSONArray();
+    JSONArray arregloviajes=new JSONArray();
     
     public principal(){
         //usuario de pruevas
@@ -46,7 +47,7 @@ public class principal
         String provincia="";
         String canton="";
         String distrito="";
-        String seÃ±as="";
+        String señas="";
         String correo="";
         String telefono="";
         String departamento="";
@@ -60,12 +61,12 @@ public class principal
             else if (cont==2)provincia += c;
             else if (cont==3)canton += c;
             else if (cont==4)distrito += c;
-            else if (cont==5)seÃ±as += c;
+            else if (cont==5)señas += c;
             else if (cont==6)correo += c;
             else if (cont==7)departamento += c;
             else if (cont==8)telefono += c;            
         }    
-        direccion dir = new direccion(provincia,canton,distrito,seÃ±as);
+        direccion dir = new direccion(provincia,canton,distrito,señas);
         int ced = Integer.parseInt(cedula);
         int tel = Integer.parseInt(telefono);
         persona pers= new persona(nombre,ced,dir,correo,tel);
@@ -80,14 +81,14 @@ public class principal
         for(int i=0;i<Array_usuarios.size();i++){            
            obj.put("Cedula",Array_usuarios.get(i).get_cedula());
            obj.put("Nombre", Array_usuarios.get(i).get_nombre());            
-           obj.put("CantÃ³n",Array_usuarios.get(i).get_canton());
+           obj.put("Cantón",Array_usuarios.get(i).get_canton());
            obj.put("Distrito",Array_usuarios.get(i).get_distrito());
            obj.put("Provincia",Array_usuarios.get(i).get_provincia());
-           obj.put("SeÃ±as",Array_usuarios.get(i).get_seÃ±as());            
+           obj.put("Señas",Array_usuarios.get(i).get_señas());            
            obj.put("Telefono",Array_usuarios.get(i).get_telefono());
            obj.put("Correo",Array_usuarios.get(i).get_correo());
            obj.put("Usuario",Array_usuarios.get(i).get_usuario());
-           obj.put("ContraseÃ±a",Array_usuarios.get(i).get_contraseÃ±a());
+           obj.put("Constraseña",Array_usuarios.get(i).get_contraseña());
            
         }
         arreglousuarios.add(obj);
@@ -116,7 +117,7 @@ public class principal
     public boolean validar_sec(String usu,String cont){        
         for (int i = 0 ; i < Array_usuarios.size() ; i++){                          
             int us = usu.compareTo(Array_usuarios.get(i).get_usuario());
-            int co = cont.compareTo(Array_usuarios.get(i).get_contraseÃ±a());            
+            int co = cont.compareTo(Array_usuarios.get(i).get_contraseña());            
             if(us==0 && co==0){return true;}        
         }
         return false;        
@@ -128,7 +129,7 @@ public class principal
         String provincia="";
         String canton="";
         String distrito="";
-        String seÃ±as="";
+        String señas="";
         String correo="";
         String telefono="";
         /**obtiene informacion de string*/
@@ -141,13 +142,13 @@ public class principal
             else if (cont==2)provincia += c;
             else if (cont==3)canton += c;
             else if (cont==4)distrito += c;
-            else if (cont==5)seÃ±as += c;
+            else if (cont==5)señas += c;
             else if (cont==6)correo += c;
             else if (cont==7)telefono += c;            
         }    
         /**crea los objetos y procede a verificar si existe otro
         con el mismo numero de cedula*/
-        direccion dir = new direccion(provincia,canton,distrito,seÃ±as);
+        direccion dir = new direccion(provincia,canton,distrito,señas);
         persona pers = new persona(nombre,Integer.parseInt(cedula),dir,correo,Integer.parseInt(telefono));
         for (int i = 0; i < Array_pasajeros.size() ; i++ ){
             if(Array_pasajeros.get(i).get_ced()==pers.get_ced()){
@@ -178,7 +179,7 @@ public class principal
         
         String diaa_pc = Integer.toString(c.get(Calendar.DATE));
         String mess_pc = Integer.toString(c.get(Calendar.MONTH));
-        String aÃ±oo_pc = Integer.toString(c.get(Calendar.YEAR));        
+        String añoo_pc = Integer.toString(c.get(Calendar.YEAR));        
         
         ArrayList<persona> Array_pasajeros_aux = new ArrayList<persona>();
         
@@ -219,8 +220,8 @@ public class principal
             Integer.parseInt(dia_llegada) <= Array_viajes.get(i).get_fin().get_d() ) &&/**dia llegada info <= dia llegada array*/
             (Array_viajes.get(i).get_ini().get_d() <= Integer.parseInt(dia_llegada) && /**mes ini aray <= mes llegada info*/
             Integer.parseInt(dia_llegada) <= Array_viajes.get(i).get_fin().get_d() ) &&/**mes ini info <= mes llegada array*/
-            (Array_viajes.get(i).get_ini().get_d() <= Integer.parseInt(dia_llegada) &&/**aÃ±o ini array <= aÃ±o llegada info*/
-            Integer.parseInt(dia_llegada) <= Array_viajes.get(i).get_fin().get_d()) /**aÃ±o ini info <= aÃ±o llegada array*/
+            (Array_viajes.get(i).get_ini().get_d() <= Integer.parseInt(dia_llegada) &&/**año ini array <= año llegada info*/
+            Integer.parseInt(dia_llegada) <= Array_viajes.get(i).get_fin().get_d()) /**año ini info <= año llegada array*/
             )/**si esto se cumple no deberia de aplicar viaje */
             { 
                 interruptor = false;
@@ -230,7 +231,7 @@ public class principal
         //fecha con 24 horas de diferencia//tomar fecha de sistema operativo        
         if(dia_llegada.compareTo(diaa_pc) == 0 &&
         mes_llegada.compareTo(mess_pc) == 0 &&
-        ano_llegada.compareTo(aÃ±oo_pc) == 0){
+        ano_llegada.compareTo(añoo_pc) == 0){
             interruptor = false;
             JOptionPane.showMessageDialog(null, "Solicitud de viaje no fue agregada correctamente, en menos de 24 horas solicitud no puede ser procesada", "ERROR!!!", JOptionPane.WARNING_MESSAGE);
         }/**si esto se cumple no debe realizarse viaje*/
@@ -248,7 +249,7 @@ public class principal
             int ano_l = Integer.parseInt(ano_llegada);            
             fecha fech_ini = new fecha(dia_s,mes_s,ano_s);
             fecha fech_fin = new fecha(dia_l,mes_l,ano_l);
-            viaje iva = new viaje(pnt_salida,pnt_destino,fech_ini,fech_fin,"En confecciÃ³n");            
+            viaje iva = new viaje(pnt_salida,pnt_destino,fech_ini,fech_fin,"En confección");            
             /**agrega todos los pasajeros*/
             for (int i=0;i<Array_pasajeros_aux.size();i++){
                 iva.agregar_pasajero(Array_pasajeros_aux.get(i));
@@ -256,8 +257,32 @@ public class principal
             Array_viajes.add(iva);
         }
         /**escribir en json*/
+        genjson();
         return interruptor;
     }
+    
+    @SuppressWarnings("unchecked")
+    public void genjsonviaje(){
+        JSONObject obj= new JSONObject();
+        for(int i=0;i<Array_viajes.size();i++){
+            obj.put("Chofer",Array_viajes.get(i).get_chof());
+            obj.put("Destino",Array_viajes.get(i).get_dest());
+            obj.put("Estado",Array_viajes.get(i).get_estado());
+            obj.put("FechaFin",Array_viajes.get(i).get_fin());
+            obj.put("FechaIni",Array_viajes.get(i).get_ini());
+            obj.put("Salida",Array_viajes.get(i).get_sal());
+            obj.put("Consecutivo",Array_viajes.get(i).get_consec());
+        }
+        arregloviajes.add(obj);
+        //C:/Users/metal/Documents/GitHub7progra_1_poo/tarea_programada_1/usuarios/
+        try (FileWriter file = new FileWriter("D:/Descargas/GitHub/progra_1_poo/tarea_programada_1/usuarios/viajes.json")) {
+        file.write(arregloviajes.toJSONString());
+        }
+        catch (IOException e){
+        System.out.print(e.getMessage());
+        }
+    }
+    
     persona optener_pasajero(int ced){
         persona aux = new persona();
         for (int i =0;i< Array_pasajeros.size();i++){
@@ -271,10 +296,10 @@ public class principal
         for(int i=0;i<Array_pasajeros.size();i++){            
             obj.put("Cedula",Array_pasajeros.get(i).get_ced());
             obj.put("Nombre", Array_pasajeros.get(i).get_nom());            
-            obj.put("CantÃ³n",Array_pasajeros.get(i).get_dir().get_can());
+            obj.put("Cantón",Array_pasajeros.get(i).get_dir().get_can());
             obj.put("Distrito",Array_pasajeros.get(i).get_dir().get_dis());
             obj.put("Provincia",Array_pasajeros.get(i).get_dir().get_pro());
-            obj.put("SeÃ±as",Array_pasajeros.get(i).get_dir().get_se());            
+            obj.put("Señas",Array_pasajeros.get(i).get_dir().get_se());            
             obj.put("Telefono",Array_pasajeros.get(i).get_tel());
             obj.put("Correo",Array_pasajeros.get(i).get_correo());
         }
