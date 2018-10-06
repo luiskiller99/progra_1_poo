@@ -194,8 +194,9 @@ public class ventana_secretaria
     }
     private class act_bot_viaje implements ActionListener{
         public void actionPerformed(ActionEvent e){          
-            prin.solicitar_viaje(textfield_viaje.getText(),textfield_viaje_pasajeros.getText());
+        if (prin.solicitar_viaje(textfield_viaje.getText(),textfield_viaje_pasajeros.getText())){
             JOptionPane.showMessageDialog(null, "Solicitud creada", "just now", JOptionPane.INFORMATION_MESSAGE);            
+        }
         }
     }
 

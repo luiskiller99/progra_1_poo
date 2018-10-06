@@ -14,7 +14,7 @@ public class persona
     direccion direc;
     String correo;
     int telefono;
-    
+    public persona(){}
     public persona(String nombre,int cedula,direccion direc,
     String correo,int telefono)
     {

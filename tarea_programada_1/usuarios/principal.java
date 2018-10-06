@@ -1,17 +1,34 @@
 package tarea_programada_1.usuarios;
-import tarea_programada_1.vehiculo.persona;
-import tarea_programada_1.vehiculo.direccion;
 import java.util.ArrayList;
 import org.json.simple.JSONObject;
 import java.io.FileWriter;
 import java.io.IOException;
-public class principal
+import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.text.DateFormat;
+
+import java.awt.event.*;
+import javax.swing.*;
+import java.awt.*;
+import javax.imageio.ImageIO;
+import java.io.*;
+import javax.swing.JOptionPane;
+
+import tarea_programada_1.vehiculo.persona;
+import tarea_programada_1.vehiculo.direccion;
+import tarea_programada_1.vehiculo.viaje;
+import tarea_programada_1.vehiculo.fecha;
+
+public class principal 
 {
     ArrayList<usuario> Array_usuarios = new ArrayList<usuario>();
+    ArrayList<viaje> Array_viajes = new ArrayList<viaje>();
     ArrayList<persona> Array_pasajeros = new ArrayList<persona>();    
     
     public principal(){
         //usuario de pruevas
+        //por defecto usu = metal0500 cont = luise5847
         direccion res=new direccion("","","","");
         persona hola=new persona("",5,res,"",3);
         usuario aquel=new usuario(hola,"hols");
@@ -69,11 +86,11 @@ public class principal
         }
         //C:/Users/metal/Documents/GitHub7progra_1_poo/tarea_programada_1/usuarios/
         try (FileWriter file = new FileWriter("C:/Users/metal/Documents/GitHub/progra_1_poo/tarea_programada_1/usuarios/secretarias.json",true)) {
-		file.append(obj.toJSONString());
-	}
-	catch (IOException e){
-	    System.out.print(e.getMessage());
-	   }
+        file.append(obj.toJSONString());
+    }
+    catch (IOException e){
+        System.out.print(e.getMessage());
+       }
         
     }
     
@@ -130,7 +147,7 @@ public class principal
         genjson();
         return true;
     }
-    public void solicitar_viaje(String info, String list_pas){
+    public boolean solicitar_viaje(String info, String list_pas){
         //obtener informacion
         String pnt_salida="";
         String pnt_destino="";
@@ -141,10 +158,99 @@ public class principal
         String mes_llegada="";
         String ano_llegada="";
         String cedula_pasajero="";
-        //interseccion de fechas vasia
+        /**optener fecha*/
+        Date d = new Date();        
+        Calendar c = new GregorianCalendar(); 
+        c.setTime(d);
+        
+        String diaa_pc = Integer.toString(c.get(Calendar.DATE));
+        String mess_pc = Integer.toString(c.get(Calendar.MONTH));
+        String añoo_pc = Integer.toString(c.get(Calendar.YEAR));        
+        
+        ArrayList<persona> Array_pasajeros_aux = new ArrayList<persona>();
+        
+        boolean interruptor=true;
+        
+        /**falta optener info*/
+        int cont =0;
+        for(int i = 0 ; i < info.length() ; i++){
+            char k = info.charAt(i);
+            if(k=='/')cont++;
+            else if (cont==0)pnt_salida += k;
+            else if (cont==1)pnt_destino += k;
+            else if (cont==2)dia_salida += k;
+            else if (cont==3)mes_salida += k;
+            else if (cont==4)ano_salida += k;
+            else if (cont==5)dia_llegada += k;
+            else if (cont==6)mes_llegada += k;
+            else if (cont==7)ano_llegada += k;            
+        }
+        String ced="";
+        int cedaux=0;
+        for(int i = 0 ; i < list_pas.length() ; i++){
+            char k = list_pas.charAt(i);
+            if(k=='/'){
+                cedaux=Integer.parseInt(ced);
+                Array_pasajeros_aux.add(optener_pasajero(cedaux));
+                ced="";
+            }
+            else {
+                ced+=k;
+            }
+        }
+        Array_pasajeros_aux.add(optener_pasajero(cedaux));
+        
+        //interseccion de fechas vacia
+        for (int i =0;i < Array_viajes.size();i++){           
+            if((Array_viajes.get(i).get_ini().get_d() <= Integer.parseInt(dia_llegada) && /**dia ini array<= dia llegada info*/
+            Integer.parseInt(dia_llegada) <= Array_viajes.get(i).get_fin().get_d() ) &&/**dia llegada info <= dia llegada array*/
+            (Array_viajes.get(i).get_ini().get_d() <= Integer.parseInt(dia_llegada) && /**mes ini aray <= mes llegada info*/
+            Integer.parseInt(dia_llegada) <= Array_viajes.get(i).get_fin().get_d() ) &&/**mes ini info <= mes llegada array*/
+            (Array_viajes.get(i).get_ini().get_d() <= Integer.parseInt(dia_llegada) &&/**año ini array <= año llegada info*/
+            Integer.parseInt(dia_llegada) <= Array_viajes.get(i).get_fin().get_d()) /**año ini info <= año llegada array*/
+            )/**si esto se cumple no deberia de aplicar viaje */
+            { 
+                interruptor = false;
+                JOptionPane.showMessageDialog(null, "Solicitud de viaje no fue agregada correctamente, choque de fechas", "ERROR!!!", JOptionPane.WARNING_MESSAGE);
+            }            
+        }
         //fecha con 24 horas de diferencia//tomar fecha de sistema operativo        
+        if(dia_llegada.compareTo(diaa_pc) == 0 &&
+        mes_llegada.compareTo(mess_pc) == 0 &&
+        ano_llegada.compareTo(añoo_pc) == 0){
+            interruptor = false;
+            JOptionPane.showMessageDialog(null, "Solicitud de viaje no fue agregada correctamente, en menos de 24 horas solicitud no puede ser procesada", "ERROR!!!", JOptionPane.WARNING_MESSAGE);
+        }/**si esto se cumple no debe realizarse viaje*/
         //debe aber un pasajero almenos
-        //escribir en json
+        if(Array_pasajeros_aux.size()==0){
+            interruptor = false;
+            JOptionPane.showMessageDialog(null, "Solicitud de viaje no fue agregada correctamente, no hay pasajeros", "ERROR!!!", JOptionPane.WARNING_MESSAGE);
+        }/**si esto se cumple no debe realizarse viaje*/
+        if(interruptor){
+            int dia_s = Integer.parseInt(dia_salida);
+            int mes_s = Integer.parseInt(mes_salida);
+            int ano_s = Integer.parseInt(ano_salida);
+            int dia_l = Integer.parseInt(dia_llegada);
+            int mes_l = Integer.parseInt(mes_llegada);
+            int ano_l = Integer.parseInt(ano_llegada);            
+            fecha fech_ini = new fecha(dia_s,mes_s,ano_s);
+            fecha fech_fin = new fecha(dia_l,mes_l,ano_l);
+            viaje iva = new viaje(pnt_salida,pnt_destino,fech_ini,fech_fin,"En confección");            
+            /**agrega todos los pasajeros*/
+            for (int i=0;i<Array_pasajeros_aux.size();i++){
+                iva.agregar_pasajero(Array_pasajeros_aux.get(i));
+            }
+            Array_viajes.add(iva);
+        }
+        /**escribir en json*/
+        return interruptor;
+    }
+    persona optener_pasajero(int ced){
+        persona aux = new persona();
+        for (int i =0;i< Array_pasajeros.size();i++){
+            if(Array_pasajeros.get(i).get_ced()==ced) aux = Array_pasajeros.get(i);
+        }
+        return aux;
     }
     @SuppressWarnings("unchecked")
     public void genjson() {
@@ -161,11 +267,11 @@ public class principal
         }
         //C:/Users/metal/Documents/GitHub7progra_1_poo/tarea_programada_1/usuarios/
         try (FileWriter file = new FileWriter("C:/Users/metal/Documents/GitHub/progra_1_poo/tarea_programada_1/usuarios/file1.json",true)) {
-		file.append(obj.toJSONString());
-	}
-	catch (IOException e){
-	    System.out.print(e.getMessage());
-	   }
+        file.append(obj.toJSONString());
+    }
+    catch (IOException e){
+        System.out.print(e.getMessage());
+       }
 
     }
 

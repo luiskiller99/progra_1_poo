@@ -1,5 +1,5 @@
 package tarea_programada_1.vehiculo;
-
+import java.util.ArrayList;
 
 /**
  * Write a description of class viaje here.
@@ -12,26 +12,25 @@ public class viaje
     /**
      * Constructor for objects of class viaje
      */
-    int consec_num=0;
-    String consecutivo="VIA-";
-    String punto_salida;
-    fecha fech_ini;
-    fecha fech_fin;
-    String destino;
-    chofer chofer_asignado;
-    int kilometrage;//de un auto, meter auto
-    String estado;
-    persona[] lista_pasajeros = new persona[0];    
-    fecha solicitud;//se pide al OS
-    public viaje(String sal,fecha ini,fecha fin,String dest,
-    chofer chof,String estado)
+    private int consec_num=0;
+    private String consecutivo="VIA-";
+    private String punto_salida;
+    private fecha fech_ini;
+    private fecha fech_fin;
+    private String destino;
+    private chofer chofer_asignado;
+    private int kilometrage;//de un auto, meter auto
+    private String estado;
+    private ArrayList<persona> lista_pasajeros = new ArrayList<persona>();
+    private fecha solicitud;//se pide al OS
+    public viaje(String sal,String dest,fecha ini,fecha fin,String estado)
     {
         set_consec();
         set_sal(sal);
         set_ini(ini);
         set_fin(fin);
         set_dest(dest);
-        set_chof(chof);
+        //set_chof(chof);
         set_estado(estado);
     }
     //seters
@@ -50,6 +49,9 @@ public class viaje
     public String get_dest(){return destino;}
     public chofer get_chof(){return chofer_asignado;}
     public String get_estado(){return estado;}    
-
+    //metodos normales
+    public void agregar_pasajero(persona pers){
+        lista_pasajeros.add(pers);
+    }
  
 }
