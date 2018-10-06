@@ -40,8 +40,10 @@ public class CrunchifyJavaMailExample {
         generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress("test1@crunchify.com"));
         generateMailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress("test2@crunchify.com"));
         generateMailMessage.setSubject("Greetings from Crunchify..");
-        String emailBody = "Test email by Crunchify.com JavaMail API example. " + "<br><br> Regards, <br>Crunchify Admin";
+        String emailBody = "Test email by Crunchify.com JavaMail API example. " + "<br><br> Regards, <br>Crunchify Admin";    
         generateMailMessage.setContent(emailBody, "text/html");
+        generateMailMessage.setFileName("HelloWorld.pdf");
+        
         System.out.println("Mail Session has been created successfully..");
  
         // Step3
@@ -50,7 +52,7 @@ public class CrunchifyJavaMailExample {
         //https://myaccount.google.com/lesssecureapps Meterse a esa pagina para poder usar programas de terceros como este.
         // Enter your correct gmail UserID and Password
         // if you have 2FA enabled then provide App Specific Password
-        transport.connect("smtp.gmail.com", "gmail ID", "-----password------"); // Donde dice Gmail ID ingresan su correo, y en password, su contraseña, debe tener el correo abierto.
+        transport.connect("smtp.gmail.com", "Gmail ID", "----password-----"); // Donde dice Gmail ID ingresan su correo, y en password, su contraseña, debe tener el correo abierto.
         transport.sendMessage(generateMailMessage, generateMailMessage.getAllRecipients());
         transport.close();
     }
