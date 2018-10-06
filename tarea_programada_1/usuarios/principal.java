@@ -1,12 +1,14 @@
 package tarea_programada_1.usuarios;
 import java.util.ArrayList;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.text.DateFormat;
+import java.io.File;
 
 import java.awt.event.*;
 import javax.swing.*;
@@ -24,7 +26,9 @@ public class principal
 {
     ArrayList<usuario> Array_usuarios = new ArrayList<usuario>();
     ArrayList<viaje> Array_viajes = new ArrayList<viaje>();
-    ArrayList<persona> Array_pasajeros = new ArrayList<persona>();    
+    ArrayList<persona> Array_pasajeros = new ArrayList<persona>(); 
+    JSONArray arreglousuarios=new JSONArray();
+    JSONArray arreglopasajeros=new JSONArray();
     
     public principal(){
         //usuario de pruevas
@@ -70,8 +74,9 @@ public class principal
         genjsonsec();
     }
     
-    public void genjsonsec(){
+    public void genjsonsec(){        
         JSONObject obj = new JSONObject();
+        
         for(int i=0;i<Array_usuarios.size();i++){            
            obj.put("Cedula",Array_usuarios.get(i).get_cedula());
            obj.put("Nombre", Array_usuarios.get(i).get_nombre());            
@@ -83,14 +88,22 @@ public class principal
            obj.put("Correo",Array_usuarios.get(i).get_correo());
            obj.put("Usuario",Array_usuarios.get(i).get_usuario());
            obj.put("Constraseña",Array_usuarios.get(i).get_contraseña());
+           
         }
+        arreglousuarios.add(obj);
+        
+        
         //C:/Users/metal/Documents/GitHub7progra_1_poo/tarea_programada_1/usuarios/
-        try (FileWriter file = new FileWriter("C:/Users/metal/Documents/GitHub/progra_1_poo/tarea_programada_1/usuarios/secretarias.json",true)) {
-        file.append(obj.toJSONString());
-    }
-    catch (IOException e){
+        try (FileWriter file = new FileWriter("D:/Descargas/GitHub/progra_1_poo/tarea_programada_1/usuarios/secretarias.json")) {
+ 
+        
+        file.write(arreglousuarios.toJSONString());
+        }
+        catch (IOException e){
         System.out.print(e.getMessage());
-       }
+        }
+    
+       
         
     }
     
@@ -265,9 +278,10 @@ public class principal
             obj.put("Telefono",Array_pasajeros.get(i).get_tel());
             obj.put("Correo",Array_pasajeros.get(i).get_correo());
         }
+        arreglopasajeros.add(obj);
         //C:/Users/metal/Documents/GitHub7progra_1_poo/tarea_programada_1/usuarios/
-        try (FileWriter file = new FileWriter("C:/Users/metal/Documents/GitHub/progra_1_poo/tarea_programada_1/usuarios/file1.json",true)) {
-        file.append(obj.toJSONString());
+        try (FileWriter file = new FileWriter("D:/Descargas/GitHub/progra_1_poo/tarea_programada_1/usuarios/file1.json")) {
+        file.write(arreglopasajeros.toJSONString());
     }
     catch (IOException e){
         System.out.print(e.getMessage());
