@@ -10,7 +10,14 @@ public class Bot extends TelegramLongPollingBot{
         .getText());
         
         SendMessage sendMessage=new SendMessage().setChatId(update.getMessage().getChatId());
-        sendMessage.setText("Hello "+update.getMessage().getFrom().getFirstName()+"\n"+update.getMessage().getText());
+        String mensaje=update.getMessage().getText();
+        System.out.print(mensaje);
+        if (mensaje.equals("!validarviaje"))
+        sendMessage.setText("El viaje ha sido aceptado, ¡que disfrute su estadía!");
+        else if (mensaje.equals("!cancelarviaje"))
+        sendMessage.setText("Lo sentimos, pero el viaje ha sido cancelado.");
+        else
+        sendMessage.setText("Comando no reconocido.");
         
         try {
             sendMessage(sendMessage);
