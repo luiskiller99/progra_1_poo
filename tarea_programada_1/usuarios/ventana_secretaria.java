@@ -157,7 +157,7 @@ public class ventana_secretaria
         boton_cancelar.setBounds(new Rectangle(100,20));                        
         boton_cancelar.setLocation(350,70);            
         boton_cancelar.setBackground(Color.white);
-        boton_listar_destino.addActionListener(new act_bot());
+        boton_listar_destino.addActionListener(new act_bot_cancelar());
         //label_detalle
         label_detalle.setBounds(new Rectangle(200,20));        
         label_detalle.setLocation(350,100);
@@ -199,6 +199,12 @@ public class ventana_secretaria
         }
         }
     }
-
+    private class act_bot_cancelar implements ActionListener{
+        public void actionPerformed(ActionEvent e){          
+        if (prin.solicitar_viaje(textfield_viaje.getText(),textfield_viaje_pasajeros.getText())){
+            JOptionPane.showMessageDialog(null, "Solicitud creada", "just now", JOptionPane.INFORMATION_MESSAGE);            
+        }
+        }
+    }
 }
 

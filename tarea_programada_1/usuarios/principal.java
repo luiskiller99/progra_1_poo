@@ -252,6 +252,7 @@ public class principal
         }
         return aux;
     }
+    boolean cancelar_viaje(){}
     @SuppressWarnings("unchecked")
     public void genjson() {
         JSONObject obj = new JSONObject();
