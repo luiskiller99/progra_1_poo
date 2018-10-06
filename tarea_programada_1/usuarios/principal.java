@@ -50,6 +50,7 @@ public class principal
         persona pers= new persona(nombre,ced,dir,correo,tel);
         usuario usu= new usuario(pers,departamento);
         Array_usuarios.add(usu);
+        genjsonsec();
     }
     
     public void genjsonsec(){
