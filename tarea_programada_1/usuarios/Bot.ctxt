@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Bot
+comment1.params=update
+comment1.target=void\ onUpdateReceived(org.telegram.telegrambots.api.objects.Update)
+comment2.params=
+comment2.target=java.lang.String\ getBotUsername()
+comment3.params=
+comment3.target=java.lang.String\ getBotToken()
+numComments=4
