@@ -178,7 +178,7 @@ public class ventana_administrador
      private class act_bot_registar implements ActionListener{
         public void actionPerformed(ActionEvent e){
             prin.nuevo_secretaria(textfield_registrar.getText());
-            JOptionPane.showMessageDialog(null, "Usuario agregado correctamente \n putos\n carajo\n\n\n\n\ntodos", "just now", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Usuario agregado correctamente", "just now", JOptionPane.INFORMATION_MESSAGE);
         }
     }
     private class act_bot_mantenimiento implements ActionListener{

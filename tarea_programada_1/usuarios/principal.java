@@ -250,7 +250,7 @@ public class principal
         for(int i = 0 ; i < list_pas.length() ; i++){
             char k = list_pas.charAt(i);
             if(k=='/'){
-                cedaux=Integer.parseInt(ced);
+                cedaux = Integer.parseInt(ced);
                 String ini = ano_salida+"-"+mes_salida+"-"+dia_salida;
                 String fin = ano_llegada+"-"+mes_llegada+"-"+dia_llegada;
                 if( validar_pasajero_choquehorario(cedaux,ini,fin)){
@@ -624,7 +624,7 @@ public class principal
         }
         cont =0;
         for(int i = 0 ; i < empresa.length() ; i++){
-            char k = info.charAt(i);
+            char k = empresa.charAt(i);
             if(k=='/')cont++;
             else if (cont==0)nombre += k;
             else if (cont==1)razon += k;

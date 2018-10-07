@@ -38,4 +38,7 @@ public class chofer
     public void agregar_licencia(licencia aux){
         array_licencias.add(aux);
     }
+    public ArrayList<licencia> get_list_lic(){
+        return array_licencias;
+    }
 }
