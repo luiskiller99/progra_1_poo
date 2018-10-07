@@ -22,6 +22,8 @@ import tarea_programada_1.vehiculo.direccion;
 import tarea_programada_1.vehiculo.viaje;
 import tarea_programada_1.vehiculo.fecha;
 import tarea_programada_1.vehiculo.vehiculo;
+import tarea_programada_1.vehiculo.licencia;
+import tarea_programada_1.vehiculo.chofer;
 
 import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.TelegramBotsApi;
@@ -324,11 +326,24 @@ public class principal
         return true;
     }
     boolean nuevo_chofer(String info, String list_lic){
+        /**info chofer*/
         String cedula="";
         String nombre="";
         String correo="";
         String telefono="";
+        /**licencia*/
+        String numero="";
+        String d_ex="";
+        String m_ex="";
+        String a_ex="";
+        String d_emi="";
+        String m_emi="";
+        String a_emi="";
+        
+        ArrayList<licencia> array_lic = new ArrayList<licencia>();
+        
         int cont =0;
+        /**info del chofer*/
         for(int i = 0 ; i < info.length() ; i++){
             char k = info.charAt(i);
             if(k=='/')cont++;
@@ -337,6 +352,38 @@ public class principal
             else if (cont==2)correo += k;
             else if (cont==3)telefono += k;
         }
+        /**agregara el nuevo chofer*/
+        int tel= Integer.parseInt(telefono);
+        int ced= Integer.parseInt(cedula);
+        chofer new_chofer = new chofer(nombre,tel,correo,ced);
+        /**agrega licencias*/
+        for(int i = 0 ; i < list_lic.length() ; i++){
+            char k = info.charAt(i);
+            if(k=='/')cont++;
+            else if (cont==0)numero += k;
+            else if (cont==1)d_ex += k;
+            else if (cont==2)m_ex += k;
+            else if (cont==3)a_ex += k;
+            else if (cont==4)d_emi += k;
+            else if (cont==5)m_emi += k;
+            else if (cont==6)a_emi += k;
+            else if (cont==7){
+                int de = Integer.parseInt(d_emi);
+                int me = Integer.parseInt(m_emi);
+                int ae = Integer.parseInt(a_emi);
+                int dx = Integer.parseInt(d_ex);
+                int mx = Integer.parseInt(m_ex);
+                int ax = Integer.parseInt(a_ex);
+                fecha emi =new fecha(de,me,ae);
+                fecha exp = new fecha(dx,mx,ax);
+                int num = Integer.parseInt(numero);
+                /**meter licencia*/
+                licencia aux = new licencia(num,emi,exp);
+                new_chofer.agregar_licencia(aux);
+                cont=0;numero="";d_ex="";m_ex="";a_ex="";
+                d_emi="";m_emi="";a_emi="";
+            }
+        }                        
         return true;
     }
     boolean registrar_vehiculo(String info){
@@ -374,6 +421,19 @@ public class principal
         return true;
     }
     boolean aprovar_viaje(String consec){
+        /**asigna chofer*/ //no debe chocar en hora con otro viaje        
+        boolean interruptor=true;
+        //for(int i=0; i< a){}
+        /**asigna vehiculo*/ // no debe chocar en hora con otro viaje
+        /**capacidad de pasajeros menos o igual a capacidad a vehiculo*/
+        /**hacer pdf y mandar*/
+        /**estado pasa a aprovado*/        
+        for(int i=0; i< Array_viajes.size();i++){
+            if(consec.compareTo(Array_viajes.get(i).get_consec()) == 0){
+                Array_viajes.get(i).cambiar_estado("Aprovado");
+            }
+        }
+        
         return true;
     }
     @SuppressWarnings("unchecked")
@@ -401,3 +461,4 @@ public class principal
     }
 
 }
+

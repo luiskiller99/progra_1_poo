@@ -1,5 +1,5 @@
 package tarea_programada_1.vehiculo;
-
+import java.util.ArrayList;
 
 /**
  * Write a description of class chofer here.
@@ -16,7 +16,7 @@ public class chofer
     int telefono;
     String correo;
     int cedula;
-    licencia[] lista_licencias = new licencia[0];
+    ArrayList<licencia> array_licencias = new ArrayList<licencia>();
     //metodos
     public chofer(String nom,int tel,String correo,int ced)
     {
@@ -35,4 +35,7 @@ public class chofer
     public int get_tel(){return telefono;}
     public String get_correo(){return correo;}
     public int get_ced(){return cedula;}
+    public void agregar_licencia(licencia aux){
+        array_licencias.add(aux);
+    }
 }
