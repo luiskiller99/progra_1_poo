@@ -9,6 +9,9 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.text.DateFormat;
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import java.awt.event.*;
 import javax.swing.*;
@@ -82,6 +85,14 @@ public class principal
         int tel = Integer.parseInt(telefono);
         persona pers= new persona(nombre,ced,dir,correo,tel);
         usuario usu= new usuario(pers,departamento);
+        System.out.println("usuario...............");
+        System.out.println(usu.get_correo());
+        System.out.println(usu.get_contraseña());
+        System.out.println(usu.get_nombre());
+        System.out.println(usu.get_telefono());
+        System.out.println(usu.get_provincia());
+        System.out.println(usu.get_distrito());
+        System.out.println("usuario...............");
         Array_usuarios.add(usu);
         genjsonsec();
     }
@@ -168,6 +179,16 @@ public class principal
         }
         /**agrega nuevo pasajero al arreglo de pasajeros*/
         /**meter en jason*/
+        System.out.println("pasajero..............");
+        System.out.println(pers.get_ced());
+        System.out.println(pers.get_nom());
+        System.out.println(pers.get_dir().get_pro());
+        System.out.println(pers.get_dir().get_can());
+        System.out.println(pers.get_dir().get_dis());
+        System.out.println(pers.get_dir().get_se());
+        System.out.println(pers.get_correo());
+        System.out.println(pers.get_tel());
+        System.out.println("pasajero..............");
         Array_pasajeros.add(pers);
         genjson();
         return true;
@@ -225,8 +246,9 @@ public class principal
         }
         Array_pasajeros_aux.add(optener_pasajero(cedaux));
         
-        //interseccion de fechas vacia
-        for (int i =0;i < Array_viajes.size();i++){           
+        /**interseccion de fechas vacia meter fucion choque horario*/
+        for (int i =0;i < Array_viajes.size();i++){ 
+            
             if((Array_viajes.get(i).get_ini().get_d() <= Integer.parseInt(dia_llegada) && /**dia ini array<= dia llegada info*/
             Integer.parseInt(dia_llegada) <= Array_viajes.get(i).get_fin().get_d() ) &&/**dia llegada info <= dia llegada array*/
             (Array_viajes.get(i).get_ini().get_d() <= Integer.parseInt(dia_llegada) && /**mes ini aray <= mes llegada info*/
@@ -234,6 +256,7 @@ public class principal
             (Array_viajes.get(i).get_ini().get_d() <= Integer.parseInt(dia_llegada) &&/**año ini array <= año llegada info*/
             Integer.parseInt(dia_llegada) <= Array_viajes.get(i).get_fin().get_d()) /**año ini info <= año llegada array*/
             )/**si esto se cumple no deberia de aplicar viaje */
+            
             { 
                 interruptor = false;
                 JOptionPane.showMessageDialog(null, "Solicitud de viaje no fue agregada correctamente, choque de fechas", "ERROR!!!", JOptionPane.WARNING_MESSAGE);
@@ -265,6 +288,18 @@ public class principal
             for (int i=0;i<Array_pasajeros_aux.size();i++){
                 iva.agregar_pasajero(Array_pasajeros_aux.get(i));
             }
+            
+            System.out.println("viaje.............");
+            System.out.println(iva.get_chof().get_nom());
+            System.out.println(iva.get_consec());
+            System.out.println(iva.get_dest());
+            System.out.println(iva.get_estado());
+            System.out.println(iva.get_fin().get_d());
+            System.out.println(iva.get_ini().get_d());
+            System.out.println(iva.get_sal());
+            System.out.println(iva.get_vehiculo().get_placa());
+            System.out.println("viaje.............");
+            
             Array_viajes.add(iva);
         }
         /**escribir en json*/
@@ -305,10 +340,12 @@ public class principal
         for(int i=0;i<Array_viajes.size();i++){
             if(Array_viajes.get(i).get_consec().compareTo(consec)==0){
                 if(Array_viajes.get(i).get_estado().compareTo("En confección")==0){
-                Array_viajes.get(i).cambiar_estado("Cancelado");
+                    System.out.println("cancelado");
+                    Array_viajes.get(i).cambiar_estado("Cancelado");
                 }
                 else if(Array_viajes.get(i).get_estado().compareTo("Aprovado")==0){
-                Array_viajes.get(i).cambiar_estado("Cancelado");
+                    System.out.println("cancelado");
+                    Array_viajes.get(i).cambiar_estado("Cancelado");
                 /**aqui codigo para notificar a los usuarios*/
                 //prueba de bot
                 ApiContextInitializer.init();
@@ -387,6 +424,12 @@ public class principal
                 d_emi="";m_emi="";a_emi="";
             }
         }         
+        System.out.println("chofer...............");
+        System.out.println(new_chofer.get_ced());
+        System.out.println(new_chofer.get_correo());
+        System.out.println(new_chofer.get_nom());
+        System.out.println(new_chofer.get_tel());
+        System.out.println("chofer...............");        
         Array_choferes.add(new_chofer);
         return true;
     }
@@ -421,6 +464,15 @@ public class principal
         int vinn = Integer.parseInt(numero_vinn);
         
         vehiculo vei = new vehiculo(pla,an,color,marca,cap,kil,vinn,sede,estado);
+        System.out.println("vehiculo..............");
+        System.out.println(vei.get_anno());
+        System.out.println(vei.get_cap());
+        System.out.println(vei.get_color());
+        System.out.println(vei.get_estado());
+        System.out.println(vei.get_kil());
+        System.out.println(vei.get_marca());
+        System.out.println(vei.get_placa());
+        System.out.println("vehiculo..............");
         Array_vehiculos.add(vei);
         genjsonvehiculo();
         return true;
@@ -458,27 +510,123 @@ public class principal
        
         
     }
-    
-    boolean aprovar_viaje(String consec){
+    private boolean chocan_horarios(String inib,String finb,String iniv,String finv){//throws ParseException {
+        int ini1,ini2,fin1,fin2;
+        try{
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                     
+        Date fechaInicial_b = dateFormat.parse(inib);
+        Date fechaInicial_v = dateFormat.parse(iniv);
+                     
+        Date fechaFinal_b = dateFormat.parse(finb);
+        Date fechaFinal_v = dateFormat.parse(finv);
+                     
+        ini1=(int) ((fechaInicial_v.getTime()-fechaInicial_b.getTime())/86400000);
+        ini2=(int) ((fechaInicial_b.getTime()-fechaFinal_v.getTime())/86400000);
+                     
+        fin1=(int) ((fechaInicial_v.getTime()-fechaFinal_b.getTime())/86400000);
+        fin2=(int) ((fechaFinal_b.getTime()-fechaFinal_v.getTime())/86400000);
+        
+        if( (ini1 <= 0 && ini2 <= 0) || (fin1 <= 0 && fin2 <= 0)){
+            //choc= true;
+            return  true;
+        }
+        //choc=false;        
+        }
+        catch( Exception e ) {
+            System.out.println( "Se ha producido un error" );
+        }  
+        return  false;
+    }
+    public boolean aprovar_viaje(String consec){
+        
+        viaje buscar = new viaje();
+        
+        for(int i=0; i< Array_viajes.size();i++){
+            if(consec.compareTo(Array_viajes.get(i).get_consec()) == 0){
+                buscar = Array_viajes.get(i);
+            }
+        }
+        
         /**asigna chofer*/ //no debe chocar en hora con otro viaje        
          for(int i=0; i < Array_choferes.size();i++){
+             boolean interruptor = true;
              for(int k=0; k< Array_viajes.size();k++){
-                 if(consec.compareTo(Array_viajes.get(i).get_consec()) == 0){
-                     
-                    }
-                }
+                 
+                            String inib = buscar.get_ini().get_a()+"-"+
+                                          buscar.get_ini().get_m()+"-"+
+                                          buscar.get_ini().get_d();
+                            String finb = buscar.get_fin().get_a()+"-"+
+                                          buscar.get_fin().get_m()+"-"+
+                                          buscar.get_fin().get_d();
+                            String iniv = Array_viajes.get(k).get_ini().get_a()+"-"+
+                                          Array_viajes.get(k).get_ini().get_m()+"-"+
+                                          Array_viajes.get(k).get_ini().get_d();
+                            String finv = Array_viajes.get(k).get_fin().get_a()+"-"+
+                                          Array_viajes.get(k).get_fin().get_m()+"-"+
+                                          Array_viajes.get(k).get_fin().get_d();
+                                          
+                 if((Array_choferes.get(i).get_ced()==Array_viajes.get(k).get_chof().get_ced() )
+                        && Array_viajes.get(k).get_estado().compareTo("Aprovado")==0){
+                            
+                     if(chocan_horarios(inib, finb, iniv, finv)){
+                         interruptor = false;
+                        }
+                    }                  
             }
-        boolean interruptor=true;
-        //for(int i=0; i< a){}
+            //asigna chofer ya que no ubo choque de orario con ningun viaje aprovado
+            if(interruptor){
+                buscar.asigna_chofer(Array_choferes.get(i));
+                break;
+            }
+        }
         /**asigna vehiculo*/ // no debe chocar en hora con otro viaje
+         for(int i=0; i < Array_vehiculos.size();i++){
+             boolean interruptor = true;
+             for(int k=0; k< Array_viajes.size();k++){
+                 
+                            String inib = buscar.get_ini().get_a()+"-"+
+                                          buscar.get_ini().get_m()+"-"+
+                                          buscar.get_ini().get_d();
+                            String finb = buscar.get_fin().get_a()+"-"+
+                                          buscar.get_fin().get_m()+"-"+
+                                          buscar.get_fin().get_d();
+                            String iniv = Array_viajes.get(k).get_ini().get_a()+"-"+
+                                          Array_viajes.get(k).get_ini().get_m()+"-"+
+                                          Array_viajes.get(k).get_ini().get_d();
+                            String finv = Array_viajes.get(k).get_fin().get_a()+"-"+
+                                          Array_viajes.get(k).get_fin().get_m()+"-"+
+                                          Array_viajes.get(k).get_fin().get_d();
+                                          
+                 if((Array_vehiculos.get(i).get_placa()==Array_viajes.get(k).get_vehiculo().get_placa())
+                        && Array_viajes.get(k).get_estado().compareTo("Aprovado")==0){
+                            
+                     if(chocan_horarios(inib, finb, iniv, finv)){
+                         interruptor = false;
+                        }
+                    }                  
+            }
+            //asigna vehiculo ya que no ubo choque de orario con ningun viaje aprovado
+            if(interruptor){
+                buscar.asigna_vehiculo(Array_vehiculos.get(i));
+                break;
+            }
+        }
+         
         /**capacidad de pasajeros menos o igual a capacidad a vehiculo*/
+        if(buscar.get_vehiculo().get_cap() < (buscar.cantidad_pasajeros()+1)){//se suma uno por chofer
+            /**si esto se cumple no debe realizar viaje*/
+            JOptionPane.showMessageDialog(null, "Se excede la cantidad de pasajeros, viaje no se puede realizar", "ERROR!!!", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
         /**hacer pdf y mandar*/
         /**estado pasa a aprovado*/        
         for(int i=0; i< Array_viajes.size();i++){
             if(consec.compareTo(Array_viajes.get(i).get_consec()) == 0){
+                System.out.println("aprovado......");
                 Array_viajes.get(i).cambiar_estado("Aprovado");
             }
-        }        
+        }
         return true;
     }
     @SuppressWarnings("unchecked")

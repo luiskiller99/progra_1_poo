@@ -23,7 +23,11 @@ public class viaje
     private String estado;
     private ArrayList<persona> lista_pasajeros = new ArrayList<persona>();
     private fecha solicitud;//se pide al OS
+    private vehiculo vehiculo_asignado;
+    
+    public viaje(){}
     public viaje(String sal,String dest,fecha ini,fecha fin,String estado)
+    
     {
         set_consec();
         set_sal(sal);
@@ -49,12 +53,22 @@ public class viaje
     public String get_dest(){return destino;}
     public chofer get_chof(){return chofer_asignado;}
     public String get_estado(){return estado;}    
+    public vehiculo get_vehiculo(){return vehiculo_asignado;}    
     //metodos normales
     public void agregar_pasajero(persona pers){
         lista_pasajeros.add(pers);
     }
     public void cambiar_estado(String est){
         estado=est;
+    }
+    public void asigna_chofer(chofer ch){
+        chofer_asignado=ch;
+    }
+    public void asigna_vehiculo(vehiculo ve){
+        vehiculo_asignado=ve;
+    }
+    public int cantidad_pasajeros(){
+        return lista_pasajeros.size();
     }
  
 }
