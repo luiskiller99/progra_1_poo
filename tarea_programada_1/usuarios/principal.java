@@ -27,12 +27,13 @@ import tarea_programada_1.vehiculo.fecha;
 import tarea_programada_1.vehiculo.vehiculo;
 import tarea_programada_1.vehiculo.licencia;
 import tarea_programada_1.vehiculo.chofer;
-import tarea_programada_1.vehiculo.servicio_mantenimiento;
-import tarea_programada_1.vehiculo.empresa;
 
 import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.TelegramBotsApi;
 import org.telegram.telegrambots.exceptions.TelegramApiRequestException;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 
 public class principal 
 {
@@ -46,6 +47,7 @@ public class principal
     JSONArray arreglopasajeros=new JSONArray();
     JSONArray arregloviajes=new JSONArray();
     JSONArray arreglovehiculos=new JSONArray();
+    JSONArray arreglochoferes=new JSONArray();
     
     public principal(){
     }
@@ -209,7 +211,6 @@ public class principal
         //obtener informacion
         String pnt_salida="";
         String pnt_destino="";
-        String kilometros="";
         String dia_salida="";
         String mes_salida="";
         String ano_salida="";
@@ -237,20 +238,19 @@ public class principal
             if(k=='/')cont++;
             else if (cont==0)pnt_salida += k;
             else if (cont==1)pnt_destino += k;
-            else if (cont==2)kilometros += k;
-            else if (cont==3)dia_salida += k;
-            else if (cont==4)mes_salida += k;
-            else if (cont==5)ano_salida += k;
-            else if (cont==6)dia_llegada += k;
-            else if (cont==7)mes_llegada += k;
-            else if (cont==8)ano_llegada += k;            
+            else if (cont==2)dia_salida += k;
+            else if (cont==3)mes_salida += k;
+            else if (cont==4)ano_salida += k;
+            else if (cont==5)dia_llegada += k;
+            else if (cont==6)mes_llegada += k;
+            else if (cont==7)ano_llegada += k;            
         }
         String ced="";
         int cedaux=0;
         for(int i = 0 ; i < list_pas.length() ; i++){
             char k = list_pas.charAt(i);
             if(k=='/'){
-                cedaux = Integer.parseInt(ced);
+                cedaux=Integer.parseInt(ced);
                 String ini = ano_salida+"-"+mes_salida+"-"+dia_salida;
                 String fin = ano_llegada+"-"+mes_llegada+"-"+dia_llegada;
                 if( validar_pasajero_choquehorario(cedaux,ini,fin)){
@@ -284,11 +284,9 @@ public class principal
             int dia_l = Integer.parseInt(dia_llegada);
             int mes_l = Integer.parseInt(mes_llegada);
             int ano_l = Integer.parseInt(ano_llegada);            
-            int kil = Integer.parseInt(kilometros);            
             fecha fech_ini = new fecha(dia_s,mes_s,ano_s);
             fecha fech_fin = new fecha(dia_l,mes_l,ano_l);
-            viaje iva = new viaje(pnt_salida,pnt_destino,fech_ini,fech_fin,"En confección",kil);            
-            
+            viaje iva = new viaje(pnt_salida,pnt_destino,fech_ini,fech_fin,"En confección");            
             /**agrega todos los pasajeros*/
             for (int i=0;i<Array_pasajeros_aux.size();i++){
                 iva.agregar_pasajero(Array_pasajeros_aux.get(i));
@@ -460,7 +458,10 @@ public class principal
                 cont=0;numero="";d_ex="";m_ex="";a_ex="";
                 d_emi="";m_emi="";a_emi="";
             }
-        }         
+        }    
+        
+        
+        
         System.out.println("chofer...............");
         System.out.println(new_chofer.get_ced());
         System.out.println(new_chofer.get_correo());
@@ -468,8 +469,42 @@ public class principal
         System.out.println(new_chofer.get_tel());
         System.out.println("chofer...............");        
         Array_choferes.add(new_chofer);
+        genjsoncho();
         return true;
     }
+    
+        public void genjsoncho(){        
+        JSONObject obj = new JSONObject();
+        
+        //ArrayList<licencia> array_licencias = new ArrayList<licencia>();         
+        
+        for(int i=0;i<Array_choferes.size();i++){ 
+           //array_licencias=Array_choferes.get(i).getlicencias();
+           obj.put("Cedula",Array_choferes.get(i).get_ced());
+           obj.put("Correo",Array_choferes.get(i).get_correo());
+           obj.put("Nombre",Array_choferes.get(i).get_nom());
+           obj.put("Telefono",Array_choferes.get(i).get_tel());
+           obj.put("numLicencia",Array_choferes.get(i).getlicencias());
+           
+           
+        }
+        arreglochoferes.add(obj);
+        
+        
+        //C:/Users/metal/Documents/GitHub7progra_1_poo/tarea_programada_1/usuarios/
+        try (FileWriter file = new FileWriter("D:/Descargas/GitHub/progra_1_poo/tarea_programada_1/usuarios/choferes.json")) {
+ 
+        
+        file.write(arreglochoferes.toJSONString());
+        }
+        catch (IOException e){
+        System.out.print(e.getMessage());
+        }
+    
+       
+        
+    }
+    
     boolean registrar_vehiculo(String info){
         String placa="";
         String año="";
@@ -526,7 +561,7 @@ public class principal
     public void genjsonvehiculo(){        
         JSONObject obj = new JSONObject();
         
-        for(int i=0;i<Array_usuarios.size();i++){            
+        for(int i=0;i<Array_vehiculos.size();i++){            
            obj.put("Placa",Array_vehiculos.get(i).get_placa());
            obj.put("Año",Array_vehiculos.get(i).get_anno());
            obj.put("Capacidad",Array_vehiculos.get(i).get_cap());
@@ -546,7 +581,7 @@ public class principal
         try (FileWriter file = new FileWriter("D:/Descargas/GitHub/progra_1_poo/tarea_programada_1/usuarios/vehiculos.json")) {
  
         
-        file.write(arreglousuarios.toJSONString());
+        file.write(arreglovehiculos.toJSONString());
         }
         catch (IOException e){
         System.out.print(e.getMessage());
@@ -583,85 +618,12 @@ public class principal
         }  
         return  false;
     }
-    public void dar_mantenimiento(String info, String empresa){
-        /**mantenimiento*/
-        String placa="";
-        String ide="";
-        String fech_ini_d="";
-        String fech_ini_m="";
-        String fech_ini_a="";        
-        String fech_fin_d="";
-        String fech_fin_m="";        
-        String fech_fin_a="";   
-        String monto="";        
-        String detalle="";
-        String tipo="";
-        /**empresa*/
-        String nombre="";
-        String razon="";
-        String ced="";
-        String tel="";
-        String dir_p="";
-        String dir_c="";
-        String dir_d="";
-        String dir_s="";
-        
-        int cont =0;
-        for(int i = 0 ; i < info.length() ; i++){
-            char k = info.charAt(i);
-            if(k=='/')cont++;
-            else if (cont==0)placa += k;
-            else if (cont==1)ide += k;
-            else if (cont==2)fech_ini_d += k;
-            else if (cont==3)fech_ini_m += k;
-            else if (cont==4)fech_ini_a += k;
-            else if (cont==5)fech_fin_d += k;
-            else if (cont==6)fech_fin_m += k;
-            else if (cont==7)fech_fin_a += k;
-            else if (cont==8)monto += k;
-            else if (cont==9)detalle += k;
-            else if (cont==10)tipo += k;
-        }
-        cont =0;
-        for(int i = 0 ; i < empresa.length() ; i++){
-            char k = empresa.charAt(i);
-            if(k=='/')cont++;
-            else if (cont==0)nombre += k;
-            else if (cont==1)razon += k;
-            else if (cont==2)ced += k;
-            else if (cont==3)tel += k;
-            else if (cont==4)dir_p += k;
-            else if (cont==5)dir_d += k;
-            else if (cont==6)dir_c += k;
-            else if (cont==7)dir_s += k;
-        }           
-        int pla=Integer.parseInt(placa);
-        for(int i =0; i< Array_vehiculos.size();i++){
-            if(pla == Array_vehiculos.get(i).get_placa() ){
-                int p= Integer.parseInt(placa);
-                int id=Integer.parseInt(ide);
-                int fech_inid=Integer.parseInt(fech_ini_d);
-                int fech_inim=Integer.parseInt(fech_ini_m);
-                int fech_inia=Integer.parseInt(fech_ini_a);
-                int fech_find=Integer.parseInt(fech_fin_d);
-                int fech_finm=Integer.parseInt(fech_fin_m);
-                int fech_fina=Integer.parseInt(fech_fin_a);
-                int mnt=Integer.parseInt(monto);
-                int ced_jur=Integer.parseInt(ced);
-                int telefono =Integer.parseInt(tel);
-                fecha in=new fecha(fech_inid,fech_inim,fech_inia);
-                fecha fn=new fecha(fech_find,fech_finm,fech_fina);
-                direccion dir= new direccion(dir_p,dir_c,dir_d,dir_s);
-                empresa em = new empresa(nombre,razon,ced_jur,telefono,dir);
-                servicio_mantenimiento serv =new servicio_mantenimiento(id,in,fn,mnt,detalle,tipo,em);
-                Array_vehiculos.get(i).nuevo_servicio_mantenimiento(serv);
-                Array_vehiculos.get(i).cambiar_estado("En mantenimiento");
-            }
-        }
-    }
-    
     public boolean aprovar_viaje(String consec){
-        
+        String chofer="";
+        String viaje="";
+        String viajeros="";
+        String correoChofer="";
+        String correoviajero="";
         viaje buscar = new viaje();
         
         for(int i=0; i< Array_viajes.size();i++){
@@ -699,6 +661,8 @@ public class principal
             //asigna chofer ya que no ubo choque de orario con ningun viaje aprovado
             if(interruptor){
                 buscar.asigna_chofer(Array_choferes.get(i));
+                chofer=Array_choferes.get(i).get_nom().toString()+"/"+Array_choferes.get(i).get_tel();
+                correoChofer=Array_choferes.get(i).get_correo();
                 break;
             }
         }
@@ -734,6 +698,7 @@ public class principal
                 break;
             }
         }
+         
         /**capacidad de pasajeros menos o igual a capacidad a vehiculo*/
         if(buscar.get_vehiculo().get_cap() < (buscar.cantidad_pasajeros()+1)){//se suma uno por chofer
             /**si esto se cumple no debe realizar viaje*/
@@ -741,13 +706,26 @@ public class principal
             return false;
         }
         /**hacer pdf y mandar*/
-        /**estado pasa a aprovado*/        
+        /**estado pasa a aprovado*/
+        /**Obtener los viajeros para generar el pdf*/
+        for (int i=0; i<buscar.get_array_pasajeros().size();i++){
+            viajeros+=buscar.get_array_pasajeros().get(i).get_nom()+"/";
+            viajeros+=buscar.get_array_pasajeros().get(i).get_tel()+"\n";            
+        }
+        viaje+=buscar.get_ini()+"/"+buscar.get_fin();
         for(int i=0; i< Array_viajes.size();i++){
             if(consec.compareTo(Array_viajes.get(i).get_consec()) == 0){
                 System.out.println("aprovado......");
                 Array_viajes.get(i).cambiar_estado("Aprovado");
-                Array_viajes.get(i).get_vehiculo().agregar_kilometros(Array_viajes.get(i).get_kil());
             }
+        }
+        CrearPDF pdf=new CrearPDF();
+        pdf.genPDF(chofer, viaje, viajeros);
+        MandarCorreo correo=new MandarCorreo();
+        correo.generateAndSendEmail(correoChofer);
+        for(int i=0;i<buscar.get_array_pasajeros().size();i++){
+            correoviajero=buscar.get_array_pasajeros().get(i).get_correo();
+            correo.generateAndSendEmail(correoviajero);
         }
         return true;
     }
@@ -776,5 +754,4 @@ public class principal
     }
 
 }
-
 
