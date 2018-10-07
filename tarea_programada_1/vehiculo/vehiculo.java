@@ -1,5 +1,5 @@
 package tarea_programada_1.vehiculo;
-
+import java.util.ArrayList;
 
 /**
  * Write a description of class vehiculo here.
@@ -19,7 +19,7 @@ public class vehiculo
     private String marca="";
     private String sede="";
     private String estado="";
-    servicio_mantenimiento[] lista_servicio_mantenimiento = new servicio_mantenimiento[0];
+    ArrayList<servicio_mantenimiento> lista_servicio_mantenimiento = new ArrayList<servicio_mantenimiento>();
     //metodos
     
     /**
@@ -58,5 +58,11 @@ public class vehiculo
     public String get_sede(){return sede;}
     public String get_estado(){return estado;}   
     public void agregar_kilometros(int kil){Kilometraje+=kil;}   
+    public void nuevo_servicio_mantenimiento(servicio_mantenimiento ser){
+        lista_servicio_mantenimiento.add(ser);
+    }
+    public void cambiar_estado(String est){
+        estado=est;
+    }
 }
 

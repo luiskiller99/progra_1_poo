@@ -27,6 +27,8 @@ import tarea_programada_1.vehiculo.fecha;
 import tarea_programada_1.vehiculo.vehiculo;
 import tarea_programada_1.vehiculo.licencia;
 import tarea_programada_1.vehiculo.chofer;
+import tarea_programada_1.vehiculo.servicio_mantenimiento;
+import tarea_programada_1.vehiculo.empresa;
 
 import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.TelegramBotsApi;
@@ -581,6 +583,83 @@ public class principal
         }  
         return  false;
     }
+    public void dar_mantenimiento(String info, String empresa){
+        /**mantenimiento*/
+        String placa="";
+        String ide="";
+        String fech_ini_d="";
+        String fech_ini_m="";
+        String fech_ini_a="";        
+        String fech_fin_d="";
+        String fech_fin_m="";        
+        String fech_fin_a="";   
+        String monto="";        
+        String detalle="";
+        String tipo="";
+        /**empresa*/
+        String nombre="";
+        String razon="";
+        String ced="";
+        String tel="";
+        String dir_p="";
+        String dir_c="";
+        String dir_d="";
+        String dir_s="";
+        
+        int cont =0;
+        for(int i = 0 ; i < info.length() ; i++){
+            char k = info.charAt(i);
+            if(k=='/')cont++;
+            else if (cont==0)placa += k;
+            else if (cont==1)ide += k;
+            else if (cont==2)fech_ini_d += k;
+            else if (cont==3)fech_ini_m += k;
+            else if (cont==4)fech_ini_a += k;
+            else if (cont==5)fech_fin_d += k;
+            else if (cont==6)fech_fin_m += k;
+            else if (cont==7)fech_fin_a += k;
+            else if (cont==8)monto += k;
+            else if (cont==9)detalle += k;
+            else if (cont==10)tipo += k;
+        }
+        cont =0;
+        for(int i = 0 ; i < empresa.length() ; i++){
+            char k = info.charAt(i);
+            if(k=='/')cont++;
+            else if (cont==0)nombre += k;
+            else if (cont==1)razon += k;
+            else if (cont==2)ced += k;
+            else if (cont==3)tel += k;
+            else if (cont==4)dir_p += k;
+            else if (cont==5)dir_d += k;
+            else if (cont==6)dir_c += k;
+            else if (cont==7)dir_s += k;
+        }           
+        int pla=Integer.parseInt(placa);
+        for(int i =0; i< Array_vehiculos.size();i++){
+            if(pla == Array_vehiculos.get(i).get_placa() ){
+                int p= Integer.parseInt(placa);
+                int id=Integer.parseInt(ide);
+                int fech_inid=Integer.parseInt(fech_ini_d);
+                int fech_inim=Integer.parseInt(fech_ini_m);
+                int fech_inia=Integer.parseInt(fech_ini_a);
+                int fech_find=Integer.parseInt(fech_fin_d);
+                int fech_finm=Integer.parseInt(fech_fin_m);
+                int fech_fina=Integer.parseInt(fech_fin_a);
+                int mnt=Integer.parseInt(monto);
+                int ced_jur=Integer.parseInt(ced);
+                int telefono =Integer.parseInt(tel);
+                fecha in=new fecha(fech_inid,fech_inim,fech_inia);
+                fecha fn=new fecha(fech_find,fech_finm,fech_fina);
+                direccion dir= new direccion(dir_p,dir_c,dir_d,dir_s);
+                empresa em = new empresa(nombre,razon,ced_jur,telefono,dir);
+                servicio_mantenimiento serv =new servicio_mantenimiento(id,in,fn,mnt,detalle,tipo,em);
+                Array_vehiculos.get(i).nuevo_servicio_mantenimiento(serv);
+                Array_vehiculos.get(i).cambiar_estado("En mantenimiento");
+            }
+        }
+    }
+    
     public boolean aprovar_viaje(String consec){
         
         viaje buscar = new viaje();
@@ -655,7 +734,6 @@ public class principal
                 break;
             }
         }
-         
         /**capacidad de pasajeros menos o igual a capacidad a vehiculo*/
         if(buscar.get_vehiculo().get_cap() < (buscar.cantidad_pasajeros()+1)){//se suma uno por chofer
             /**si esto se cumple no debe realizar viaje*/
@@ -698,4 +776,5 @@ public class principal
     }
 
 }
+
 

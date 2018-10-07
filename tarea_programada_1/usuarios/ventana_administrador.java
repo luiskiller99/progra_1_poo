@@ -34,7 +34,7 @@ public class ventana_administrador
     private JButton boton_topdep = new JButton("Top departamentos");               
     
     private JLabel label_mantenimiento = new JLabel("Servicio de mantenimiento");
-    private JTextField textfield_mantenimiento = new JTextField("identificador/fech_ini(d/m/a)/fech_fin(d/m/a)/monto/detalle/tipo");
+    private JTextField textfield_mantenimiento = new JTextField("placa/identificador/fech_ini(d/m/a)/fech_fin(d/m/a)/monto/detalle/tipo");
     private JTextField textfield_mantenimiento_empresa = new JTextField("nombre/razon_social/cedula juridica/telefono/provincia/distrito/canton/señas");
     private JButton boton_mantenimiento = new JButton ("Dar mantenimiento");    
     
@@ -173,12 +173,18 @@ public class ventana_administrador
         boton_mantenimiento.setBounds(new Rectangle(150,20));                        
         boton_mantenimiento.setLocation(10,580);            
         boton_mantenimiento.setBackground(Color.white);
-        boton_mantenimiento.addActionListener(new act_bot_registar());
+        boton_mantenimiento.addActionListener(new act_bot_mantenimiento());
     }
      private class act_bot_registar implements ActionListener{
         public void actionPerformed(ActionEvent e){
             prin.nuevo_secretaria(textfield_registrar.getText());
             JOptionPane.showMessageDialog(null, "Usuario agregado correctamente \n putos\n carajo\n\n\n\n\ntodos", "just now", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+    private class act_bot_mantenimiento implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+            prin.dar_mantenimiento(textfield_mantenimiento.getText(),textfield_mantenimiento_empresa.getText());
+            JOptionPane.showMessageDialog(null, "Servicio realizado con exito", "just now", JOptionPane.INFORMATION_MESSAGE);
         }
     }
     private class act_bot_chofer implements ActionListener{
