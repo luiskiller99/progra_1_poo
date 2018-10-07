@@ -125,6 +125,7 @@ public class ventana_principal extends JFrame
             String cont=textedit_cont_adm.getText(); 
             if(prin.validar_adm(usu,cont)){
                 new ventana_administrador(prin);
+                /***/
             }
             else{
                 JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos", "ERROR!!!", JOptionPane.WARNING_MESSAGE);

@@ -157,7 +157,7 @@ public class ventana_secretaria
         boton_cancelar.setBounds(new Rectangle(100,20));                        
         boton_cancelar.setLocation(10,390);            
         boton_cancelar.setBackground(Color.white);
-        boton_listar_destino.addActionListener(new act_bot_cancelar());
+        boton_cancelar.addActionListener(new act_bot_cancelar());
         //label_detalle
         label_detalle.setBounds(new Rectangle(200,20));        
         label_detalle.setLocation(180,320);
