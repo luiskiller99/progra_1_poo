@@ -46,13 +46,6 @@ public class principal
     JSONArray arreglovehiculos=new JSONArray();
     
     public principal(){
-        //usuario de pruevas
-        //por defecto usu = metal0500 cont = luise5847
-        direccion res=new direccion("","","","");
-        persona hola=new persona("",5,res,"",3);
-        usuario aquel=new usuario(hola,"hols");
-        Array_usuarios.add(aquel);
-        //eliminar
     }
     
     public void nuevo_secretaria(String info){
@@ -193,6 +186,23 @@ public class principal
         genjson();
         return true;
     }
+    private boolean validar_pasajero_choquehorario(int cedaux,String ini,String fin){
+        for(int i =0;i< Array_viajes.size();i++){
+            for(int j=0;j < Array_viajes.get(i).get_array_pasajeros().size();i++){
+                if(cedaux==Array_viajes.get(i).get_array_pasajeros().get(j).get_ced()){
+                    String iniv=Array_viajes.get(i).get_ini().get_a()+"-"+
+                                Array_viajes.get(i).get_ini().get_m()+"-"+
+                                Array_viajes.get(i).get_ini().get_d();
+                    String finv=Array_viajes.get(i).get_fin().get_a()+"-"+
+                                Array_viajes.get(i).get_fin().get_m()+"-"+
+                                Array_viajes.get(i).get_fin().get_d();
+                                
+                    if(chocan_horarios(ini,fin,iniv,finv))return false;
+                }
+            }
+        }
+        return true;
+    }
     public boolean solicitar_viaje(String info, String list_pas){
         //obtener informacion
         String pnt_salida="";
@@ -237,31 +247,20 @@ public class principal
             char k = list_pas.charAt(i);
             if(k=='/'){
                 cedaux=Integer.parseInt(ced);
-                Array_pasajeros_aux.add(optener_pasajero(cedaux));
+                String ini = ano_salida+"-"+mes_salida+"-"+dia_salida;
+                String fin = ano_llegada+"-"+mes_llegada+"-"+dia_llegada;
+                if( validar_pasajero_choquehorario(cedaux,ini,fin)){
+                    Array_pasajeros_aux.add(optener_pasajero(cedaux));
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "el pasajero de cedula "+cedaux+" tiene choque de horarios, no se incluira en el viaje", "ERROR!!!", JOptionPane.WARNING_MESSAGE);
+                }
                 ced="";
             }
             else {
                 ced+=k;
             }
-        }
-        Array_pasajeros_aux.add(optener_pasajero(cedaux));
-        
-        /**interseccion de fechas vacia meter fucion choque horario*/
-        for (int i =0;i < Array_viajes.size();i++){ 
-            
-            if((Array_viajes.get(i).get_ini().get_d() <= Integer.parseInt(dia_llegada) && /**dia ini array<= dia llegada info*/
-            Integer.parseInt(dia_llegada) <= Array_viajes.get(i).get_fin().get_d() ) &&/**dia llegada info <= dia llegada array*/
-            (Array_viajes.get(i).get_ini().get_d() <= Integer.parseInt(dia_llegada) && /**mes ini aray <= mes llegada info*/
-            Integer.parseInt(dia_llegada) <= Array_viajes.get(i).get_fin().get_d() ) &&/**mes ini info <= mes llegada array*/
-            (Array_viajes.get(i).get_ini().get_d() <= Integer.parseInt(dia_llegada) &&/**año ini array <= año llegada info*/
-            Integer.parseInt(dia_llegada) <= Array_viajes.get(i).get_fin().get_d()) /**año ini info <= año llegada array*/
-            )/**si esto se cumple no deberia de aplicar viaje */
-            
-            { 
-                interruptor = false;
-                JOptionPane.showMessageDialog(null, "Solicitud de viaje no fue agregada correctamente, choque de fechas", "ERROR!!!", JOptionPane.WARNING_MESSAGE);
-            }            
-        }
+        }               
         //fecha con 24 horas de diferencia//tomar fecha de sistema operativo        
         if(dia_llegada.compareTo(diaa_pc) == 0 &&
         mes_llegada.compareTo(mess_pc) == 0 &&
@@ -365,7 +364,22 @@ public class principal
         }
         return true;
     }
-    boolean nuevo_chofer(String info, String list_lic){
+    private boolean valida_espiracion(String fecha_pc,String fecha_expi){
+        try{
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                     
+        Date fechaInicial = dateFormat.parse(fecha_expi);
+        Date fechaFinal = dateFormat.parse(fecha_pc);
+        int ini1=(int) ((fechaInicial.getTime()-fechaFinal.getTime())/86400000);
+        if(ini1<0)return true; //expiro
+    }
+    catch( Exception e ) {
+            System.out.println( "Se ha producido un error" );
+        }
+        return false;//no expiro
+    }
+    
+    public boolean nuevo_chofer(String info, String list_lic){
         /**info chofer*/
         String cedula="";
         String nombre="";
@@ -392,6 +406,23 @@ public class principal
             else if (cont==2)correo += k;
             else if (cont==3)telefono += k;
         }
+        /** valida licencias vencidas */
+        
+        Date d = new Date();        
+        Calendar c = new GregorianCalendar(); 
+        c.setTime(d);
+        
+        String dia = Integer.toString(c.get(Calendar.DATE));
+        String mes = Integer.toString(c.get(Calendar.MONTH));
+        String año = Integer.toString(c.get(Calendar.YEAR));
+        
+        String fecha_pc = año+"-"+mes+"-"+dia; 
+        String fecha_expi =a_ex+"-"+m_ex+"-"+d_ex;
+        if (valida_espiracion(fecha_pc,fecha_expi)){
+            JOptionPane.showMessageDialog(null, "licencia de chofer vencida, no se tomara en cuenta", "ERROR!!!", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        
         /**agregara el nuevo chofer*/
         int tel= Integer.parseInt(telefono);
         int ced= Integer.parseInt(cedula);
@@ -473,6 +504,14 @@ public class principal
         System.out.println(vei.get_marca());
         System.out.println(vei.get_placa());
         System.out.println("vehiculo..............");
+        /**validar numero de placa o vinn repetidos*/        
+        for(int i=0;i< Array_vehiculos.size();i++){
+            if(vei.get_placa()==Array_vehiculos.get(i).get_placa() ||
+                vei.get_num()==Array_vehiculos.get(i).get_num()){
+                    JOptionPane.showMessageDialog(null, "Numero de placa o vinn repetidos, vehiculo no se tomara en cuenta", "ERROR!!!", JOptionPane.WARNING_MESSAGE);
+                    return false;
+                }
+        }
         Array_vehiculos.add(vei);
         genjsonvehiculo();
         return true;

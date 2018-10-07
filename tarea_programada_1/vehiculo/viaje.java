@@ -53,7 +53,8 @@ public class viaje
     public String get_dest(){return destino;}
     public chofer get_chof(){return chofer_asignado;}
     public String get_estado(){return estado;}    
-    public vehiculo get_vehiculo(){return vehiculo_asignado;}    
+    public vehiculo get_vehiculo(){return vehiculo_asignado;}  
+    public ArrayList<persona> get_array_pasajeros(){return lista_pasajeros;}
     //metodos normales
     public void agregar_pasajero(persona pers){
         lista_pasajeros.add(pers);

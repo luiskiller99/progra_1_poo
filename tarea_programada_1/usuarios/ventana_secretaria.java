@@ -21,13 +21,13 @@ public class ventana_secretaria
     private JTextField textfield_pasajero = new JTextField("cedula/nombre/provincia/canton/distrito/señas/correo/telefono");    
     private JButton boton_pas = new JButton("Registrar");    
     private JTextField textfield_viaje = new JTextField("pnt salida/destino salida(dia/mes/año) llegada(dia/mes/año)");
-    private JTextField textfield_viaje_pasajeros = new JTextField("cedula pasajero1 / cedula pasajero2");
+    private JTextField textfield_viaje_pasajeros = new JTextField("cedula pasajero1 / cedula pasajero2/");
     private JButton boton_viaje = new JButton("Solicitar");  
     private JLabel label_listar = new JLabel("Listar solicitudes de viajes");
     private JTextField textfield_listar_fecha = new JTextField("dd/mm/aa");
     private JTextField textfield_listar_estado = new JTextField("En confeccion/Aprovado/Cancelado/No aprovado");
     private JTextField textfield_listar_destino = new JTextField("Destino");
-    private JTextField textfield_panel_listar = new JTextField("aqui mostrar");
+    //private JTextField textfield_panel_listar = new JTextField("aqui mostrar");
     private JButton boton_listar_fecha = new JButton("Listar");
     private JButton boton_listar_estado = new JButton("Listar");               
     private JButton boton_listar_destino = new JButton("Listar");  
@@ -36,7 +36,7 @@ public class ventana_secretaria
     private JButton boton_cancelar = new JButton("Cancelar");              
     private JLabel label_detalle = new JLabel("Consultar detalle de viaje");
     private JTextField textfield_detalle = new JTextField("consecutivo");
-    private JTextField textfield_panel_detalle = new JTextField("aqui mostrar");
+    //private JTextField textfield_panel_detalle = new JTextField("aqui mostrar");
     private JButton boton_detalle = new JButton ("Consultar");    
 
     public ventana_secretaria(principal pr){
@@ -52,7 +52,7 @@ public class ventana_secretaria
         pane.getContentPane().setLayout(null);
         pane.setResizable(false);//no permite hacer mas grande
         pane.setUndecorated(false);//quita decoraciones
-        pane.setSize(680,700);
+        pane.setSize(400,450);
         pane.setTitle("Secretaria");
         pane.setLocationRelativeTo(null);
         pane.setVisible(true);
@@ -68,7 +68,7 @@ public class ventana_secretaria
         pane.add(textfield_listar_fecha); 
         pane.add(textfield_listar_estado); 
         pane.add(textfield_listar_destino); 
-        pane.add(textfield_panel_listar);
+        //pane.add(textfield_panel_listar);
         pane.add(boton_listar_fecha);
         pane.add(boton_listar_estado);     
         pane.add(boton_listar_destino);  
@@ -77,7 +77,7 @@ public class ventana_secretaria
         pane.add(boton_cancelar);             
         pane.add(label_detalle);      
         pane.add(textfield_detalle); 
-        pane.add(textfield_panel_detalle); 
+        //pane.add(textfield_panel_detalle); 
         pane.add(boton_detalle); 
         
         //label_pasajero        
@@ -127,9 +127,9 @@ public class ventana_secretaria
         textfield_listar_destino.setLocation(230,260);
         textfield_listar_destino.setBackground(Color.white);
         //textfield_panel_listar
-        textfield_panel_listar.setBounds(new Rectangle(300,300));        
-        textfield_panel_listar.setLocation(10,320);
-        textfield_panel_listar.setBackground(Color.white);
+        //textfield_panel_listar.setBounds(new Rectangle(300,300));        
+        /**textfield_panel_listar.setLocation(10,320);*/
+        //textfield_panel_listar.setBackground(Color.white);
         //boton_listar_fecha
         boton_listar_fecha.setBounds(new Rectangle(100,20));                        
         boton_listar_fecha.setLocation(10,280);            
@@ -147,32 +147,33 @@ public class ventana_secretaria
         boton_listar_destino.addActionListener(new act_bot());
         //label_cancelar
         label_cancelar.setBounds(new Rectangle(150,20));        
-        label_cancelar.setLocation(350,10);
+        label_cancelar.setLocation(10,320);
         label_cancelar.setBackground(Color.white);
         //textfield_cancelar
         textfield_cancelar.setBounds(new Rectangle(100,20));        
-        textfield_cancelar.setLocation(350,50);
+        textfield_cancelar.setLocation(10,360);
         textfield_cancelar.setBackground(Color.white);
         //boton_cancelar
         boton_cancelar.setBounds(new Rectangle(100,20));                        
-        boton_cancelar.setLocation(350,70);            
+        boton_cancelar.setLocation(10,390);            
         boton_cancelar.setBackground(Color.white);
         boton_listar_destino.addActionListener(new act_bot_cancelar());
         //label_detalle
         label_detalle.setBounds(new Rectangle(200,20));        
-        label_detalle.setLocation(350,100);
+        label_detalle.setLocation(180,320);
         label_detalle.setBackground(Color.white);
         //textfield_detalle
         textfield_detalle.setBounds(new Rectangle(100,20));        
-        textfield_detalle.setLocation(350,130);
+        textfield_detalle.setLocation(180,360);
         textfield_detalle.setBackground(Color.white);
         //textfield_panel_detalle
-        textfield_panel_detalle.setBounds(new Rectangle(300,300));        
-        textfield_panel_detalle.setLocation(350,200);
-        textfield_panel_detalle.setBackground(Color.white);
+        //textfield_panel_detalle.setBounds(new Rectangle(300,300));        
+        //textfield_panel_detalle.setLocation(350,200);
+        //textfield_panel_detalle.setBackground(Color.white);
+        
         //boton_detalle
         boton_detalle.setBounds(new Rectangle(100,20));                        
-        boton_detalle.setLocation(350,150);            
+        boton_detalle.setLocation(180,390);            
         boton_detalle.setBackground(Color.white);
         boton_detalle.addActionListener(new act_bot());
     }

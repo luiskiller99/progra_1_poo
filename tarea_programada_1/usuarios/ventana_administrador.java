@@ -22,7 +22,7 @@ public class ventana_administrador
     private JTextField textfield_vehiculo = new JTextField("placa/año/capacidad/kilometraje/numero vinn/color/marca/sede/estado");
     private JButton boton_vehiculo = new JButton("Registrar");      
     private JLabel label_list_adm = new JLabel("Listar informacion");
-    private JTextField textfield_list_adm = new JTextField("aqui mostrar");
+    //private JTextField textfield_list_adm = new JTextField("aqui mostrar");
     private JButton boton_list_adm = new JButton("Listar");      
     private JLabel label_aprovar = new JLabel("Aprovar solicitud de viaje");
     private JTextField textfield_aprovar  = new JTextField("consecutivo viaje");
@@ -47,7 +47,7 @@ public class ventana_administrador
         pane.getContentPane().setLayout(null);
         pane.setResizable(false);//no permite hacer mas grande
         pane.setUndecorated(false);//quita decoraciones
-        pane.setSize(700,500);
+        pane.setSize(350,550);
         pane.setTitle("Administrador");
         pane.setLocationRelativeTo(null);
         pane.setVisible(true);
@@ -60,7 +60,7 @@ public class ventana_administrador
         pane.add(textfield_vehiculo);
         pane.add(boton_vehiculo);
         pane.add(label_registrar);
-        pane.add(textfield_list_adm);
+        //pane.add(textfield_list_adm);
         pane.add(label_list_adm);
         pane.add(boton_list_adm);
         pane.add(label_aprovar);
@@ -102,15 +102,15 @@ public class ventana_administrador
         boton_vehiculo.addActionListener(new act_bot_vehiculo());
         //label_list_adm
         label_list_adm.setBounds(new Rectangle(150,20));        
-        label_list_adm.setLocation(350,10);
+        label_list_adm.setLocation(10,440);
         label_list_adm.setBackground(Color.white);
         //textfield_list_adm
-        textfield_list_adm.setBounds(new Rectangle(300,350));        
-        textfield_list_adm.setLocation(350,40);
-        textfield_list_adm.setBackground(Color.white);
+        //textfield_list_adm.setBounds(new Rectangle(300,350));        
+        //textfield_list_adm.setLocation(350,40);
+        //textfield_list_adm.setBackground(Color.white);
         //boton_list_adm
         boton_list_adm.setBounds(new Rectangle(100,20));                        
-        boton_list_adm.setLocation(350,400);            
+        boton_list_adm.setLocation(10,460);            
         boton_list_adm.setBackground(Color.white);
         //label_aprovar
         label_aprovar.setBounds(new Rectangle(150,20));        
@@ -152,7 +152,7 @@ public class ventana_administrador
      private class act_bot_registar implements ActionListener{
         public void actionPerformed(ActionEvent e){
             prin.nuevo_secretaria(textfield_registrar.getText());
-            JOptionPane.showMessageDialog(null, "Usuario agregado correctamente", "just now", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Usuario agregado correctamente \n putos\n carajo\n\n\n\n\ntodos", "just now", JOptionPane.INFORMATION_MESSAGE);
         }
     }
     private class act_bot_chofer implements ActionListener{
