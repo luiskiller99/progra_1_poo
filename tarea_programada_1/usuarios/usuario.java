@@ -19,8 +19,18 @@ public class usuario
         set_usu();
         set_cont();
     }
+    
+    public usuario(persona ind, String dep, String usu, String cont){
+        set_persona(ind);
+        set_dep(dep);
+        set_usu(usu);
+        set_cont(cont);
+    }    
+    
     private void set_persona(persona ind){individuo=ind;}
     private void set_dep(String dep){departamento=dep;}
+    private void set_usu(String pusu){usuario=pusu;}
+    private void set_cont(String pcont){contraseña=pcont;}        
     private void set_usu(){
         String correo=individuo.get_correo();
         String temp="";
@@ -54,6 +64,9 @@ public class usuario
        
        contraseña=respaldo;        
     }
+    
+    public String get_dep(){return departamento;}
+    
     public String get_usuario(){
         return usuario;
     }
