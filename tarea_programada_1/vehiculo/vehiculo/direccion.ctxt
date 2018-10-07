@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.target=direccion
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ direccion\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=pro\ can\ dis\ se
+comment1.target=direccion(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String)
+comment2.params=pro
+comment2.target=void\ set_pro(java.lang.String)
+comment3.params=can
+comment3.target=void\ set_can(java.lang.String)
+comment4.params=dis
+comment4.target=void\ set_dis(java.lang.String)
+comment5.params=se
+comment5.target=void\ set_se(java.lang.String)
+comment6.params=
+comment6.target=java.lang.String\ get_pro()
+comment7.params=
+comment7.target=java.lang.String\ get_can()
+comment8.params=
+comment8.target=java.lang.String\ get_dis()
+comment9.params=
+comment9.target=java.lang.String\ get_se()
+numComments=10
