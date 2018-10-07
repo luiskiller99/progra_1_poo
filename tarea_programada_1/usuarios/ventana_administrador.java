@@ -33,6 +33,10 @@ public class ventana_administrador
     private JButton boton_topcho  = new JButton("Top choferes"); 
     private JButton boton_topdep = new JButton("Top departamentos");               
     
+    private JLabel label_mantenimiento = new JLabel("Servicio de mantenimiento");
+    private JTextField textfield_mantenimiento = new JTextField("identificador/fech_ini(d/m/a)/fech_fin(d/m/a)/monto/detalle/tipo");
+    private JTextField textfield_mantenimiento_empresa = new JTextField("nombre/razon_social/cedula juridica/telefono/provincia/distrito/canton/señas");
+    private JButton boton_mantenimiento = new JButton ("Dar mantenimiento");    
     
     public ventana_administrador(principal pr){
         set_prin(pr);
@@ -47,7 +51,7 @@ public class ventana_administrador
         pane.getContentPane().setLayout(null);
         pane.setResizable(false);//no permite hacer mas grande
         pane.setUndecorated(false);//quita decoraciones
-        pane.setSize(350,550);
+        pane.setSize(350,650);
         pane.setTitle("Administrador");
         pane.setLocationRelativeTo(null);
         pane.setVisible(true);
@@ -70,6 +74,10 @@ public class ventana_administrador
         pane.add(boton_registrar); 
         pane.add(boton_topcho); 
         pane.add(boton_topdep); 
+        pane.add(label_mantenimiento);
+        pane.add(textfield_mantenimiento);
+        pane.add(textfield_mantenimiento_empresa);
+        pane.add(boton_mantenimiento);
         //label_chofer
         label_chofer.setBounds(new Rectangle(150,20));        
         label_chofer.setLocation(10,10);
@@ -148,6 +156,24 @@ public class ventana_administrador
         boton_topdep.setLocation(170,400);            
         boton_topdep.setBackground(Color.white);
         boton_topdep.addActionListener(new act_bot_registar());
+        
+        //label mantenimiento
+        label_mantenimiento.setBounds(new Rectangle(200,20));                        
+        label_mantenimiento.setLocation(10,490);            
+        label_mantenimiento.setBackground(Color.white);
+        //texfield mantenimiento
+        textfield_mantenimiento.setBounds(new Rectangle(200,20));                        
+        textfield_mantenimiento.setLocation(10,520);            
+        textfield_mantenimiento.setBackground(Color.white);
+        //textfield mantenimiento empresa
+        textfield_mantenimiento_empresa.setBounds(new Rectangle(200,20));                        
+        textfield_mantenimiento_empresa.setLocation(10,550);            
+        textfield_mantenimiento_empresa.setBackground(Color.white);
+        //boton mantenimiento
+        boton_mantenimiento.setBounds(new Rectangle(150,20));                        
+        boton_mantenimiento.setLocation(10,580);            
+        boton_mantenimiento.setBackground(Color.white);
+        boton_mantenimiento.addActionListener(new act_bot_registar());
     }
      private class act_bot_registar implements ActionListener{
         public void actionPerformed(ActionEvent e){

@@ -20,7 +20,7 @@ public class ventana_secretaria
     private JLabel label_viaje = new JLabel("Solicitar nuevo viaje");
     private JTextField textfield_pasajero = new JTextField("cedula/nombre/provincia/canton/distrito/señas/correo/telefono");    
     private JButton boton_pas = new JButton("Registrar");    
-    private JTextField textfield_viaje = new JTextField("pnt salida/destino salida(dia/mes/año) llegada(dia/mes/año)");
+    private JTextField textfield_viaje = new JTextField("pnt salida/destino/kilometros salida(dia/mes/año) llegada(dia/mes/año)");
     private JTextField textfield_viaje_pasajeros = new JTextField("cedula pasajero1 / cedula pasajero2/");
     private JButton boton_viaje = new JButton("Solicitar");  
     private JLabel label_listar = new JLabel("Listar solicitudes de viajes");
@@ -37,8 +37,8 @@ public class ventana_secretaria
     private JLabel label_detalle = new JLabel("Consultar detalle de viaje");
     private JTextField textfield_detalle = new JTextField("consecutivo");
     //private JTextField textfield_panel_detalle = new JTextField("aqui mostrar");
-    private JButton boton_detalle = new JButton ("Consultar");    
-
+    private JButton boton_detalle = new JButton ("Consultar");     
+    
     public ventana_secretaria(principal pr){
         set_prin(pr);
         configuraciones();
@@ -176,6 +176,8 @@ public class ventana_secretaria
         boton_detalle.setLocation(180,390);            
         boton_detalle.setBackground(Color.white);
         boton_detalle.addActionListener(new act_bot());
+        
+        
     }
     private class act_bot implements ActionListener{
         public void actionPerformed(ActionEvent e){

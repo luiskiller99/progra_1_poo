@@ -207,6 +207,7 @@ public class principal
         //obtener informacion
         String pnt_salida="";
         String pnt_destino="";
+        String kilometros="";
         String dia_salida="";
         String mes_salida="";
         String ano_salida="";
@@ -234,12 +235,13 @@ public class principal
             if(k=='/')cont++;
             else if (cont==0)pnt_salida += k;
             else if (cont==1)pnt_destino += k;
-            else if (cont==2)dia_salida += k;
-            else if (cont==3)mes_salida += k;
-            else if (cont==4)ano_salida += k;
-            else if (cont==5)dia_llegada += k;
-            else if (cont==6)mes_llegada += k;
-            else if (cont==7)ano_llegada += k;            
+            else if (cont==2)kilometros += k;
+            else if (cont==3)dia_salida += k;
+            else if (cont==4)mes_salida += k;
+            else if (cont==5)ano_salida += k;
+            else if (cont==6)dia_llegada += k;
+            else if (cont==7)mes_llegada += k;
+            else if (cont==8)ano_llegada += k;            
         }
         String ced="";
         int cedaux=0;
@@ -280,9 +282,11 @@ public class principal
             int dia_l = Integer.parseInt(dia_llegada);
             int mes_l = Integer.parseInt(mes_llegada);
             int ano_l = Integer.parseInt(ano_llegada);            
+            int kil = Integer.parseInt(kilometros);            
             fecha fech_ini = new fecha(dia_s,mes_s,ano_s);
             fecha fech_fin = new fecha(dia_l,mes_l,ano_l);
-            viaje iva = new viaje(pnt_salida,pnt_destino,fech_ini,fech_fin,"En confección");            
+            viaje iva = new viaje(pnt_salida,pnt_destino,fech_ini,fech_fin,"En confección",kil);            
+            
             /**agrega todos los pasajeros*/
             for (int i=0;i<Array_pasajeros_aux.size();i++){
                 iva.agregar_pasajero(Array_pasajeros_aux.get(i));
@@ -664,6 +668,7 @@ public class principal
             if(consec.compareTo(Array_viajes.get(i).get_consec()) == 0){
                 System.out.println("aprovado......");
                 Array_viajes.get(i).cambiar_estado("Aprovado");
+                Array_viajes.get(i).get_vehiculo().agregar_kilometros(Array_viajes.get(i).get_kil());
             }
         }
         return true;

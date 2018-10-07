@@ -47,6 +47,7 @@ public class vehiculo
     private void set_num(int num){numero_vin=num;}
     private void set_sede(String sed){sede=sed;}
     private void set_estado(String est){estado=est;}
+    
     public int get_placa(){return placa;}
     public int get_anno(){return año;}
     public String get_color(){return color;}
@@ -56,5 +57,6 @@ public class vehiculo
     public int get_num(){return numero_vin;}
     public String get_sede(){return sede;}
     public String get_estado(){return estado;}   
+    public void agregar_kilometros(int kil){Kilometraje+=kil;}   
 }
 

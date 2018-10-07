@@ -19,14 +19,14 @@ public class viaje
     private fecha fech_fin;
     private String destino;
     private chofer chofer_asignado;
-    private int kilometrage;//de un auto, meter auto
+    private int kilometros=0;//de un auto, meter auto
     private String estado;
     private ArrayList<persona> lista_pasajeros = new ArrayList<persona>();
     private fecha solicitud;//se pide al OS
     private vehiculo vehiculo_asignado;
     
     public viaje(){}
-    public viaje(String sal,String dest,fecha ini,fecha fin,String estado)
+    public viaje(String sal,String dest,fecha ini,fecha fin,String estado, int kil)
     
     {
         set_consec();
@@ -36,6 +36,7 @@ public class viaje
         set_dest(dest);
         //set_chof(chof);
         set_estado(estado);
+        set_kilometros(kil);
     }
     //seters
     private void set_consec(){consecutivo=consecutivo+Integer.toString(consec_num);}
@@ -45,6 +46,7 @@ public class viaje
     private void set_dest(String des){destino=des;}
     private void set_chof(chofer chof){chofer_asignado=chof;}
     private void set_estado(String est){estado=est;}
+    private void set_kilometros(int kil){kilometros=kil;}
     //geters
     public String get_consec(){return consecutivo;}
     public String get_sal(){return punto_salida;}
@@ -54,6 +56,7 @@ public class viaje
     public chofer get_chof(){return chofer_asignado;}
     public String get_estado(){return estado;}    
     public vehiculo get_vehiculo(){return vehiculo_asignado;}  
+    public int get_kil(){return kilometros;}      
     public ArrayList<persona> get_array_pasajeros(){return lista_pasajeros;}
     //metodos normales
     public void agregar_pasajero(persona pers){
@@ -73,3 +76,4 @@ public class viaje
     }
  
 }
+
