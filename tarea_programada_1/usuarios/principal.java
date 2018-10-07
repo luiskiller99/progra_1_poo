@@ -330,6 +330,7 @@ public class principal
             obj.put("FechaIni",Array_viajes.get(i).get_ini());
             obj.put("Salida",Array_viajes.get(i).get_sal());
             obj.put("Consecutivo",Array_viajes.get(i).get_consec());
+            obj.put("Kilometros", Array_viajes.get(i).get_kil());
         }
         arregloviajes.add(obj);
         //C:/Users/metal/Documents/GitHub7progra_1_poo/tarea_programada_1/usuarios/
