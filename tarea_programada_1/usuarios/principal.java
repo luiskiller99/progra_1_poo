@@ -491,7 +491,7 @@ public class principal
            obj.put("Correo",Array_choferes.get(i).get_correo());
            obj.put("Nombre",Array_choferes.get(i).get_nom());
            obj.put("Telefono",Array_choferes.get(i).get_tel());
-           obj.put("numLicencia",Array_choferes.get(i).getlicencias());
+           //obj.put("numLicencia",Array_choferes.get(i).getlicencias());
            
            
         }
