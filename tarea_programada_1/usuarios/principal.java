@@ -22,6 +22,10 @@ import tarea_programada_1.vehiculo.direccion;
 import tarea_programada_1.vehiculo.viaje;
 import tarea_programada_1.vehiculo.fecha;
 
+import org.telegram.telegrambots.ApiContextInitializer;
+import org.telegram.telegrambots.TelegramBotsApi;
+import org.telegram.telegrambots.exceptions.TelegramApiRequestException;
+
 public class principal 
 {
     ArrayList<usuario> Array_usuarios = new ArrayList<usuario>();
@@ -299,6 +303,19 @@ public class principal
                 else if(Array_viajes.get(i).get_estado().compareTo("Aprovado")==0){
                 Array_viajes.get(i).cambiar_estado("Cancelado");
                 /**aqui codigo para notificar a los usuarios*/
+                //prueba de bot
+                ApiContextInitializer.init();
+                TelegramBotsApi telegramBotsApi=new TelegramBotsApi();
+                Bot bot=new Bot();
+                bot.setestado(Array_viajes.get(i).get_estado());
+                
+                try{
+                    telegramBotsApi.registerBot(bot);
+                }
+                catch(TelegramApiRequestException e){
+                    e.printStackTrace();
+                }
+                
                 }
             }
         }
