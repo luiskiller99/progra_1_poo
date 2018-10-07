@@ -34,6 +34,9 @@ import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.TelegramBotsApi;
 import org.telegram.telegrambots.exceptions.TelegramApiRequestException;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+
 public class principal 
 {
     ArrayList<usuario> Array_usuarios = new ArrayList<usuario>();
@@ -46,6 +49,7 @@ public class principal
     JSONArray arreglopasajeros=new JSONArray();
     JSONArray arregloviajes=new JSONArray();
     JSONArray arreglovehiculos=new JSONArray();
+    JSONArray arreglochoferes=new JSONArray();
     
     public principal(){
     }
@@ -243,14 +247,14 @@ public class principal
             else if (cont==5)ano_salida += k;
             else if (cont==6)dia_llegada += k;
             else if (cont==7)mes_llegada += k;
-            else if (cont==8)ano_llegada += k;            
+            else if (cont==8)ano_llegada += k;              
         }
         String ced="";
         int cedaux=0;
         for(int i = 0 ; i < list_pas.length() ; i++){
             char k = list_pas.charAt(i);
             if(k=='/'){
-                cedaux = Integer.parseInt(ced);
+                cedaux=Integer.parseInt(ced);
                 String ini = ano_salida+"-"+mes_salida+"-"+dia_salida;
                 String fin = ano_llegada+"-"+mes_llegada+"-"+dia_llegada;/**revisar esto*/
                 //if( validar_pasajero_choquehorario(cedaux,ini,fin)){
@@ -283,12 +287,11 @@ public class principal
             int ano_s = Integer.parseInt(ano_salida);
             int dia_l = Integer.parseInt(dia_llegada);
             int mes_l = Integer.parseInt(mes_llegada);
-            int ano_l = Integer.parseInt(ano_llegada);            
-            int kil = Integer.parseInt(kilometros);            
+            int ano_l = Integer.parseInt(ano_llegada);
+            int kil   = Integer.parseInt(kilometros);
             fecha fech_ini = new fecha(dia_s,mes_s,ano_s);
             fecha fech_fin = new fecha(dia_l,mes_l,ano_l);
-            viaje iva = new viaje(pnt_salida,pnt_destino,fech_ini,fech_fin,"En confección",kil);            
-            
+            viaje iva = new viaje(pnt_salida,pnt_destino,fech_ini,fech_fin,"En confección",kil);
             /**agrega todos los pasajeros*/
             for (int i=0;i<Array_pasajeros_aux.size();i++){
                 iva.agregar_pasajero(Array_pasajeros_aux.get(i));
@@ -462,7 +465,10 @@ public class principal
                 cont=0;numero="";d_ex="";m_ex="";a_ex="";
                 d_emi="";m_emi="";a_emi="";
             }
-        }         
+        }    
+        
+        
+        
         System.out.println("chofer...............");
         System.out.println(new_chofer.get_ced());
         System.out.println(new_chofer.get_correo());
@@ -470,8 +476,42 @@ public class principal
         System.out.println(new_chofer.get_tel());
         System.out.println("chofer...............");        
         Array_choferes.add(new_chofer);
+        genjsoncho();
         return true;
     }
+    
+        public void genjsoncho(){        
+        JSONObject obj = new JSONObject();
+        
+        //ArrayList<licencia> array_licencias = new ArrayList<licencia>();         
+        
+        for(int i=0;i<Array_choferes.size();i++){ 
+           //array_licencias=Array_choferes.get(i).getlicencias();
+           obj.put("Cedula",Array_choferes.get(i).get_ced());
+           obj.put("Correo",Array_choferes.get(i).get_correo());
+           obj.put("Nombre",Array_choferes.get(i).get_nom());
+           obj.put("Telefono",Array_choferes.get(i).get_tel());
+           obj.put("numLicencia",Array_choferes.get(i).getlicencias());
+           
+           
+        }
+        arreglochoferes.add(obj);
+        
+        
+        //C:/Users/metal/Documents/GitHub7progra_1_poo/tarea_programada_1/usuarios/
+        try (FileWriter file = new FileWriter("D:/Descargas/GitHub/progra_1_poo/tarea_programada_1/usuarios/choferes.json")) {
+ 
+        
+        file.write(arreglochoferes.toJSONString());
+        }
+        catch (IOException e){
+        System.out.print(e.getMessage());
+        }
+    
+       
+        
+    }
+    
     boolean registrar_vehiculo(String info){
         String placa="";
         String año="";
@@ -528,7 +568,7 @@ public class principal
     public void genjsonvehiculo(){        
         JSONObject obj = new JSONObject();
         
-        for(int i=0;i<Array_usuarios.size();i++){            
+        for(int i=0;i<Array_vehiculos.size();i++){            
            obj.put("Placa",Array_vehiculos.get(i).get_placa());
            obj.put("Año",Array_vehiculos.get(i).get_anno());
            obj.put("Capacidad",Array_vehiculos.get(i).get_cap());
@@ -548,7 +588,7 @@ public class principal
         try (FileWriter file = new FileWriter("D:/Descargas/GitHub/progra_1_poo/tarea_programada_1/usuarios/vehiculos.json")) {
  
         
-        file.write(arreglousuarios.toJSONString());
+        file.write(arreglovehiculos.toJSONString());
         }
         catch (IOException e){
         System.out.print(e.getMessage());
@@ -585,6 +625,7 @@ public class principal
         }  
         return  false;
     }
+    
     public void dar_mantenimiento(String info, String empresa){
         /**mantenimiento*/
         String placa="";
@@ -662,7 +703,11 @@ public class principal
         }
     } 
     public boolean aprovar_viaje(String consec){
-        
+        String chofer="";
+        String viaje="";
+        String viajeros="";
+        String correoChofer="";
+        String correoviajero="";
         viaje buscar = new viaje();
         
         for(int i=0; i< Array_viajes.size();i++){
@@ -701,6 +746,8 @@ public class principal
             //asigna chofer ya que no ubo choque de orario con ningun viaje aprovado
             if(interruptor){
                 buscar.asigna_chofer(Array_choferes.get(i));
+                chofer=Array_choferes.get(i).get_nom().toString()+"/"+Array_choferes.get(i).get_tel();
+                correoChofer=Array_choferes.get(i).get_correo();
                 break;
             }
         }
@@ -737,6 +784,7 @@ public class principal
                 break;
             }
         }
+         
         /**capacidad de pasajeros menos o igual a capacidad a vehiculo*/
         if(buscar.get_vehiculo().get_cap() < (buscar.cantidad_pasajeros()+1)){//se suma uno por chofer
             /**si esto se cumple no debe realizar viaje*/
@@ -744,13 +792,27 @@ public class principal
             return false;
         }
         /**hacer pdf y mandar*/
-        /**estado pasa a aprovado*/        
+        /**estado pasa a aprovado*/
+        /**Obtener los viajeros para generar el pdf*/
+        for (int i=0; i<buscar.get_array_pasajeros().size();i++){
+            viajeros+=buscar.get_array_pasajeros().get(i).get_nom()+"/";
+            viajeros+=buscar.get_array_pasajeros().get(i).get_tel()+"\n";            
+        }
+        viaje+=buscar.get_ini()+"/"+buscar.get_fin();
         for(int i=0; i< Array_viajes.size();i++){
             if(consec.compareTo(Array_viajes.get(i).get_consec()) == 0){
                 System.out.println("aprovado......");
                 Array_viajes.get(i).cambiar_estado("Aprovado");
                 Array_viajes.get(i).get_vehiculo().agregar_kilometros(Array_viajes.get(i).get_kil());
             }
+        }
+        CrearPDF pdf=new CrearPDF();
+        pdf.genPDF(chofer, viaje, viajeros);
+        MandarCorreo correo=new MandarCorreo();
+        correo.generateAndSendEmail(correoChofer);
+        for(int i=0;i<buscar.get_array_pasajeros().size();i++){
+            correoviajero=buscar.get_array_pasajeros().get(i).get_correo();
+            correo.generateAndSendEmail(correoviajero);
         }
         return true;
     }
@@ -779,5 +841,4 @@ public class principal
     }
 
 }
-
 
