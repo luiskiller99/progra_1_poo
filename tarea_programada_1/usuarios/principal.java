@@ -326,8 +326,12 @@ public class principal
             obj.put("Chofer",Array_viajes.get(i).get_chof());
             obj.put("Destino",Array_viajes.get(i).get_dest());
             obj.put("Estado",Array_viajes.get(i).get_estado());
-            obj.put("FechaFin",Array_viajes.get(i).get_fin());
-            obj.put("FechaIni",Array_viajes.get(i).get_ini());
+            obj.put("DíaF",Array_viajes.get(i).get_fin().get_d());
+            obj.put("MesF",Array_viajes.get(i).get_fin().get_m());
+            obj.put("AñoF",Array_viajes.get(i).get_fin().get_a());
+            obj.put("DíaI",Array_viajes.get(i).get_ini().get_d());
+            obj.put("MesI",Array_viajes.get(i).get_ini().get_m());
+            obj.put("AñoI",Array_viajes.get(i).get_ini().get_a());
             obj.put("Salida",Array_viajes.get(i).get_sal());
             obj.put("Consecutivo",Array_viajes.get(i).get_consec());
             obj.put("Kilometros", Array_viajes.get(i).get_kil());
