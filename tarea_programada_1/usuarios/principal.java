@@ -53,6 +53,11 @@ public class principal
     
     public void principal(){
         //setArrayusuario(ArrayList<usuario> parregloUsuarios =new ArrayList<usuario>());
+        Json archivos=new Json();
+        archivos.leerJSONpasajeros();
+        archivos.leerJSONusuarios();
+        archivos.leerJSONviajes();
+        archivos.leerJSONvehiculos();
         
         
     }
