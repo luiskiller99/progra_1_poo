@@ -53,11 +53,6 @@ public class principal
     
     public void principal(){
         //setArrayusuario(ArrayList<usuario> parregloUsuarios =new ArrayList<usuario>());
-        Json archivos=new Json();
-        archivos.leerJSONpasajeros();
-        archivos.leerJSONusuarios();
-        archivos.leerJSONviajes();
-        archivos.leerJSONvehiculos();
         
         
     }
@@ -152,6 +147,17 @@ public class principal
         }
         return false;        
     }
+    public usuario ret_sec(String usu,String cont){
+        usuario aux=new usuario();
+        for (int i = 0 ; i < Array_usuarios.size() ; i++){                          
+            int us = usu.compareTo(Array_usuarios.get(i).get_usuario());
+            int co = cont.compareTo(Array_usuarios.get(i).get_contraseña());            
+            if(us==0 && co==0){
+                aux= Array_usuarios.get(i);
+            }        
+        }
+        return aux;
+    }
     public boolean agregar_pasajero(String info){        
         
         String cedula="";
@@ -218,7 +224,7 @@ public class principal
         }
         return true;
     }
-    public boolean solicitar_viaje(String info, String list_pas){
+    public boolean solicitar_viaje(String info, String list_pas,usuario usu){
         //obtener informacion
         String pnt_salida="";
         String pnt_destino="";
@@ -316,11 +322,11 @@ public class principal
             System.out.println(iva.get_sal());
             //System.out.println(iva.get_vehiculo().get_placa());
             System.out.println("viaje.............");
-            
+            usu.agregar_sol_viaje(iva);
             Array_viajes.add(iva);
         }
         /**escribir en json*/
-        genjsonviaje();
+        genjson();
         return interruptor;
     }
     
@@ -331,15 +337,10 @@ public class principal
             obj.put("Chofer",Array_viajes.get(i).get_chof());
             obj.put("Destino",Array_viajes.get(i).get_dest());
             obj.put("Estado",Array_viajes.get(i).get_estado());
-            obj.put("DíaF",Array_viajes.get(i).get_fin().get_d());
-            obj.put("MesF",Array_viajes.get(i).get_fin().get_m());
-            obj.put("AñoF",Array_viajes.get(i).get_fin().get_a());
-            obj.put("DíaI",Array_viajes.get(i).get_ini().get_d());
-            obj.put("MesI",Array_viajes.get(i).get_ini().get_m());
-            obj.put("AñoI",Array_viajes.get(i).get_ini().get_a());
+            obj.put("FechaFin",Array_viajes.get(i).get_fin());
+            obj.put("FechaIni",Array_viajes.get(i).get_ini());
             obj.put("Salida",Array_viajes.get(i).get_sal());
             obj.put("Consecutivo",Array_viajes.get(i).get_consec());
-            obj.put("Kilometros", Array_viajes.get(i).get_kil());
         }
         arregloviajes.add(obj);
         //C:/Users/metal/Documents/GitHub7progra_1_poo/tarea_programada_1/usuarios/
@@ -358,16 +359,32 @@ public class principal
         }
         return aux;
     }
-    boolean cancelar_viaje(String consec){
+
+
+
+    boolean cancelar_viaje(String consec,usuario usu){
+
         for(int i=0;i<Array_viajes.size();i++){
             if(Array_viajes.get(i).get_consec().compareTo(consec)==0){
                 if(Array_viajes.get(i).get_estado().compareTo("En confección")==0){
                     System.out.println("cancelado");
+
+                    for(int l=0;l<usu.optener_sol_viajes().size();l++){
+                        if(usu.optener_sol_viajes().get(l).get_consec().compareTo(consec)==0){
+                            usu.optener_sol_viajes().get(l).cambiar_estado("Cancelado");
+                        }
+                    }
                     Array_viajes.get(i).cambiar_estado("Cancelado");
                 }
-                else if(Array_viajes.get(i).get_estado().compareTo("Aprovado")==0){
-                    System.out.println("cancelado");
-                    Array_viajes.get(i).cambiar_estado("Cancelado");
+                else if(Array_viajes.get(i).get_estado().compareTo("Aprovado")==0){                    
+                           for(int l=0;l<usu.optener_sol_viajes().size();l++){
+                               if(usu.optener_sol_viajes().get(l).get_consec().compareTo(consec)==0){
+                                   usu.optener_sol_viajes().get(l).cambiar_estado("Cancelado");
+                                }                                
+                            }
+                            Array_viajes.get(i).cambiar_estado("Cancelado");
+                        
+                                                                            
                 /**aqui codigo para notificar a los usuarios*/
                 //prueba de bot
                 ApiContextInitializer.init();
@@ -803,6 +820,13 @@ public class principal
         /**capacidad de pasajeros menos o igual a capacidad a vehiculo*/
         if(buscar.get_vehiculo().get_cap() < (buscar.cantidad_pasajeros()+1)){//se suma uno por chofer
             /**si esto se cumple no debe realizar viaje*/
+            for(int i=0; i< Array_viajes.size();i++){
+            if(consec.compareTo(Array_viajes.get(i).get_consec()) == 0){
+                System.out.println("no aprovado......");
+                Array_viajes.get(i).cambiar_estado("No aprovado");
+                Array_viajes.get(i).get_vehiculo().agregar_kilometros(Array_viajes.get(i).get_kil());
+                }
+            }
             JOptionPane.showMessageDialog(null, "Se excede la cantidad de pasajeros, viaje no se puede realizar", "ERROR!!!", JOptionPane.WARNING_MESSAGE);
             return false;
         }
@@ -844,6 +868,122 @@ public class principal
             correo.generateAndSendEmail(correoviajero);
         }
         return true;
+    }
+    public String listar_fecha(String fech,usuario usu){
+        String ret="";
+        for(int i =0;i<usu.optener_sol_viajes().size();i++){
+            String fech_viaje = usu.optener_sol_viajes().get(i).get_ini().get_d()+"-"+
+                                usu.optener_sol_viajes().get(i).get_ini().get_m()+"-"+
+                                usu.optener_sol_viajes().get(i).get_ini().get_a();
+            if(fech.compareTo(fech_viaje)==0){
+                ret+= "ID de la solicitud  del viaje: "+usu.optener_sol_viajes().get(i).get_consec();
+                ret+= "Fecha de ingreso al sistema:   "+usu.optener_sol_viajes().get(i).get_fecha().get_d()+"-"+
+                usu.optener_sol_viajes().get(i).get_fecha().get_m()+"-"+
+                usu.optener_sol_viajes().get(i).get_fecha().get_a();
+                ret+= "Estado:                        "+usu.optener_sol_viajes().get(i).get_estado();
+                ret+= "Destino:                       "+usu.optener_sol_viajes().get(i).get_dest();
+                ret+= "Fecha de inicio del viaje:     "+usu.optener_sol_viajes().get(i).get_ini().get_d()+"-"+
+                                                        usu.optener_sol_viajes().get(i).get_ini().get_m()+"-"+
+                                                        usu.optener_sol_viajes().get(i).get_ini().get_a();                
+                ret+="\n";
+            }
+        }
+        return ret;
+    }
+    public String listar_destino(String destino,usuario usu){
+        String ret="";
+        for(int i =0;i<usu.optener_sol_viajes().size();i++){
+            
+            String des = usu.optener_sol_viajes().get(i).get_dest();
+
+            if(destino.compareTo(des)==0){
+                ret+= "ID de la solicitud  del viaje: "+usu.optener_sol_viajes().get(i).get_consec();
+                ret+= "Fecha de ingreso al sistema:   "+usu.optener_sol_viajes().get(i).get_fecha().get_d()+"-"+
+                usu.optener_sol_viajes().get(i).get_fecha().get_m()+"-"+
+                usu.optener_sol_viajes().get(i).get_fecha().get_a();
+                ret+= "Estado:                        "+usu.optener_sol_viajes().get(i).get_estado();
+                ret+= "Destino:                       "+usu.optener_sol_viajes().get(i).get_dest();
+                ret+= "Fecha de inicio del viaje:     "+usu.optener_sol_viajes().get(i).get_ini().get_d()+"-"+
+                                                        usu.optener_sol_viajes().get(i).get_ini().get_m()+"-"+
+                                                        usu.optener_sol_viajes().get(i).get_ini().get_a();                
+                ret+="\n";
+            }
+        }
+        return ret;
+    }
+    public String listar_estado(String estado,usuario usu){
+        String ret="";
+        for(int i =0;i<usu.optener_sol_viajes().size();i++){
+            
+            String est = usu.optener_sol_viajes().get(i).get_estado();
+            
+            if(estado.compareTo(est)==0){
+                ret+= "ID de la solicitud  del viaje: "+usu.optener_sol_viajes().get(i).get_consec();
+                ret+= "Fecha de ingreso al sistema:   "+usu.optener_sol_viajes().get(i).get_fecha().get_d()+"-"+
+                usu.optener_sol_viajes().get(i).get_fecha().get_m()+"-"+
+                usu.optener_sol_viajes().get(i).get_fecha().get_a();
+                ret+= "Estado:                        "+usu.optener_sol_viajes().get(i).get_estado();
+                ret+= "Destino:                       "+usu.optener_sol_viajes().get(i).get_dest();
+                ret+= "Fecha de inicio del viaje:     "+usu.optener_sol_viajes().get(i).get_ini().get_d()+"-"+
+                                                        usu.optener_sol_viajes().get(i).get_ini().get_m()+"-"+
+                                                        usu.optener_sol_viajes().get(i).get_ini().get_a();                
+                ret+="\n";
+            }
+        }
+        return ret;
+    }
+    public String listar_adm(){
+        String ret="";
+        for(int i = 0;i<Array_usuarios.size();i++){
+            for(int k=0;k<Array_usuarios.get(i).optener_sol_viajes().size();k++){
+                ret+= "ID de la solicitud  del viaje: "+Array_usuarios.get(i).optener_sol_viajes().get(k).get_consec();
+                ret+= "Fecha de ingreso al sistema:   "+Array_usuarios.get(i).optener_sol_viajes().get(k).get_fecha().get_d()+"-"+
+                                                        Array_usuarios.get(i).optener_sol_viajes().get(k).get_fecha().get_m()+"-"+
+                                                        Array_usuarios.get(i).optener_sol_viajes().get(k).get_fecha().get_a();
+                ret+= "Estado:                        "+Array_usuarios.get(i).optener_sol_viajes().get(k).get_estado();
+                ret+= "Destino:                       "+Array_usuarios.get(i).optener_sol_viajes().get(k).get_dest();
+                ret+= "Departamento:                  "+Array_usuarios.get(i).get_dep();
+            }
+        }
+        return ret;
+    }
+    public String detalle_viaje(String consec){
+        String ret="";
+        for(int i =0;i<Array_viajes.size();i++){
+            
+            String con = Array_viajes.get(i).get_estado();
+            
+            if(consec.compareTo(con)==0){
+                ret+= "ID de la solicitud  del viaje: "+Array_viajes.get(i).get_consec();
+                ret+= "Fecha de ingreso al sistema:   "+Array_viajes.get(i).get_fecha().get_d()+"-"+
+                Array_viajes.get(i).get_fecha().get_m()+"-"+
+                Array_viajes.get(i).get_fecha().get_a();
+                ret+= "Estado:                        "+Array_viajes.get(i).get_estado();
+                ret+= "Salida:                        "+Array_viajes.get(i).get_sal();
+                ret+= "Destino:                       "+Array_viajes.get(i).get_dest();
+                ret+= "Fecha de inicio del viaje:     "+Array_viajes.get(i).get_ini().get_d()+"-"+
+                                                        Array_viajes.get(i).get_ini().get_m()+"-"+
+                                                        Array_viajes.get(i).get_ini().get_a();                
+                ret+= "Fecha de fin del viaje:        "+Array_viajes.get(i).get_fin().get_d()+"-"+
+                                                        Array_viajes.get(i).get_fin().get_m()+"-"+
+                                                        Array_viajes.get(i).get_fin().get_a();
+                ret+= "Kilometros:                    "+Array_viajes.get(i).get_kil();
+                if(Array_viajes.get(i).get_estado().compareTo("Aprovado")==0){
+                    ret+= "Nombre chofer:                 "+Array_viajes.get(i).get_chof().get_nom();
+                    ret+= "Placa vehiculo:                "+Array_viajes.get(i).get_vehiculo().get_placa();
+                }
+                else{
+                    ret+= "Nombre chofer:                 "+"no asignado";
+                    ret+= "Placa vehiculo:                "+"no asignado";
+                }
+                ret+="Lista de pasajeros: ";
+                for(int h = 0;h<Array_viajes.get(i).get_array_pasajeros().size();h++){
+                    ret+= h +"."+"cedula: " +Array_viajes.get(i).get_array_pasajeros().get(h).get_ced()+
+                    "nombre: "+Array_viajes.get(i).get_array_pasajeros().get(h).get_nom();
+                }
+            }
+        }
+        return ret;
     }
     @SuppressWarnings("unchecked")
     public void genjson() {
