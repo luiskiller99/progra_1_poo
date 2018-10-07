@@ -139,7 +139,8 @@ public class ventana_principal extends JFrame
             String usu=textedit_usu_sec.getText();            
             String cont=textedit_cont_sec.getText();                        
             if(prin.validar_sec(usu, cont)){            
-                new ventana_secretaria(prin);
+                usuario este = prin.ret_sec(usu, cont);
+                new ventana_secretaria(prin,este);
             }
             else{
                 JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos", "ERROR!!!", JOptionPane.WARNING_MESSAGE);
