@@ -800,7 +800,9 @@ public class principal
             viajeros+=buscar.get_array_pasajeros().get(i).get_nom()+"/";
             viajeros+=buscar.get_array_pasajeros().get(i).get_tel()+"\n";            
         }
-        viaje+=buscar.get_ini()+"/"+buscar.get_fin();
+        viaje="Lugar de inicio: "+ buscar.get_dest()+" Fecha inicio: "+buscar.get_ini().get_d()+"-"+buscar.get_ini().get_m()+"-"
+        +buscar.get_ini().get_a()+ " Fecha finalización: "+ buscar.get_fin().get_d()+"-"+
+        buscar.get_fin().get_m()+"-"+ buscar.get_fin().get_a();
         for(int i=0; i< Array_viajes.size();i++){
             if(consec.compareTo(Array_viajes.get(i).get_consec()) == 0){
                 System.out.println("aprovado......");
