@@ -38,6 +38,7 @@ public class principal
     JSONArray arreglousuarios=new JSONArray();
     JSONArray arreglopasajeros=new JSONArray();
     JSONArray arregloviajes=new JSONArray();
+    JSONArray arreglovehiculos=new JSONArray();
     
     public principal(){
         //usuario de pruevas
@@ -418,8 +419,43 @@ public class principal
         
         vehiculo vei = new vehiculo(pla,an,color,marca,cap,kil,vinn,sede,estado);
         Array_vehiculos.add(vei);
+        genjsonvehiculo();
         return true;
     }
+    
+    public void genjsonvehiculo(){        
+        JSONObject obj = new JSONObject();
+        
+        for(int i=0;i<Array_usuarios.size();i++){            
+           obj.put("Placa",Array_vehiculos.get(i).get_placa());
+           obj.put("Año",Array_vehiculos.get(i).get_anno());
+           obj.put("Capacidad",Array_vehiculos.get(i).get_cap());
+           obj.put("Color",Array_vehiculos.get(i).get_color());
+           obj.put("Estado",Array_vehiculos.get(i).get_estado());
+           obj.put("Kilómetros",Array_vehiculos.get(i).get_kil());
+           obj.put("Marca",Array_vehiculos.get(i).get_marca());
+           obj.put("Número",Array_vehiculos.get(i).get_num());
+           obj.put("sede",Array_vehiculos.get(i).get_sede());
+           
+           
+        }
+        arreglovehiculos.add(obj);
+        
+        
+        //C:/Users/metal/Documents/GitHub7progra_1_poo/tarea_programada_1/usuarios/
+        try (FileWriter file = new FileWriter("D:/Descargas/GitHub/progra_1_poo/tarea_programada_1/usuarios/vehiculos.json")) {
+ 
+        
+        file.write(arreglousuarios.toJSONString());
+        }
+        catch (IOException e){
+        System.out.print(e.getMessage());
+        }
+    
+       
+        
+    }
+    
     boolean aprovar_viaje(String consec){
         /**asigna chofer*/ //no debe chocar en hora con otro viaje        
         boolean interruptor=true;
