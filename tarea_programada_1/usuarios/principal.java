@@ -21,6 +21,7 @@ import tarea_programada_1.vehiculo.persona;
 import tarea_programada_1.vehiculo.direccion;
 import tarea_programada_1.vehiculo.viaje;
 import tarea_programada_1.vehiculo.fecha;
+import tarea_programada_1.vehiculo.vehiculo;
 
 import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.TelegramBotsApi;
@@ -31,6 +32,7 @@ public class principal
     ArrayList<usuario> Array_usuarios = new ArrayList<usuario>();
     ArrayList<viaje> Array_viajes = new ArrayList<viaje>();
     ArrayList<persona> Array_pasajeros = new ArrayList<persona>(); 
+    ArrayList<vehiculo> Array_vehiculos = new ArrayList<vehiculo>();
     JSONArray arreglousuarios=new JSONArray();
     JSONArray arreglopasajeros=new JSONArray();
     JSONArray arregloviajes=new JSONArray();
@@ -335,6 +337,43 @@ public class principal
             else if (cont==2)correo += k;
             else if (cont==3)telefono += k;
         }
+        return true;
+    }
+    boolean registrar_vehiculo(String info){
+        String placa="";
+        String año="";
+        String capacidad="";
+        String kilometrage="";
+        String numero_vinn="";
+        String color="";
+        String marca="";
+        String sede="";
+        String estado="";
+        int cont =0;
+        for(int i = 0 ; i < info.length() ; i++){
+            char k = info.charAt(i);
+            if(k=='/')cont++;
+            else if (cont==0)placa += k;
+            else if (cont==1)año += k;
+            else if (cont==2)capacidad += k;
+            else if (cont==3)kilometrage += k;
+            else if (cont==4)numero_vinn += k;
+            else if (cont==5)color += k;
+            else if (cont==6)marca += k;
+            else if (cont==7)sede += k;
+            else if (cont==8)estado += k;
+        }
+        int pla = Integer.parseInt(placa);
+        int an = Integer.parseInt(año);
+        int cap = Integer.parseInt(capacidad);
+        int kil = Integer.parseInt(kilometrage);
+        int vinn = Integer.parseInt(numero_vinn);
+        
+        vehiculo vei = new vehiculo(pla,an,color,marca,cap,kil,vinn,sede,estado);
+        Array_vehiculos.add(vei);
+        return true;
+    }
+    boolean aprovar_viaje(String consec){
         return true;
     }
     @SuppressWarnings("unchecked")

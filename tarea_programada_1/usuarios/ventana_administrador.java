@@ -124,7 +124,7 @@ public class ventana_administrador
         boton_aprovar.setBounds(new Rectangle(100,20));                        
         boton_aprovar.setLocation(10,360);            
         boton_aprovar.setBackground(Color.white);
-        boton_aprovar.addActionListener(new act_bot_registar());
+        boton_aprovar.addActionListener(new act_bot_aprovar());
         //label_registrar
         label_registrar.setBounds(new Rectangle(150,20));        
         label_registrar.setLocation(10,220);
@@ -159,6 +159,20 @@ public class ventana_administrador
         public void actionPerformed(ActionEvent e){
             if(prin.nuevo_chofer(textfield_chofer.getText(),licencias_chofer.getText())){
                 JOptionPane.showMessageDialog(null, "Chofer agregado correctamente", "just now", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }
+    private class act_bot_vehiculo implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+            if(prin.registrar_vehiculo(textfield_vehiculo.getText())){
+                JOptionPane.showMessageDialog(null, "Vehiculo agregado correctamente", "just now", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }
+    private class act_bot_aprovar implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+            if(prin.aprovar_viaje(textfield_aprovar.getText())){
+                JOptionPane.showMessageDialog(null, "Viaje aprovado correctamente", "just now", JOptionPane.INFORMATION_MESSAGE);
             }
         }
     }

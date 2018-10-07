@@ -23,13 +23,6 @@ public class Bot extends TelegramLongPollingBot{
         .getText());
         
         SendMessage sendMessage=new SendMessage().setChatId(update.getMessage().getChatId());
-
-        String mensaje=update.getMessage().getText();
-        System.out.print(mensaje);
-        if (mensaje.equals("!validarviaje"))
-        sendMessage.setText("El viaje ha sido aceptado, ¡que disfrute su estadía!");
-        else if (mensaje.equals("!cancelarviaje"))
-
         //String mensaje=update.getMessage().getText();
         //System.out.print(mensaje);
         String estado=this.getestado();
@@ -38,7 +31,6 @@ public class Bot extends TelegramLongPollingBot{
         if (estado.equals("Aprovado"))
         sendMessage.setText("El viaje ha sido aceptado, ¡que disfrute su estadía!");
         else if (estado.equals("Cancelado"))
-
         sendMessage.setText("Lo sentimos, pero el viaje ha sido cancelado.");
         else
         sendMessage.setText("Comando no reconocido.");
@@ -59,5 +51,5 @@ public class Bot extends TelegramLongPollingBot{
     @Override
     public String getBotToken(){
         return "689327470:AAFkoSKw1NF5ZDHrwbpETfC3D3FWdHIdXYw";
-    }    
+    } 
 }
