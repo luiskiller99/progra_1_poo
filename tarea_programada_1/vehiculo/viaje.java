@@ -1,9 +1,5 @@
 package tarea_programada_1.vehiculo;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.text.DateFormat;
 
 /**
  * Write a description of class viaje here.
@@ -38,26 +34,11 @@ public class viaje
         set_ini(ini);
         set_fin(fin);
         set_dest(dest);
-        set_fecha();
+        //set_chof(chof);
         set_estado(estado);
         set_kilometros(kil);
     }
     //seters
-    private void set_fecha(){
-        Date d=new Date();
-        Calendar c=new GregorianCalendar();
-        c.setTime(d);
-        String di=Integer.toString(c.get(Calendar.DATE));
-        String me=Integer.toString(c.get(Calendar.MONTH));
-        String añ=Integer.toString(c.get(Calendar.YEAR));
-        
-        int dia=Integer.parseInt(di);
-        int mes=Integer.parseInt(me);
-        int año=Integer.parseInt(añ);
-        
-        solicitud=new fecha(dia,mes,año);
-        
-    }
     private void set_consec(){consecutivo=consecutivo+Integer.toString(consec_num);}
     private void set_sal(String sal){punto_salida=sal;}
     private void set_ini(fecha ini){fech_ini=ini;}
@@ -77,7 +58,6 @@ public class viaje
     public vehiculo get_vehiculo(){return vehiculo_asignado;}  
     public int get_kil(){return kilometros;}      
     public ArrayList<persona> get_array_pasajeros(){return lista_pasajeros;}
-    public fecha get_fecha(){return solicitud;}        
     //metodos normales
     public void agregar_pasajero(persona pers){
         lista_pasajeros.add(pers);
