@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Bot
+comment1.params=pestado
+comment1.target=void\ setestado(java.lang.String)
+comment2.params=
+comment2.target=java.lang.String\ getestado()
+comment3.params=update
+comment3.target=void\ onUpdateReceived(org.telegram.telegrambots.api.objects.Update)
+comment4.params=
+comment4.target=java.lang.String\ getBotUsername()
+comment5.params=
+comment5.target=java.lang.String\ getBotToken()
+numComments=6

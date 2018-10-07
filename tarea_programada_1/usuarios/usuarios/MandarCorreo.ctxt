@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=MandarCorreo
+comment0.text=\r\n\ @author\ Crunchify.com\r\n\ \r\n
+comment1.params=pcorreo
+comment1.target=void\ setcorreo(java.lang.String)
+comment1.text=public\ static\ void\ main(String\ args[])\ throws\ AddressException,\ MessagingException\ {\r\n\ \ \ \ \ \ \ \ generateAndSendEmail();\r\n\ \ \ \ \ \ \ \ System.out.println("\\n\\n\ \=\=\=>\ Your\ Java\ Program\ has\ just\ sent\ an\ Email\ successfully.\ Check\ your\ email..");\r\n}
+comment2.params=pcorreo
+comment2.target=void\ generateAndSendEmail(java.lang.String)
+numComments=3

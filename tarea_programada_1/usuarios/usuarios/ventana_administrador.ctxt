@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=ventana_administrador
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ ventana_administrador\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=pr
+comment1.target=ventana_administrador(principal)
+comment2.params=pr
+comment2.target=void\ set_prin(principal)
+comment3.params=
+comment3.target=void\ configuraciones()
+numComments=4
