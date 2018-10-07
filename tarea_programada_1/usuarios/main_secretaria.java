@@ -11,6 +11,7 @@ public class main_secretaria
 {
     public static void main(){
         principal hola=new principal();
-        new ventana_secretaria(hola);
+        usuario us=new usuario();
+        new ventana_secretaria(hola,us);
     }
 }
