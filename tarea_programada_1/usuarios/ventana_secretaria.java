@@ -39,16 +39,10 @@ public class ventana_secretaria
     //private JTextField textfield_panel_detalle = new JTextField("aqui mostrar");
     private JButton boton_detalle = new JButton ("Consultar");     
     
-    usuario usu_prin= new usuario();
-    
-    public ventana_secretaria(principal pr, usuario us){
+    public ventana_secretaria(principal pr){
         set_prin(pr);
         configuraciones();
-        set_usu(us);
     }    
-    private void set_usu(usuario us){
-        usu_prin=us;
-    }
     private void set_prin(principal pr){
         prin=pr;
     }
@@ -140,19 +134,17 @@ public class ventana_secretaria
         boton_listar_fecha.setBounds(new Rectangle(100,20));                        
         boton_listar_fecha.setLocation(10,280);            
         boton_listar_fecha.setBackground(Color.white);
-        boton_listar_fecha.addActionListener(new act_bot_listar_fecha());
+        boton_listar_fecha.addActionListener(new act_bot());
         //boton_listar_estado
         boton_listar_estado.setBounds(new Rectangle(100,20));                        
         boton_listar_estado.setLocation(120,280);            
         boton_listar_estado.setBackground(Color.white);
-        //boton_listar_estado.addActionListener(new act_bot_listar_estado());
-        /**siguiente*/
+        boton_listar_estado.addActionListener(new act_bot());
         //boton_listar_destino
         boton_listar_destino.setBounds(new Rectangle(100,20));                        
         boton_listar_destino.setLocation(230,280);            
         boton_listar_destino.setBackground(Color.white);
-        //boton_listar_destino.addActionListener(new act_bot_listar_destino());
-        /**siguiente*/
+        boton_listar_destino.addActionListener(new act_bot());
         //label_cancelar
         label_cancelar.setBounds(new Rectangle(150,20));        
         label_cancelar.setLocation(10,320);
@@ -183,7 +175,7 @@ public class ventana_secretaria
         boton_detalle.setBounds(new Rectangle(100,20));                        
         boton_detalle.setLocation(180,390);            
         boton_detalle.setBackground(Color.white);
-        boton_detalle.addActionListener(new act_bot_detalle());
+        boton_detalle.addActionListener(new act_bot());
         
         
     }
@@ -205,40 +197,16 @@ public class ventana_secretaria
     }
     private class act_bot_viaje implements ActionListener{
         public void actionPerformed(ActionEvent e){          
-        if (prin.solicitar_viaje(textfield_viaje.getText(),textfield_viaje_pasajeros.getText(),usu_prin)){
+        if (prin.solicitar_viaje(textfield_viaje.getText(),textfield_viaje_pasajeros.getText())){
             JOptionPane.showMessageDialog(null, "Solicitud creada", "just now", JOptionPane.INFORMATION_MESSAGE);            
         }
         }
     }
     private class act_bot_cancelar implements ActionListener{
         public void actionPerformed(ActionEvent e){          
-        if (prin.cancelar_viaje(textfield_cancelar.getText(),usu_prin)){
+        if (prin.cancelar_viaje(textfield_cancelar.getText())){
             JOptionPane.showMessageDialog(null, "Viaje cancelado con exito", "just now", JOptionPane.INFORMATION_MESSAGE);            
         }
-        }
-    }
-     private class act_bot_listar_fecha implements ActionListener{
-        public void actionPerformed(ActionEvent e){          
-        String hola = prin.listar_fecha(textfield_listar_fecha.getText(),usu_prin);
-            JOptionPane.showMessageDialog(null,hola,"Viajes de la fecha"+textfield_listar_fecha.getText() , JOptionPane.INFORMATION_MESSAGE);                    
-        }
-    }
-    private class act_bot_listar_destino implements ActionListener{
-        public void actionPerformed(ActionEvent e){          
-        String hola = prin.listar_destino(textfield_listar_destino.getText(),usu_prin);
-            JOptionPane.showMessageDialog(null,hola,"Viajes del destino"+textfield_listar_destino.getText() , JOptionPane.INFORMATION_MESSAGE);                    
-        }
-    }
-    private class act_bot_listar_estado implements ActionListener{
-        public void actionPerformed(ActionEvent e){          
-        String hola = prin.listar_estado(textfield_listar_estado.getText(),usu_prin);
-            JOptionPane.showMessageDialog(null,hola,"Viajes del estado"+textfield_listar_estado.getText() , JOptionPane.INFORMATION_MESSAGE);                    
-        }
-    }
-    private class act_bot_detalle implements ActionListener{
-        public void actionPerformed(ActionEvent e){          
-        String hola = prin.detalle_viaje(textfield_detalle.getText());
-            JOptionPane.showMessageDialog(null,hola,"Detalles del ID "+textfield_detalle.getText() , JOptionPane.INFORMATION_MESSAGE);                    
         }
     }
 }
