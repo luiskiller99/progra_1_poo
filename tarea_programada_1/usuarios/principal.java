@@ -63,7 +63,7 @@ public class principal
         String provincia="";
         String canton="";
         String distrito="";
-        String seÃ±as="";
+        String señas="";
         String correo="";
         String telefono="";
         String departamento="";
@@ -77,19 +77,19 @@ public class principal
             else if (cont==2)provincia += c;
             else if (cont==3)canton += c;
             else if (cont==4)distrito += c;
-            else if (cont==5)seÃ±as += c;
+            else if (cont==5)señas += c;
             else if (cont==6)correo += c;
             else if (cont==7)departamento += c;
             else if (cont==8)telefono += c;            
         }    
-        direccion dir = new direccion(provincia,canton,distrito,seÃ±as);
+        direccion dir = new direccion(provincia,canton,distrito,señas);
         int ced = Integer.parseInt(cedula);
         int tel = Integer.parseInt(telefono);
         persona pers= new persona(nombre,ced,dir,correo,tel);
         usuario usu= new usuario(pers,departamento);
         System.out.println("usuario...............");
         System.out.println(usu.get_correo());
-        System.out.println(usu.get_contraseÃ±a());
+        System.out.println(usu.get_contraseña());
         System.out.println(usu.get_nombre());
         System.out.println(usu.get_telefono());
         System.out.println(usu.get_provincia());
@@ -105,14 +105,14 @@ public class principal
         for(int i=0;i<Array_usuarios.size();i++){            
            obj.put("Cedula",Array_usuarios.get(i).get_cedula());
            obj.put("Nombre", Array_usuarios.get(i).get_nombre());            
-           obj.put("CantÃ³n",Array_usuarios.get(i).get_canton());
+           obj.put("Cantón",Array_usuarios.get(i).get_canton());
            obj.put("Distrito",Array_usuarios.get(i).get_distrito());
            obj.put("Provincia",Array_usuarios.get(i).get_provincia());
-           obj.put("SeÃ±as",Array_usuarios.get(i).get_seÃ±as());            
+           obj.put("Señas",Array_usuarios.get(i).get_señas());            
            obj.put("Telefono",Array_usuarios.get(i).get_telefono());
            obj.put("Correo",Array_usuarios.get(i).get_correo());
            obj.put("Usuario",Array_usuarios.get(i).get_usuario());
-           obj.put("ConstraseÃ±a",Array_usuarios.get(i).get_contraseÃ±a());
+           obj.put("Constraseña",Array_usuarios.get(i).get_contraseña());
            obj.put("Departamento",Array_usuarios.get(i).get_dep());
            
         }
@@ -142,7 +142,7 @@ public class principal
     public boolean validar_sec(String usu,String cont){        
         for (int i = 0 ; i < Array_usuarios.size() ; i++){                          
             int us = usu.compareTo(Array_usuarios.get(i).get_usuario());
-            int co = cont.compareTo(Array_usuarios.get(i).get_contraseÃ±a());            
+            int co = cont.compareTo(Array_usuarios.get(i).get_contraseña());            
             if(us==0 && co==0){return true;}        
         }
         return false;        
@@ -151,7 +151,7 @@ public class principal
         usuario aux=new usuario();
         for (int i = 0 ; i < Array_usuarios.size() ; i++){                          
             int us = usu.compareTo(Array_usuarios.get(i).get_usuario());
-            int co = cont.compareTo(Array_usuarios.get(i).get_contraseÃ±a());            
+            int co = cont.compareTo(Array_usuarios.get(i).get_contraseña());            
             if(us==0 && co==0){
                 aux= Array_usuarios.get(i);
             }        
@@ -165,7 +165,7 @@ public class principal
         String provincia="";
         String canton="";
         String distrito="";
-        String seÃ±as="";
+        String señas="";
         String correo="";
         String telefono="";
         /**obtiene informacion de string*/
@@ -178,13 +178,13 @@ public class principal
             else if (cont==2)provincia += c;
             else if (cont==3)canton += c;
             else if (cont==4)distrito += c;
-            else if (cont==5)seÃ±as += c;
+            else if (cont==5)señas += c;
             else if (cont==6)correo += c;
             else if (cont==7)telefono += c;            
         }    
         /**crea los objetos y procede a verificar si existe otro
         con el mismo numero de cedula*/
-        direccion dir = new direccion(provincia,canton,distrito,seÃ±as);
+        direccion dir = new direccion(provincia,canton,distrito,señas);
         persona pers = new persona(nombre,Integer.parseInt(cedula),dir,correo,Integer.parseInt(telefono));
         for (int i = 0; i < Array_pasajeros.size() ; i++ ){
             if(Array_pasajeros.get(i).get_ced()==pers.get_ced()){
@@ -243,7 +243,7 @@ public class principal
         
         String diaa_pc = Integer.toString(c.get(Calendar.DATE));
         String mess_pc = Integer.toString(c.get(Calendar.MONTH));
-        String aÃ±oo_pc = Integer.toString(c.get(Calendar.YEAR));        
+        String añoo_pc = Integer.toString(c.get(Calendar.YEAR));        
         
         ArrayList<persona> Array_pasajeros_aux = new ArrayList<persona>();
         
@@ -287,7 +287,7 @@ public class principal
         //fecha con 24 horas de diferencia//tomar fecha de sistema operativo        
         if(dia_llegada.compareTo(diaa_pc) == 0 &&
         mes_llegada.compareTo(mess_pc) == 0 &&
-        ano_llegada.compareTo(aÃ±oo_pc) == 0){
+        ano_llegada.compareTo(añoo_pc) == 0){
             interruptor = false;
             JOptionPane.showMessageDialog(null, "Solicitud de viaje no fue agregada correctamente, en menos de 24 horas solicitud no puede ser procesada", "ERROR!!!", JOptionPane.WARNING_MESSAGE);
         }/**si esto se cumple no debe realizarse viaje*/
@@ -306,7 +306,7 @@ public class principal
             int kil   = Integer.parseInt(kilometros);
             fecha fech_ini = new fecha(dia_s,mes_s,ano_s);
             fecha fech_fin = new fecha(dia_l,mes_l,ano_l);
-            viaje iva = new viaje(pnt_salida,pnt_destino,fech_ini,fech_fin,"En confecciÃ³n",kil);
+            viaje iva = new viaje(pnt_salida,pnt_destino,fech_ini,fech_fin,"En confección",kil);
             /**agrega todos los pasajeros*/
             for (int i=0;i<Array_pasajeros_aux.size();i++){
                 iva.agregar_pasajero(Array_pasajeros_aux.get(i));
@@ -366,7 +366,7 @@ public class principal
 
         for(int i=0;i<Array_viajes.size();i++){
             if(Array_viajes.get(i).get_consec().compareTo(consec)==0){
-                if(Array_viajes.get(i).get_estado().compareTo("En confecciÃ³n")==0){
+                if(Array_viajes.get(i).get_estado().compareTo("En confección")==0){
                     System.out.println("cancelado");
 
                     for(int l=0;l<usu.optener_sol_viajes().size();l++){
@@ -454,9 +454,9 @@ public class principal
         
         String dia = Integer.toString(c.get(Calendar.DATE));
         String mes = Integer.toString(c.get(Calendar.MONTH));
-        String aÃ±o = Integer.toString(c.get(Calendar.YEAR));
+        String año = Integer.toString(c.get(Calendar.YEAR));
         
-        String fecha_pc = aÃ±o+"-"+mes+"-"+dia; 
+        String fecha_pc = año+"-"+mes+"-"+dia; 
         String fecha_expi =a_ex+"-"+m_ex+"-"+d_ex;
         if (valida_espiracion(fecha_pc,fecha_expi)){
             JOptionPane.showMessageDialog(null, "licencia de chofer vencida, no se tomara en cuenta", "ERROR!!!", JOptionPane.WARNING_MESSAGE);
@@ -522,7 +522,7 @@ public class principal
            obj.put("Telefono",Array_choferes.get(i).get_tel());
            System.out.print(Array_choferes.get(i).get_list_lic().get(0).get_em());
            for(int j=0;j<Array_choferes.get(i).get_list_lic().size();j++){
-               obj.put("EmisiÃ³n",Array_choferes.get(i).get_list_lic().get(j).get_em());
+               obj.put("Emisión",Array_choferes.get(i).get_list_lic().get(j).get_em());
                obj.put("Expira",Array_choferes.get(i).get_list_lic().get(j).get_ex());
                obj.put("numLicencia",Array_choferes.get(i).get_list_lic().get(j).get_num());
             }
@@ -547,7 +547,7 @@ public class principal
     
     boolean registrar_vehiculo(String info){
         String placa="";
-        String aÃ±o="";
+        String año="";
         String capacidad="";
         String kilometrage="";
         String numero_vinn="";
@@ -560,7 +560,7 @@ public class principal
             char k = info.charAt(i);
             if(k=='/')cont++;
             else if (cont==0)placa += k;
-            else if (cont==1)aÃ±o += k;
+            else if (cont==1)año += k;
             else if (cont==2)capacidad += k;
             else if (cont==3)kilometrage += k;
             else if (cont==4)numero_vinn += k;
@@ -570,7 +570,7 @@ public class principal
             else if (cont==8)estado += k;
         }
         int pla = Integer.parseInt(placa);
-        int an = Integer.parseInt(aÃ±o);
+        int an = Integer.parseInt(año);
         int cap = Integer.parseInt(capacidad);
         int kil = Integer.parseInt(kilometrage);
         int vinn = Integer.parseInt(numero_vinn);
@@ -603,13 +603,13 @@ public class principal
         
         for(int i=0;i<Array_vehiculos.size();i++){            
            obj.put("Placa",Array_vehiculos.get(i).get_placa());
-           obj.put("AÃ±o",Array_vehiculos.get(i).get_anno());
+           obj.put("Año",Array_vehiculos.get(i).get_anno());
            obj.put("Capacidad",Array_vehiculos.get(i).get_cap());
            obj.put("Color",Array_vehiculos.get(i).get_color());
            obj.put("Estado",Array_vehiculos.get(i).get_estado());
-           obj.put("KilÃ³metros",Array_vehiculos.get(i).get_kil());
+           obj.put("Kilómetros",Array_vehiculos.get(i).get_kil());
            obj.put("Marca",Array_vehiculos.get(i).get_marca());
-           obj.put("NÃºmero",Array_vehiculos.get(i).get_num());
+           obj.put("Número",Array_vehiculos.get(i).get_num());
            obj.put("sede",Array_vehiculos.get(i).get_sede());
            
            
@@ -839,7 +839,7 @@ public class principal
             viajeros+=buscar.get_array_pasajeros().get(i).get_tel()+"\n";            
         }
         viaje="Lugar de inicio: "+ buscar.get_dest()+" Fecha inicio: "+buscar.get_ini().get_d()+"-"+buscar.get_ini().get_m()+"-"
-        +buscar.get_ini().get_a()+ " Fecha finalizaciÃ³n: "+ buscar.get_fin().get_d()+"-"+
+        +buscar.get_ini().get_a()+ " Fecha finalización: "+ buscar.get_fin().get_d()+"-"+
         buscar.get_fin().get_m()+"-"+ buscar.get_fin().get_a();
         for(int i=0; i< Array_viajes.size();i++){
             if(consec.compareTo(Array_viajes.get(i).get_consec()) == 0){
@@ -991,10 +991,10 @@ public class principal
         for(int i=0;i<Array_pasajeros.size();i++){            
             obj.put("Cedula",Array_pasajeros.get(i).get_ced());
             obj.put("Nombre", Array_pasajeros.get(i).get_nom());            
-            obj.put("CantÃ³n",Array_pasajeros.get(i).get_dir().get_can());
+            obj.put("Cantón",Array_pasajeros.get(i).get_dir().get_can());
             obj.put("Distrito",Array_pasajeros.get(i).get_dir().get_dis());
             obj.put("Provincia",Array_pasajeros.get(i).get_dir().get_pro());
-            obj.put("SeÃ±as",Array_pasajeros.get(i).get_dir().get_se());            
+            obj.put("Señas",Array_pasajeros.get(i).get_dir().get_se());            
             obj.put("Telefono",Array_pasajeros.get(i).get_tel());
             obj.put("Correo",Array_pasajeros.get(i).get_correo());
         }
@@ -1010,3 +1010,4 @@ public class principal
     }
 
 }
+
