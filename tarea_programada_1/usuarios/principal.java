@@ -315,7 +315,7 @@ public class principal
             Array_viajes.add(iva);
         }
         /**escribir en json*/
-        genjson();
+        genjsonviaje();
         return interruptor;
     }
     
