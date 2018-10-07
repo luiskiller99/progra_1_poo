@@ -51,7 +51,10 @@ public class principal
     private JSONArray arreglovehiculos=new JSONArray();
     private JSONArray arreglochoferes=new JSONArray();
     
-    public principal(){
+    public void principal(){
+        //setArrayusuario(ArrayList<usuario> parregloUsuarios =new ArrayList<usuario>());
+        
+        
     }
     
     public void nuevo_secretaria(String info){
@@ -110,6 +113,7 @@ public class principal
            obj.put("Correo",Array_usuarios.get(i).get_correo());
            obj.put("Usuario",Array_usuarios.get(i).get_usuario());
            obj.put("Constraseña",Array_usuarios.get(i).get_contraseña());
+           obj.put("Departamento",Array_usuarios.get(i).get_dep());
            
         }
         arreglousuarios.add(obj);
