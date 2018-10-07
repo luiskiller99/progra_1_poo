@@ -39,22 +39,24 @@ import javax.mail.internet.AddressException;
 
 public class principal 
 {
-    private ArrayList<usuario> Array_usuarios = new ArrayList<usuario>();
-    private ArrayList<viaje> Array_viajes = new ArrayList<viaje>();
-    private ArrayList<persona> Array_pasajeros = new ArrayList<persona>(); 
-    private ArrayList<vehiculo> Array_vehiculos = new ArrayList<vehiculo>();
-    private ArrayList<chofer> Array_choferes = new ArrayList<chofer>();
+    ArrayList<usuario> Array_usuarios = new ArrayList<usuario>();
+    ArrayList<viaje> Array_viajes = new ArrayList<viaje>();
+    ArrayList<persona> Array_pasajeros = new ArrayList<persona>(); 
+    ArrayList<vehiculo> Array_vehiculos = new ArrayList<vehiculo>();
+    ArrayList<chofer> Array_choferes = new ArrayList<chofer>();
     
-    private JSONArray arreglousuarios=new JSONArray();
-    private JSONArray arreglopasajeros=new JSONArray();
-    private JSONArray arregloviajes=new JSONArray();
-    private JSONArray arreglovehiculos=new JSONArray();
-    private JSONArray arreglochoferes=new JSONArray();
+    JSONArray arreglousuarios=new JSONArray();
+    JSONArray arreglopasajeros=new JSONArray();
+    JSONArray arregloviajes=new JSONArray();
+    JSONArray arreglovehiculos=new JSONArray();
+    JSONArray arreglochoferes=new JSONArray();
     
-    public void principal(){
-        //setArrayusuario(ArrayList<usuario> parregloUsuarios =new ArrayList<usuario>());
-        
-        
+    public principal(){
+        Json archivos=new Json();
+        archivos.leerJSONpasajeros();
+        archivos.leerJSONusuarios();
+        archivos.leerJSONviajes();
+        archivos.leerJSONvehiculos();
     }
     
     public void nuevo_secretaria(String info){
@@ -63,7 +65,7 @@ public class principal
         String provincia="";
         String canton="";
         String distrito="";
-        String señas="";
+        String seÃ±as="";
         String correo="";
         String telefono="";
         String departamento="";
@@ -77,19 +79,19 @@ public class principal
             else if (cont==2)provincia += c;
             else if (cont==3)canton += c;
             else if (cont==4)distrito += c;
-            else if (cont==5)señas += c;
+            else if (cont==5)seÃ±as += c;
             else if (cont==6)correo += c;
             else if (cont==7)departamento += c;
             else if (cont==8)telefono += c;            
         }    
-        direccion dir = new direccion(provincia,canton,distrito,señas);
+        direccion dir = new direccion(provincia,canton,distrito,seÃ±as);
         int ced = Integer.parseInt(cedula);
         int tel = Integer.parseInt(telefono);
         persona pers= new persona(nombre,ced,dir,correo,tel);
         usuario usu= new usuario(pers,departamento);
         System.out.println("usuario...............");
         System.out.println(usu.get_correo());
-        System.out.println(usu.get_contraseña());
+        System.out.println(usu.get_contraseÃ±a());
         System.out.println(usu.get_nombre());
         System.out.println(usu.get_telefono());
         System.out.println(usu.get_provincia());
@@ -105,15 +107,14 @@ public class principal
         for(int i=0;i<Array_usuarios.size();i++){            
            obj.put("Cedula",Array_usuarios.get(i).get_cedula());
            obj.put("Nombre", Array_usuarios.get(i).get_nombre());            
-           obj.put("Cantón",Array_usuarios.get(i).get_canton());
+           obj.put("CantÃ³n",Array_usuarios.get(i).get_canton());
            obj.put("Distrito",Array_usuarios.get(i).get_distrito());
            obj.put("Provincia",Array_usuarios.get(i).get_provincia());
-           obj.put("Señas",Array_usuarios.get(i).get_señas());            
+           obj.put("SeÃ±as",Array_usuarios.get(i).get_seÃ±as());            
            obj.put("Telefono",Array_usuarios.get(i).get_telefono());
            obj.put("Correo",Array_usuarios.get(i).get_correo());
            obj.put("Usuario",Array_usuarios.get(i).get_usuario());
-           obj.put("Constraseña",Array_usuarios.get(i).get_contraseña());
-           obj.put("Departamento",Array_usuarios.get(i).get_dep());
+           obj.put("ConstraseÃ±a",Array_usuarios.get(i).get_contraseÃ±a());
            
         }
         arreglousuarios.add(obj);
@@ -142,21 +143,10 @@ public class principal
     public boolean validar_sec(String usu,String cont){        
         for (int i = 0 ; i < Array_usuarios.size() ; i++){                          
             int us = usu.compareTo(Array_usuarios.get(i).get_usuario());
-            int co = cont.compareTo(Array_usuarios.get(i).get_contraseña());            
+            int co = cont.compareTo(Array_usuarios.get(i).get_contraseÃ±a());            
             if(us==0 && co==0){return true;}        
         }
         return false;        
-    }
-    public usuario ret_sec(String usu,String cont){
-        usuario aux=new usuario();
-        for (int i = 0 ; i < Array_usuarios.size() ; i++){                          
-            int us = usu.compareTo(Array_usuarios.get(i).get_usuario());
-            int co = cont.compareTo(Array_usuarios.get(i).get_contraseña());            
-            if(us==0 && co==0){
-                aux= Array_usuarios.get(i);
-            }        
-        }
-        return aux;
     }
     public boolean agregar_pasajero(String info){        
         
@@ -165,7 +155,7 @@ public class principal
         String provincia="";
         String canton="";
         String distrito="";
-        String señas="";
+        String seÃ±as="";
         String correo="";
         String telefono="";
         /**obtiene informacion de string*/
@@ -178,13 +168,13 @@ public class principal
             else if (cont==2)provincia += c;
             else if (cont==3)canton += c;
             else if (cont==4)distrito += c;
-            else if (cont==5)señas += c;
+            else if (cont==5)seÃ±as += c;
             else if (cont==6)correo += c;
             else if (cont==7)telefono += c;            
         }    
         /**crea los objetos y procede a verificar si existe otro
         con el mismo numero de cedula*/
-        direccion dir = new direccion(provincia,canton,distrito,señas);
+        direccion dir = new direccion(provincia,canton,distrito,seÃ±as);
         persona pers = new persona(nombre,Integer.parseInt(cedula),dir,correo,Integer.parseInt(telefono));
         for (int i = 0; i < Array_pasajeros.size() ; i++ ){
             if(Array_pasajeros.get(i).get_ced()==pers.get_ced()){
@@ -224,7 +214,7 @@ public class principal
         }
         return true;
     }
-    public boolean solicitar_viaje(String info, String list_pas,usuario usu){
+    public boolean solicitar_viaje(String info, String list_pas){
         //obtener informacion
         String pnt_salida="";
         String pnt_destino="";
@@ -243,7 +233,7 @@ public class principal
         
         String diaa_pc = Integer.toString(c.get(Calendar.DATE));
         String mess_pc = Integer.toString(c.get(Calendar.MONTH));
-        String añoo_pc = Integer.toString(c.get(Calendar.YEAR));        
+        String aÃ±oo_pc = Integer.toString(c.get(Calendar.YEAR));        
         
         ArrayList<persona> Array_pasajeros_aux = new ArrayList<persona>();
         
@@ -287,7 +277,7 @@ public class principal
         //fecha con 24 horas de diferencia//tomar fecha de sistema operativo        
         if(dia_llegada.compareTo(diaa_pc) == 0 &&
         mes_llegada.compareTo(mess_pc) == 0 &&
-        ano_llegada.compareTo(añoo_pc) == 0){
+        ano_llegada.compareTo(aÃ±oo_pc) == 0){
             interruptor = false;
             JOptionPane.showMessageDialog(null, "Solicitud de viaje no fue agregada correctamente, en menos de 24 horas solicitud no puede ser procesada", "ERROR!!!", JOptionPane.WARNING_MESSAGE);
         }/**si esto se cumple no debe realizarse viaje*/
@@ -306,7 +296,7 @@ public class principal
             int kil   = Integer.parseInt(kilometros);
             fecha fech_ini = new fecha(dia_s,mes_s,ano_s);
             fecha fech_fin = new fecha(dia_l,mes_l,ano_l);
-            viaje iva = new viaje(pnt_salida,pnt_destino,fech_ini,fech_fin,"En confección",kil);
+            viaje iva = new viaje(pnt_salida,pnt_destino,fech_ini,fech_fin,"En confecciÃ³n",kil);
             /**agrega todos los pasajeros*/
             for (int i=0;i<Array_pasajeros_aux.size();i++){
                 iva.agregar_pasajero(Array_pasajeros_aux.get(i));
@@ -322,11 +312,11 @@ public class principal
             System.out.println(iva.get_sal());
             //System.out.println(iva.get_vehiculo().get_placa());
             System.out.println("viaje.............");
-            usu.agregar_sol_viaje(iva);
+            
             Array_viajes.add(iva);
         }
         /**escribir en json*/
-        genjson();
+        genjsonviaje();
         return interruptor;
     }
     
@@ -337,10 +327,15 @@ public class principal
             obj.put("Chofer",Array_viajes.get(i).get_chof());
             obj.put("Destino",Array_viajes.get(i).get_dest());
             obj.put("Estado",Array_viajes.get(i).get_estado());
-            obj.put("FechaFin",Array_viajes.get(i).get_fin());
-            obj.put("FechaIni",Array_viajes.get(i).get_ini());
+            obj.put("DÃ­aF",Array_viajes.get(i).get_fin().get_d());
+            obj.put("MesF",Array_viajes.get(i).get_fin().get_m());
+            obj.put("AÃ±oF",Array_viajes.get(i).get_fin().get_a());
+            obj.put("DÃ­aI",Array_viajes.get(i).get_ini().get_d());
+            obj.put("MesI",Array_viajes.get(i).get_ini().get_m());
+            obj.put("AÃ±oI",Array_viajes.get(i).get_ini().get_a());
             obj.put("Salida",Array_viajes.get(i).get_sal());
             obj.put("Consecutivo",Array_viajes.get(i).get_consec());
+            obj.put("Kilometros", Array_viajes.get(i).get_kil());
         }
         arregloviajes.add(obj);
         //C:/Users/metal/Documents/GitHub7progra_1_poo/tarea_programada_1/usuarios/
@@ -359,32 +354,16 @@ public class principal
         }
         return aux;
     }
-
-
-
-    boolean cancelar_viaje(String consec,usuario usu){
-
+    boolean cancelar_viaje(String consec){
         for(int i=0;i<Array_viajes.size();i++){
             if(Array_viajes.get(i).get_consec().compareTo(consec)==0){
-                if(Array_viajes.get(i).get_estado().compareTo("En confección")==0){
+                if(Array_viajes.get(i).get_estado().compareTo("En confecciÃ³n")==0){
                     System.out.println("cancelado");
-
-                    for(int l=0;l<usu.optener_sol_viajes().size();l++){
-                        if(usu.optener_sol_viajes().get(l).get_consec().compareTo(consec)==0){
-                            usu.optener_sol_viajes().get(l).cambiar_estado("Cancelado");
-                        }
-                    }
                     Array_viajes.get(i).cambiar_estado("Cancelado");
                 }
-                else if(Array_viajes.get(i).get_estado().compareTo("Aprovado")==0){                    
-                           for(int l=0;l<usu.optener_sol_viajes().size();l++){
-                               if(usu.optener_sol_viajes().get(l).get_consec().compareTo(consec)==0){
-                                   usu.optener_sol_viajes().get(l).cambiar_estado("Cancelado");
-                                }                                
-                            }
-                            Array_viajes.get(i).cambiar_estado("Cancelado");
-                        
-                                                                            
+                else if(Array_viajes.get(i).get_estado().compareTo("Aprovado")==0){
+                    System.out.println("cancelado");
+                    Array_viajes.get(i).cambiar_estado("Cancelado");
                 /**aqui codigo para notificar a los usuarios*/
                 //prueba de bot
                 ApiContextInitializer.init();
@@ -454,9 +433,9 @@ public class principal
         
         String dia = Integer.toString(c.get(Calendar.DATE));
         String mes = Integer.toString(c.get(Calendar.MONTH));
-        String año = Integer.toString(c.get(Calendar.YEAR));
+        String aÃ±o = Integer.toString(c.get(Calendar.YEAR));
         
-        String fecha_pc = año+"-"+mes+"-"+dia; 
+        String fecha_pc = aÃ±o+"-"+mes+"-"+dia; 
         String fecha_expi =a_ex+"-"+m_ex+"-"+d_ex;
         if (valida_espiracion(fecha_pc,fecha_expi)){
             JOptionPane.showMessageDialog(null, "licencia de chofer vencida, no se tomara en cuenta", "ERROR!!!", JOptionPane.WARNING_MESSAGE);
@@ -520,12 +499,8 @@ public class principal
            obj.put("Correo",Array_choferes.get(i).get_correo());
            obj.put("Nombre",Array_choferes.get(i).get_nom());
            obj.put("Telefono",Array_choferes.get(i).get_tel());
-           System.out.print(Array_choferes.get(i).get_list_lic().get(0).get_em());
-           for(int j=0;j<Array_choferes.get(i).get_list_lic().size();j++){
-               obj.put("Emisión",Array_choferes.get(i).get_list_lic().get(j).get_em());
-               obj.put("Expira",Array_choferes.get(i).get_list_lic().get(j).get_ex());
-               obj.put("numLicencia",Array_choferes.get(i).get_list_lic().get(j).get_num());
-            }
+           //obj.put("numLicencia",Array_choferes.get(i).getlicencias());
+           
            
         }
         arreglochoferes.add(obj);
@@ -547,7 +522,7 @@ public class principal
     
     boolean registrar_vehiculo(String info){
         String placa="";
-        String año="";
+        String aÃ±o="";
         String capacidad="";
         String kilometrage="";
         String numero_vinn="";
@@ -560,7 +535,7 @@ public class principal
             char k = info.charAt(i);
             if(k=='/')cont++;
             else if (cont==0)placa += k;
-            else if (cont==1)año += k;
+            else if (cont==1)aÃ±o += k;
             else if (cont==2)capacidad += k;
             else if (cont==3)kilometrage += k;
             else if (cont==4)numero_vinn += k;
@@ -570,7 +545,7 @@ public class principal
             else if (cont==8)estado += k;
         }
         int pla = Integer.parseInt(placa);
-        int an = Integer.parseInt(año);
+        int an = Integer.parseInt(aÃ±o);
         int cap = Integer.parseInt(capacidad);
         int kil = Integer.parseInt(kilometrage);
         int vinn = Integer.parseInt(numero_vinn);
@@ -603,13 +578,13 @@ public class principal
         
         for(int i=0;i<Array_vehiculos.size();i++){            
            obj.put("Placa",Array_vehiculos.get(i).get_placa());
-           obj.put("Año",Array_vehiculos.get(i).get_anno());
+           obj.put("AÃ±o",Array_vehiculos.get(i).get_anno());
            obj.put("Capacidad",Array_vehiculos.get(i).get_cap());
            obj.put("Color",Array_vehiculos.get(i).get_color());
            obj.put("Estado",Array_vehiculos.get(i).get_estado());
-           obj.put("Kilómetros",Array_vehiculos.get(i).get_kil());
+           obj.put("KilÃ³metros",Array_vehiculos.get(i).get_kil());
            obj.put("Marca",Array_vehiculos.get(i).get_marca());
-           obj.put("Número",Array_vehiculos.get(i).get_num());
+           obj.put("NÃºmero",Array_vehiculos.get(i).get_num());
            obj.put("sede",Array_vehiculos.get(i).get_sede());
            
            
@@ -820,17 +795,9 @@ public class principal
         /**capacidad de pasajeros menos o igual a capacidad a vehiculo*/
         if(buscar.get_vehiculo().get_cap() < (buscar.cantidad_pasajeros()+1)){//se suma uno por chofer
             /**si esto se cumple no debe realizar viaje*/
-            for(int i=0; i< Array_viajes.size();i++){
-            if(consec.compareTo(Array_viajes.get(i).get_consec()) == 0){
-                System.out.println("no aprovado......");
-                Array_viajes.get(i).cambiar_estado("No aprovado");
-                Array_viajes.get(i).get_vehiculo().agregar_kilometros(Array_viajes.get(i).get_kil());
-                }
-            }
             JOptionPane.showMessageDialog(null, "Se excede la cantidad de pasajeros, viaje no se puede realizar", "ERROR!!!", JOptionPane.WARNING_MESSAGE);
             return false;
         }
-        
         /**hacer pdf y mandar*/
         /**estado pasa a aprovado*/
         /**Obtener los viajeros para generar el pdf*/
@@ -838,25 +805,12 @@ public class principal
             viajeros+=buscar.get_array_pasajeros().get(i).get_nom()+"/";
             viajeros+=buscar.get_array_pasajeros().get(i).get_tel()+"\n";            
         }
-        viaje="Lugar de inicio: "+ buscar.get_dest()+" Fecha inicio: "+buscar.get_ini().get_d()+"-"+buscar.get_ini().get_m()+"-"
-        +buscar.get_ini().get_a()+ " Fecha finalización: "+ buscar.get_fin().get_d()+"-"+
-        buscar.get_fin().get_m()+"-"+ buscar.get_fin().get_a();
+        viaje+=buscar.get_ini()+"/"+buscar.get_fin();
         for(int i=0; i< Array_viajes.size();i++){
             if(consec.compareTo(Array_viajes.get(i).get_consec()) == 0){
                 System.out.println("aprovado......");
                 Array_viajes.get(i).cambiar_estado("Aprovado");
                 Array_viajes.get(i).get_vehiculo().agregar_kilometros(Array_viajes.get(i).get_kil());
-                ApiContextInitializer.init();
-                TelegramBotsApi telegramBotsApi=new TelegramBotsApi();
-                Bot bot=new Bot();
-                bot.setestado(Array_viajes.get(i).get_estado());
-                
-                try{
-                    telegramBotsApi.registerBot(bot);
-                }
-                catch(TelegramApiRequestException e){
-                    e.printStackTrace();
-                }
             }
         }
         CrearPDF pdf=new CrearPDF();
@@ -869,132 +823,16 @@ public class principal
         }
         return true;
     }
-    public String listar_fecha(String fech,usuario usu){
-        String ret="";
-        for(int i =0;i<usu.optener_sol_viajes().size();i++){
-            String fech_viaje = usu.optener_sol_viajes().get(i).get_ini().get_d()+"-"+
-                                usu.optener_sol_viajes().get(i).get_ini().get_m()+"-"+
-                                usu.optener_sol_viajes().get(i).get_ini().get_a();
-            if(fech.compareTo(fech_viaje)==0){
-                ret+= "ID de la solicitud  del viaje: "+usu.optener_sol_viajes().get(i).get_consec();
-                ret+= "Fecha de ingreso al sistema:   "+usu.optener_sol_viajes().get(i).get_fecha().get_d()+"-"+
-                usu.optener_sol_viajes().get(i).get_fecha().get_m()+"-"+
-                usu.optener_sol_viajes().get(i).get_fecha().get_a();
-                ret+= "Estado:                        "+usu.optener_sol_viajes().get(i).get_estado();
-                ret+= "Destino:                       "+usu.optener_sol_viajes().get(i).get_dest();
-                ret+= "Fecha de inicio del viaje:     "+usu.optener_sol_viajes().get(i).get_ini().get_d()+"-"+
-                                                        usu.optener_sol_viajes().get(i).get_ini().get_m()+"-"+
-                                                        usu.optener_sol_viajes().get(i).get_ini().get_a();                
-                ret+="\n";
-            }
-        }
-        return ret;
-    }
-    public String listar_destino(String destino,usuario usu){
-        String ret="";
-        for(int i =0;i<usu.optener_sol_viajes().size();i++){
-            
-            String des = usu.optener_sol_viajes().get(i).get_dest();
-
-            if(destino.compareTo(des)==0){
-                ret+= "ID de la solicitud  del viaje: "+usu.optener_sol_viajes().get(i).get_consec();
-                ret+= "Fecha de ingreso al sistema:   "+usu.optener_sol_viajes().get(i).get_fecha().get_d()+"-"+
-                usu.optener_sol_viajes().get(i).get_fecha().get_m()+"-"+
-                usu.optener_sol_viajes().get(i).get_fecha().get_a();
-                ret+= "Estado:                        "+usu.optener_sol_viajes().get(i).get_estado();
-                ret+= "Destino:                       "+usu.optener_sol_viajes().get(i).get_dest();
-                ret+= "Fecha de inicio del viaje:     "+usu.optener_sol_viajes().get(i).get_ini().get_d()+"-"+
-                                                        usu.optener_sol_viajes().get(i).get_ini().get_m()+"-"+
-                                                        usu.optener_sol_viajes().get(i).get_ini().get_a();                
-                ret+="\n";
-            }
-        }
-        return ret;
-    }
-    public String listar_estado(String estado,usuario usu){
-        String ret="";
-        for(int i =0;i<usu.optener_sol_viajes().size();i++){
-            
-            String est = usu.optener_sol_viajes().get(i).get_estado();
-            
-            if(estado.compareTo(est)==0){
-                ret+= "ID de la solicitud  del viaje: "+usu.optener_sol_viajes().get(i).get_consec();
-                ret+= "Fecha de ingreso al sistema:   "+usu.optener_sol_viajes().get(i).get_fecha().get_d()+"-"+
-                usu.optener_sol_viajes().get(i).get_fecha().get_m()+"-"+
-                usu.optener_sol_viajes().get(i).get_fecha().get_a();
-                ret+= "Estado:                        "+usu.optener_sol_viajes().get(i).get_estado();
-                ret+= "Destino:                       "+usu.optener_sol_viajes().get(i).get_dest();
-                ret+= "Fecha de inicio del viaje:     "+usu.optener_sol_viajes().get(i).get_ini().get_d()+"-"+
-                                                        usu.optener_sol_viajes().get(i).get_ini().get_m()+"-"+
-                                                        usu.optener_sol_viajes().get(i).get_ini().get_a();                
-                ret+="\n";
-            }
-        }
-        return ret;
-    }
-    public String listar_adm(){
-        String ret="";
-        for(int i = 0;i<Array_usuarios.size();i++){
-            for(int k=0;k<Array_usuarios.get(i).optener_sol_viajes().size();k++){
-                ret+= "ID de la solicitud  del viaje: "+Array_usuarios.get(i).optener_sol_viajes().get(k).get_consec();
-                ret+= "Fecha de ingreso al sistema:   "+Array_usuarios.get(i).optener_sol_viajes().get(k).get_fecha().get_d()+"-"+
-                                                        Array_usuarios.get(i).optener_sol_viajes().get(k).get_fecha().get_m()+"-"+
-                                                        Array_usuarios.get(i).optener_sol_viajes().get(k).get_fecha().get_a();
-                ret+= "Estado:                        "+Array_usuarios.get(i).optener_sol_viajes().get(k).get_estado();
-                ret+= "Destino:                       "+Array_usuarios.get(i).optener_sol_viajes().get(k).get_dest();
-                ret+= "Departamento:                  "+Array_usuarios.get(i).get_dep();
-            }
-        }
-        return ret;
-    }
-    public String detalle_viaje(String consec){
-        String ret="";
-        for(int i =0;i<Array_viajes.size();i++){
-            
-            String con = Array_viajes.get(i).get_estado();
-            
-            if(consec.compareTo(con)==0){
-                ret+= "ID de la solicitud  del viaje: "+Array_viajes.get(i).get_consec();
-                ret+= "Fecha de ingreso al sistema:   "+Array_viajes.get(i).get_fecha().get_d()+"-"+
-                Array_viajes.get(i).get_fecha().get_m()+"-"+
-                Array_viajes.get(i).get_fecha().get_a();
-                ret+= "Estado:                        "+Array_viajes.get(i).get_estado();
-                ret+= "Salida:                        "+Array_viajes.get(i).get_sal();
-                ret+= "Destino:                       "+Array_viajes.get(i).get_dest();
-                ret+= "Fecha de inicio del viaje:     "+Array_viajes.get(i).get_ini().get_d()+"-"+
-                                                        Array_viajes.get(i).get_ini().get_m()+"-"+
-                                                        Array_viajes.get(i).get_ini().get_a();                
-                ret+= "Fecha de fin del viaje:        "+Array_viajes.get(i).get_fin().get_d()+"-"+
-                                                        Array_viajes.get(i).get_fin().get_m()+"-"+
-                                                        Array_viajes.get(i).get_fin().get_a();
-                ret+= "Kilometros:                    "+Array_viajes.get(i).get_kil();
-                if(Array_viajes.get(i).get_estado().compareTo("Aprovado")==0){
-                    ret+= "Nombre chofer:                 "+Array_viajes.get(i).get_chof().get_nom();
-                    ret+= "Placa vehiculo:                "+Array_viajes.get(i).get_vehiculo().get_placa();
-                }
-                else{
-                    ret+= "Nombre chofer:                 "+"no asignado";
-                    ret+= "Placa vehiculo:                "+"no asignado";
-                }
-                ret+="Lista de pasajeros: ";
-                for(int h = 0;h<Array_viajes.get(i).get_array_pasajeros().size();h++){
-                    ret+= h +"."+"cedula: " +Array_viajes.get(i).get_array_pasajeros().get(h).get_ced()+
-                    "nombre: "+Array_viajes.get(i).get_array_pasajeros().get(h).get_nom();
-                }
-            }
-        }
-        return ret;
-    }
     @SuppressWarnings("unchecked")
     public void genjson() {
         JSONObject obj = new JSONObject();
         for(int i=0;i<Array_pasajeros.size();i++){            
             obj.put("Cedula",Array_pasajeros.get(i).get_ced());
             obj.put("Nombre", Array_pasajeros.get(i).get_nom());            
-            obj.put("Cantón",Array_pasajeros.get(i).get_dir().get_can());
+            obj.put("CantÃ³n",Array_pasajeros.get(i).get_dir().get_can());
             obj.put("Distrito",Array_pasajeros.get(i).get_dir().get_dis());
             obj.put("Provincia",Array_pasajeros.get(i).get_dir().get_pro());
-            obj.put("Señas",Array_pasajeros.get(i).get_dir().get_se());            
+            obj.put("SeÃ±as",Array_pasajeros.get(i).get_dir().get_se());            
             obj.put("Telefono",Array_pasajeros.get(i).get_tel());
             obj.put("Correo",Array_pasajeros.get(i).get_correo());
         }
