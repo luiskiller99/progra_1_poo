@@ -99,7 +99,7 @@ public class ventana_administrador
         boton_vehiculo.setBounds(new Rectangle(100,20));                        
         boton_vehiculo.setLocation(10,190);            
         boton_vehiculo.setBackground(Color.white);
-        boton_vehiculo.addActionListener(new act_bot_registar());
+        boton_vehiculo.addActionListener(new act_bot_vehiculo());
         //label_list_adm
         label_list_adm.setBounds(new Rectangle(150,20));        
         label_list_adm.setLocation(350,10);

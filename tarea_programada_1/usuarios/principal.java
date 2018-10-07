@@ -290,14 +290,14 @@ public class principal
             }
             
             System.out.println("viaje.............");
-            System.out.println(iva.get_chof().get_nom());
+            //System.out.println(iva.get_chof().get_nom());
             System.out.println(iva.get_consec());
             System.out.println(iva.get_dest());
             System.out.println(iva.get_estado());
             System.out.println(iva.get_fin().get_d());
             System.out.println(iva.get_ini().get_d());
             System.out.println(iva.get_sal());
-            System.out.println(iva.get_vehiculo().get_placa());
+            //System.out.println(iva.get_vehiculo().get_placa());
             System.out.println("viaje.............");
             
             Array_viajes.add(iva);
