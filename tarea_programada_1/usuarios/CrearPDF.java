@@ -30,7 +30,7 @@ public class CrearPDF{
       Document document = new Document();
       try
       {
-         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("InfoViajes.pdf"));
+         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("D:/Java/progra_1_poo-master/tarea_programada_1/usuarios/InfoViajes.pdf"));
          document.open();
          document.add(new Paragraph(chofer+"\n"));
          document.add(new Paragraph(viaje+"\n"));
