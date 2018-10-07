@@ -5,12 +5,18 @@ import java.security.SecureRandom;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Random;
+import tarea_programada_1.vehiculo.viaje;
+import java.util.ArrayList;
 public class usuario
 {
     private persona individuo;
     private String departamento;
     private String usuario;
-    private String contrase�a;   
+    private String contraseña;
+    private ArrayList<viaje> Array_viajes_sol=new ArrayList<viaje>();
+    
+    
+    public usuario(){}
     
     public usuario(persona ind,String dep)
     {
@@ -30,7 +36,7 @@ public class usuario
     private void set_persona(persona ind){individuo=ind;}
     private void set_dep(String dep){departamento=dep;}
     private void set_usu(String pusu){usuario=pusu;}
-    private void set_cont(String pcont){contrase�a=pcont;}        
+    private void set_cont(String pcont){contraseña=pcont;}        
     private void set_usu(){
         String correo=individuo.get_correo();
         String temp="";
@@ -43,7 +49,7 @@ public class usuario
         usuario=temp;
     }
     private void set_cont(){
-       final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~!#$%&/@¿?^";
+       final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~!#$%&/@Â¿?^";
        SecureRandom rnd = new SecureRandom();
        int cont=0;
        int len=new Random().nextInt(5)+8; 
@@ -62,7 +68,7 @@ public class usuario
        if(cont==0)
        set_cont();
        
-       contrase�a=respaldo;        
+       contraseña=respaldo;        
     }
     
     public String get_dep(){return departamento;}
@@ -71,8 +77,8 @@ public class usuario
         return usuario;
     }
     
-    public String get_contrase�a(){
-        return contrase�a;
+    public String get_contraseña(){
+        return contraseña;
     }
     
     public int get_cedula(){
@@ -95,7 +101,7 @@ public class usuario
         return individuo.get_dir().get_dis();
     }
     
-    public String get_se�as(){
+    public String get_señas(){
         return individuo.get_dir().get_se();
     }
     
@@ -105,6 +111,14 @@ public class usuario
     
     public String get_correo(){
         return individuo.get_correo();
+    }
+    
+    public void agregar_sol_viaje(viaje este){
+        Array_viajes_sol.add(este);
+    }
+    
+    public ArrayList<viaje> optener_sol_viajes(){
+        return Array_viajes_sol;
     }
     
 }
