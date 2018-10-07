@@ -82,7 +82,7 @@ public class ventana_administrador
         boton_chofer.setBounds(new Rectangle(100,20));                        
         boton_chofer.setLocation(10,100);            
         boton_chofer.setBackground(Color.white);
-        boton_chofer.addActionListener(new act_bot_registar());
+        boton_chofer.addActionListener(new act_bot_chofer());
         //licencias_chofer
         licencias_chofer.setBounds(new Rectangle(300,20));        
         licencias_chofer.setLocation(10,80);
@@ -153,6 +153,13 @@ public class ventana_administrador
         public void actionPerformed(ActionEvent e){
             prin.nuevo_secretaria(textfield_registrar.getText());
             JOptionPane.showMessageDialog(null, "Usuario agregado correctamente", "just now", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+    private class act_bot_chofer implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+            if(prin.nuevo_chofer(textfield_chofer.getText(),licencias_chofer.getText())){
+                JOptionPane.showMessageDialog(null, "Chofer agregado correctamente", "just now", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     }
 }

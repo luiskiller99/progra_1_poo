@@ -304,7 +304,22 @@ public class principal
         }
         return true;
     }
-    
+    boolean nuevo_chofer(String info, String list_lic){
+        String cedula="";
+        String nombre="";
+        String correo="";
+        String telefono="";
+        int cont =0;
+        for(int i = 0 ; i < info.length() ; i++){
+            char k = info.charAt(i);
+            if(k=='/')cont++;
+            else if (cont==0)cedula += k;
+            else if (cont==1)nombre += k;
+            else if (cont==2)correo += k;
+            else if (cont==3)telefono += k;
+        }
+        return true;
+    }
     @SuppressWarnings("unchecked")
     public void genjson() {
         JSONObject obj = new JSONObject();
