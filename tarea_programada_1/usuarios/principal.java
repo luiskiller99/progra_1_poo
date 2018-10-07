@@ -35,6 +35,8 @@ public class principal
     ArrayList<viaje> Array_viajes = new ArrayList<viaje>();
     ArrayList<persona> Array_pasajeros = new ArrayList<persona>(); 
     ArrayList<vehiculo> Array_vehiculos = new ArrayList<vehiculo>();
+    ArrayList<chofer> Array_choferes = new ArrayList<chofer>();
+    
     JSONArray arreglousuarios=new JSONArray();
     JSONArray arreglopasajeros=new JSONArray();
     JSONArray arregloviajes=new JSONArray();
@@ -384,7 +386,8 @@ public class principal
                 cont=0;numero="";d_ex="";m_ex="";a_ex="";
                 d_emi="";m_emi="";a_emi="";
             }
-        }                        
+        }         
+        Array_choferes.add(new_chofer);
         return true;
     }
     boolean registrar_vehiculo(String info){
@@ -458,6 +461,13 @@ public class principal
     
     boolean aprovar_viaje(String consec){
         /**asigna chofer*/ //no debe chocar en hora con otro viaje        
+         for(int i=0; i < Array_choferes.size();i++){
+             for(int k=0; k< Array_viajes.size();k++){
+                 if(consec.compareTo(Array_viajes.get(i).get_consec()) == 0){
+                     
+                    }
+                }
+            }
         boolean interruptor=true;
         //for(int i=0; i< a){}
         /**asigna vehiculo*/ // no debe chocar en hora con otro viaje
@@ -468,8 +478,7 @@ public class principal
             if(consec.compareTo(Array_viajes.get(i).get_consec()) == 0){
                 Array_viajes.get(i).cambiar_estado("Aprovado");
             }
-        }
-        
+        }        
         return true;
     }
     @SuppressWarnings("unchecked")
